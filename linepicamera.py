@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 import RPi.GPIO as GPIO
 
+#this is a comment
 in1 = 25
 in2 = 24
 in3 = 23

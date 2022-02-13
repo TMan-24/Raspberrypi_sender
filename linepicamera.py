@@ -1,11 +1,12 @@
-from picamera.array import PiRGBArray
-from picamera import PiCamera
-import time
 import cv2
 import numpy as np
 import RPi.GPIO as GPIO
+from picamera.array import PiRGBArray
+from picamera import PiCamera
+import matplotlib.pyplot as plt
+from IPython.display import Image
+from time import sleep
 
-#this is a comment
 in1 = 25
 in2 = 24
 in3 = 23
@@ -13,7 +14,9 @@ in4 = 22
 enA = 12
 enB = 13
 
-GPIO.setmode(GPIO.BOARD)
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setwarnings(False)
 GPIO.setup(in1,GPIO.OUT)
 GPIO.setup(in2,GPIO.OUT)
 GPIO.setup(in3,GPIO.OUT)
@@ -29,10 +32,12 @@ GPIO.output(in2,GPIO.HIGH)
 GPIO.output(in3,GPIO.HIGH)
 GPIO.output(in4,GPIO.HIGH)
 
+
+
 camera = PiCamera()
-camera.resolution = (640, 360)
+camera.resolution = (640, 480)
 camera.rotation = 180
-rawCapture = PiRGBArray(camera, size=(640, 360))
+rawCapture = PiRGBArray(camera, size=(640, 480))
 time.sleep(0.1)
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
@@ -42,13 +47,15 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     kernel = np.ones((3,3), np.uint8)
     Blackline = cv2.erode(Blackline, kernel, iterations=5)
     Blackline = cv2.dilate(Blackline, kernel, iterations=9)	
-    img,contours, hierarchy = cv2.findContours(Blackline.copy(),cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
+    contours, hierarchy = cv2.findContours(Blackline.copy(),cv2.RETR_TREE,cv2.CHAIN_APPROX_SIMPLE)
     if len(contours) > 0 :
         x,y,w,h = cv2.boundingRect(contours[0])
         cv2.line(image, (x+(w/2), 200), (x+(w/2), 250), (255,0,0),3)
-    cv2.imshow("original with line", image)
-    rawCapture.truncate(0)
+    plt.imshow(image, cmap= 'gray', interpolation = 'bicubic')
+    plt.xticks([2]), plt.yticks([2])
+    plt.show
     key = cv2.waitKey(1) & 0xFF
+    rawCapture.truncate(0)
     if key == ord("q"):
         break
 

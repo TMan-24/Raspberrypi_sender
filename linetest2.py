@@ -5,15 +5,15 @@ in1 = 25
 in2 = 24
 in3 = 23
 in4 = 22
-Rightlinesensor = 4
-Leftlinesensor = 27
+Rightmiddlelinesensor = 4
+Leftmiddlelinesensor = 27
 enA = 12
 enB = 13
 temp1=1
 
 gpio.setmode(gpio.BCM)
-gpio.setup(Rightlinesensor, gpio.IN)
-gpio.setup(Leftlinesensor, gpio.IN)
+gpio.setup(Rightmiddlelinesensor, gpio.IN)
+gpio.setup(Leftmiddlelinesensor, gpio.IN)
 gpio.setup(in1,gpio.OUT)
 gpio.setup(in2,gpio.OUT)
 gpio.setup(in3,gpio.OUT)
@@ -31,7 +31,7 @@ p2.start(45)
 
 try:
     while 1:
-        if gpio.input(Rightlinesensor):
+        if gpio.input(Rightmiddlelinesensor):
             #Black
  #           print("right FORWARD")
             gpio.output(in1,gpio.HIGH)
@@ -41,7 +41,7 @@ try:
   #          print("right BACKWARDS")
             gpio.output(in1,gpio.LOW)
             gpio.output(in2,gpio.HIGH)
-        if gpio.input(Leftlinesensor):
+        if gpio.input(Leftmiddlelinesensor):
             #Black
    #         print("left FORWORDS")
             gpio.output(in3,gpio.HIGH)

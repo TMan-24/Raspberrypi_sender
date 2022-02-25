@@ -1,4 +1,5 @@
 from pickle import TRUE
+from pickle import FALSE
 from time import sleep
 import RPi.GPIO as gpio
 
@@ -8,8 +9,8 @@ in3 = 23
 in4 = 22
 RightMiddlelinesensor = 4
 LeftMiddlelinesensor = 27
-Rightlinesensor = 3 #not real
-Leftlinesensor = 9 #not real
+Rightlinesensor = 15 #not real
+Leftlinesensor = 14 #not real
 enA = 12
 enB = 13
 
@@ -30,12 +31,12 @@ gpio.output(in3,gpio.LOW)
 gpio.output(in4,gpio.LOW)
 p1=gpio.PWM(enA,1000)
 p2=gpio.PWM(enB,1000)
-p1.start(30)
-p2.start(30)
+p1.start(50)
+p2.start(50)
 
 try:
     while True:
-        if gpio.input((Rightlinesensor and Leftlinesensor) == False):
+        if gpio.input(Rightlinesensor) == False and gpio.input(Leftlinesensor) == False:
             #when it sees white
             gpio.output(in1,gpio.HIGH)
             gpio.output(in2,gpio.LOW)
@@ -64,22 +65,22 @@ try:
                 gpio.output(in4,gpio.HIGH)
                 
                 #right turn
-            if gpio.input(Rightlinesensor == False):
+            if gpio.input(Rightlinesensor) == False:
                 #when it sees white
                 gpio.output(in1,gpio.LOW)
                 gpio.output(in2,gpio.HIGH)
                 gpio.output(in3,gpio.HIGH)
                 gpio.output(in4,gpio.LOW)
-                sleep(2) #this is to time the turn
+                sleep(10) #this is to time the turn
 
                 #left turn
-            if gpio.input(Leftlinesensor == False):
+            if gpio.input(Leftlinesensor) == False:
                 #when it sees white
                 gpio.output(in1,gpio.HIGH)
                 gpio.output(in2,gpio.LOW)
                 gpio.output(in3,gpio.LOW)
                 gpio.output(in4,gpio.HIGH)
-                sleep(2) #this is to time the turn
+                sleep(10) #this is to time the turn
 
 
 finally:

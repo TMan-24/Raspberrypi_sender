@@ -197,7 +197,7 @@ def main():
              #   set_motor(LEFT_MOTOR, FORWARD)
               #  set_motor(RIGHT_MOTOR, FORWARD)
             #1. continue straight - innermost sensors are on and outer sensors are not on
-            if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW:
+            if gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW:
             # Set H-Bridge to go straight
                 set_motor(LEFT_MOTOR, FORWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)

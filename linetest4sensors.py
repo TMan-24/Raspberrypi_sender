@@ -9,8 +9,8 @@ in3 = 23
 in4 = 22
 RightMiddlelinesensor = 4
 LeftMiddlelinesensor = 27
-Rightlinesensor = 15 #not real
-Leftlinesensor = 14 #not real
+Rightlinesensor = 15
+Leftlinesensor = 14
 enA = 12
 enB = 13
 
@@ -31,12 +31,12 @@ gpio.output(in3,gpio.LOW)
 gpio.output(in4,gpio.LOW)
 p1=gpio.PWM(enA,1000)
 p2=gpio.PWM(enB,1000)
-p1.start(50)
-p2.start(50)
+p1.start(30)
+p2.start(30)
 
 try:
     while True:
-        if gpio.input(Rightlinesensor) == False and gpio.input(Leftlinesensor) == False:
+        if gpio.input(Rightlinesensor) == False and gpio.input(Leftlinesensor) == False and gpio.input(RightMiddlelinesensor) == False and gpio.input(LeftMiddlelinesensor) == False:
             #when it sees white
             gpio.output(in1,gpio.HIGH)
             gpio.output(in2,gpio.LOW)
@@ -74,7 +74,7 @@ try:
                 sleep(10) #this is to time the turn
 
                 #left turn
-            if gpio.input(Leftlinesensor) == False:
+            elif gpio.input(Leftlinesensor) == False:
                 #when it sees white
                 gpio.output(in1,gpio.HIGH)
                 gpio.output(in2,gpio.LOW)

@@ -144,14 +144,14 @@ gpio.setup(US_BIT3, gpio.IN)
 # This function will need to be improved by testing
 def turn_90(direction):
     # high means that the right sensor was active so turn the vehicle 90 degrees right
-    if direction == gpio.LOW: ##HAVENT CHANGED
+    if direction == gpio.HIGH: ##HAVENT CHANGED
         # turn until the left middle sensor is active (vehicle has turned far enough to cross the line)
-        while gpio.input(LM_SENSOR) == gpio.HIGH:
+        while gpio.input(LM_SENSOR) == gpio.LOW:
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BACKWARD)
     else:
         # turn until the right middle sensor is active (vehicle has turned far enough to cross the line)
-        while gpio.input(RM_SENSOR) == gpio.HIGH:
+        while gpio.input(RM_SENSOR) == gpio.LOW:
             set_motor(LEFT_MOTOR, BACKWARD)
             set_motor(RIGHT_MOTOR, FORWARD)
     print("END OF 90 TURN\n")

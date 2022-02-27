@@ -89,14 +89,15 @@ def init_gpio():
     #set_motor(LEFT_MOTOR, FORWARD)
     #set_motor(RIGHT_MOTOR, FORWARD)
 
-    print("I GOT TO THE END OF INIT GPIO\n")
+    
     ###### THIS WILL BE DIFFERENT PROBABLY ######
     # Set up GPIO for ultrasonic sensor as 4 bit input
     # This will require multiple GPIO pins 
-    gpio.setup(US_BIT0, gpio.IN)
-    gpio.setup(US_BIT1, gpio.IN)
-    gpio.setup(US_BIT2, gpio.IN)
-    gpio.setup(US_BIT3, gpio.IN)
+    #gpio.setup(US_BIT0, gpio.IN)
+    #gpio.setup(US_BIT1, gpio.IN)
+    #gpio.setup(US_BIT2, gpio.IN)
+    #gpio.setup(US_BIT3, gpio.IN)
+    print("I GOT TO THE END OF INIT GPIO\n")
 
 try:
     while TRUE:

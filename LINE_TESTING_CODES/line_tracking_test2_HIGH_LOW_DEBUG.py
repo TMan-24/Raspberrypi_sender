@@ -13,10 +13,10 @@ GPIO14 = 14 #L_SENSOR
 GPIO15 = 15 #R_SENSOR
 GPIO18 = 18 #Ultrasonic_1 - Trigger 
 GPIO19 = 19 #Ultrasonic_2 - Trigger
-GPIO22 = 25 #RM_FORWARD
-GPIO23 = 24 #RM_BACKWARD
-GPIO24 = 23 #LM_FORWARD
-GPIO25 = 22 #LM_BACKWARD
+GPIO22 = 22 #RM_FORWARD
+GPIO23 = 23 #RM_BACKWARD
+GPIO24 = 24 #LM_FORWARD
+GPIO25 = 25 #LM_BACKWARD
 GPIO26 = 26 #FREE
 GPIO27 = 27 #LM_SENSOR
 
@@ -54,11 +54,6 @@ THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for u
 def set_motor(motor_num, state):
 
     print("I GOT TO SET MOTOR\n")
-    print(FORWARD, "\n")
-    print(BACKWARD, "\n")
-    print(BRAKE, "\n")
-    print(LEFT_MOTOR, "\n")
-    print(RIGHT_MOTOR, "\n")
     # determine which motor to set
     if motor_num == LEFT_MOTOR:
         if state == FORWARD:
@@ -94,11 +89,6 @@ def set_motor(motor_num, state):
 
     else:
         print("Invalid motor paramter")
-    print(FORWARD, "\n")
-    print(BACKWARD, "\n")
-    print(BRAKE, "\n")
-    print(LEFT_MOTOR, "\n")
-    print(RIGHT_MOTOR, "\n")
 
 
 # Set pinout mode to Broadcom (board communication)
@@ -145,16 +135,6 @@ gpio.setup(US_BIT0, gpio.IN)
 gpio.setup(US_BIT1, gpio.IN)
 gpio.setup(US_BIT2, gpio.IN)
 gpio.setup(US_BIT3, gpio.IN)
-
-#try:
-    #init_gpio()
- #   while TRUE:
- #           gpio.output(RM_FORWARD, gpio.HIGH)
- #           gpio.output(RM_BACKWARD, gpio.LOW)
- #           gpio.output(LM_FORWARD, gpio.HIGH)
-  #          gpio.output(LM_BACKWARD, gpio.LOW)
-#finally:
- #   gpio.cleanup()
 
 '''def read_ultrasound():
     # convert binary to decimal. bit*2^0 + bit*2^1 + bit*2^2 + bit*2^3
@@ -211,10 +191,6 @@ def main():
     
     # main logic of program
     while TRUE:
-        gpio.output(RM_FORWARD, gpio.HIGH)
-        gpio.output(RM_BACKWARD, gpio.LOW)
-        gpio.output(LM_FORWARD, gpio.HIGH)
-        gpio.output(LM_BACKWARD, gpio.LOW)
         #1. continue straight - innermost sensors are on and outer sensors are not on
         if gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
             # Set H-Bridge to go straight

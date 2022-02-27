@@ -50,7 +50,56 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for ultrasaound
+
+def init_gpio():
+
+    # Set pinout mode to Broadcom (board communication)
+    gpio.setmode(gpio.BCM)
+
+    # Line sensor setup as input digital pins
+    gpio.setup(RM_SENSOR, gpio.IN)
+    gpio.setup(LM_SENSOR, gpio.IN)
+    gpio.setup(R_SENSOR, gpio.IN)
+    gpio.setup(L_SENSOR, gpio.IN)
+
+    # Setup H-bridge inputs as output pins
+    gpio.setup(RM_FORWARD, gpio.OUT)
+    gpio.setup(RM_BACKWARD, gpio.OUT)
+    gpio.setup(LM_FORWARD, gpio.OUT)
+    gpio.setup(LM_BACKWARD, gpio.OUT)
+    gpio.output(RM_FORWARD,gpio.LOW)
+    gpio.output(RM_BACKWARD,gpio.LOW)
+    gpio.output(LM_FORWARD,gpio.LOW)
+    gpio.output(LM_BACKWARD,gpio.LOW)
+
+    # Set H-bridge Enable motor signals as output pins 
+    gpio.setup(EN_LM, gpio.OUT)
+    gpio.setup(EN_RM, gpio.OUT)
+
+
+    # Set a PWM signal of 1000 for both motors
+    p1=gpio.PWM(EN_LM, 1000)
+    p2=gpio.PWM(EN_RM, 1000)
+
+    # Start motors
+    p1.start(30) #motor speeds
+    p2.start(30)
+    
+    # initialize motor to go forward
+    #set_motor(LEFT_MOTOR, FORWARD)
+    #set_motor(RIGHT_MOTOR, FORWARD)
+
+    print("I GOT TO THE END OF INIT GPIO\n")
+    ###### THIS WILL BE DIFFERENT PROBABLY ######
+    # Set up GPIO for ultrasonic sensor as 4 bit input
+    # This will require multiple GPIO pins 
+    gpio.setup(US_BIT0, gpio.IN)
+    gpio.setup(US_BIT1, gpio.IN)
+    gpio.setup(US_BIT2, gpio.IN)
+    gpio.setup(US_BIT3, gpio.IN)
+
 while TRUE:
+        init_gpio()
         gpio.output(RM_FORWARD, gpio.HIGH)
         gpio.output(RM_BACKWARD, gpio.LOW)
         gpio.output(LM_FORWARD, gpio.HIGH)
@@ -107,7 +156,6 @@ def set_motor(motor_num, state):
     print(LEFT_MOTOR, "\n")
     print(RIGHT_MOTOR, "\n")
 
-
 def init_gpio():
 
     # Set pinout mode to Broadcom (board communication)
@@ -143,8 +191,8 @@ def init_gpio():
     p2.start(30)
     
     # initialize motor to go forward
-    set_motor(LEFT_MOTOR, FORWARD)
-    set_motor(RIGHT_MOTOR, FORWARD)
+    #set_motor(LEFT_MOTOR, FORWARD)
+    #set_motor(RIGHT_MOTOR, FORWARD)
 
     print("I GOT TO THE END OF INIT GPIO\n")
     ###### THIS WILL BE DIFFERENT PROBABLY ######

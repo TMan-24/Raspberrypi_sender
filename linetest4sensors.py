@@ -38,6 +38,7 @@ try:
     while True:
         if gpio.input(Rightlinesensor) == False and gpio.input(Leftlinesensor) == False and gpio.input(RightMiddlelinesensor) == False and gpio.input(LeftMiddlelinesensor) == False:
             #when it sees white
+            print("hi")
             gpio.output(in1,gpio.HIGH)
             gpio.output(in2,gpio.LOW)
             gpio.output(in3,gpio.HIGH)
@@ -67,6 +68,7 @@ try:
                 #right turn
             if gpio.input(Rightlinesensor) == False:
                 #when it sees white
+                print('hi')
                 gpio.output(in1,gpio.LOW)
                 gpio.output(in2,gpio.HIGH)
                 gpio.output(in3,gpio.HIGH)
@@ -76,6 +78,7 @@ try:
                 #left turn
             elif gpio.input(Leftlinesensor) == False:
                 #when it sees white
+                print('hi')
                 gpio.output(in1,gpio.HIGH)
                 gpio.output(in2,gpio.LOW)
                 gpio.output(in3,gpio.LOW)

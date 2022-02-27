@@ -30,7 +30,7 @@ p1.start(45)
 p2.start(45)
 
 try:
-    while 1:
+    while TRUE:
         if gpio.input(Rightmiddlelinesensor):
             #Black
  #           print("right FORWARD")

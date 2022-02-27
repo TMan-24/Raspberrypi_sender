@@ -188,38 +188,40 @@ def main():
         # Set H-Bridge to go straight
      #   set_motor(LEFT_MOTOR, FORWARD)
       #  set_motor(RIGHT_MOTOR, FORWARD)
-    
+    try:
     # main logic of program
-    while TRUE:
-        #1. continue straight - innermost sensors are on and outer sensors are not on
-        if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW:
+        while TRUE:
+            #1. continue straight - innermost sensors are on and outer sensors are not on
+            if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW:
             # Set H-Bridge to go straight
-            set_motor(LEFT_MOTOR, FORWARD)
-            set_motor(RIGHT_MOTOR, FORWARD)
+                set_motor(LEFT_MOTOR, FORWARD)
+                set_motor(RIGHT_MOTOR, FORWARD)
 
         #2. 90deg turn - either rightmost or leftmost sensor true (on) 
-        elif gpio.input(R_SENSOR) == gpio.LOW or gpio.input(L_SENSOR) == gpio.LOW:
-            turn_90(gpio.input(R_SENSOR))
+            elif gpio.input(R_SENSOR) == gpio.LOW or gpio.input(L_SENSOR) == gpio.LOW:
+                turn_90(gpio.input(R_SENSOR))
 
         #3. correct back to line - use two middle sensors to determine
-        elif gpio.input(RM_SENSOR) == gpio.LOW:
-            set_motor(LEFT_MOTOR, FORWARD)
-            set_motor(RIGHT_MOTOR, BRAKE)
-        else:
-            set_motor(LEFT_MOTOR, BRAKE)
-            set_motor(RIGHT_MOTOR, FORWARD)
+            elif gpio.input(RM_SENSOR) == gpio.LOW:
+                set_motor(LEFT_MOTOR, FORWARD)
+                set_motor(RIGHT_MOTOR, BRAKE)
+            else:
+                set_motor(LEFT_MOTOR, BRAKE)
+                set_motor(RIGHT_MOTOR, FORWARD)
 
         #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
         #if read_ultrasound() < THRESHOLD_VALUE:
          #   turn_around()
 
         #5. if we get back to starting position, stop program
-        if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
-            # turn off all gpio settings
-            set_motor(LEFT_MOTOR, BRAKE)
-            set_motor(RIGHT_MOTOR, BRAKE)
-            gpio.cleanup()
-            exit()
+            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+                # turn off all gpio settings
+                set_motor(LEFT_MOTOR, BRAKE)
+                set_motor(RIGHT_MOTOR, BRAKE)
+
+    finally:
+        gpio.cleanup()
+        exit()
         print("SUCCESS (END OF MAIN)\n")
 
 # program starts here. Boilerplate (reusable) python code for having a main function.

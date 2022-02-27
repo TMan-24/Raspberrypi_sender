@@ -100,8 +100,8 @@ def init_gpio():
     print("I GOT TO THE END OF INIT GPIO\n")
 
 try:
+    init_gpio()
     while TRUE:
-            init_gpio()
             gpio.output(RM_FORWARD, gpio.HIGH)
             gpio.output(RM_BACKWARD, gpio.LOW)
             gpio.output(LM_FORWARD, gpio.HIGH)

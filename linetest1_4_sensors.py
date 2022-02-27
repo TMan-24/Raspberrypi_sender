@@ -11,8 +11,7 @@ temp1 = 1
 
 try:
     while 1:
-#        if gpio.input(14) or gpio.input(15) or gpio.input(4) or gpio.input(27):
-        if gpio.input(4):
+        if gpio.input(14) and gpio.input(15) and gpio.input(4) and gpio.input(27):
             print("BLACK")
         else:
             print("WHITE")

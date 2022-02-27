@@ -33,7 +33,7 @@ temp1 = 1
 
 try:
     while 1:
-        if gpio.input(14) and gpio.input(15) and gpio.input(4) and gpio.input(27):
+        if GPIO.input(14) and GPIO.input(15) and GPIO.input(4) and GPIO.input(27):
             print("BLACK")
             GPIO.output(in1,GPIO.HIGH)
             GPIO.output(in2,GPIO.LOW)
@@ -44,4 +44,4 @@ try:
         
 finally:
     #cleanup the gpio pins before ending
-    gpio.cleanup()
+    GPIO.cleanup()

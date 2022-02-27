@@ -13,18 +13,18 @@ GPIO14 = 14 #L_SENSOR
 GPIO15 = 15 #R_SENSOR
 GPIO18 = 18 #Ultrasonic_1 - Trigger 
 GPIO19 = 19 #Ultrasonic_2 - Trigger
-GPIO22 = 22 #RM_FORWARD
-GPIO23 = 23 #RM_BACKWARD
-GPIO24 = 24 #LM_FORWARD
-GPIO25 = 25 #LM_BACKWARD
+GPIO22 = 25 #RM_FORWARD
+GPIO23 = 24 #RM_BACKWARD
+GPIO24 = 23 #LM_FORWARD
+GPIO25 = 22 #LM_BACKWARD
 GPIO26 = 26 #FREE
 GPIO27 = 27 #LM_SENSOR
 
 # H-Bridge input control pins
-RM_FORWARD = GPIO25     #in4, blue
-RM_BACKWARD = GPIO24    #in3, green
-LM_FORWARD =  GPIO23    #in2, yellow
-LM_BACKWARD = GPIO22    #in1, orange
+RM_FORWARD = GPIO22     #in4, blue
+RM_BACKWARD = GPIO23    #in3, green
+LM_FORWARD =  GPIO24    #in2, yellow
+LM_BACKWARD = GPIO25   #in1, orange
 
 # Line Sensor pins
 RM_SENSOR = GPIO4   #right middle sensor, green
@@ -92,7 +92,7 @@ def set_motor(motor_num, state):
         else:
             print("Invalid direction parameter")
 
-    #else:
+    else:
         print("Invalid motor paramter")
     print(FORWARD, "\n")
     print(BACKWARD, "\n")
@@ -126,9 +126,6 @@ def init_gpio():
     gpio.setup(EN_LM, gpio.OUT)
     gpio.setup(EN_RM, gpio.OUT)
 
-    # initialize motor to go forward
-    set_motor(LEFT_MOTOR, FORWARD)
-    set_motor(RIGHT_MOTOR, FORWARD)
 
     # Set a PWM signal of 1000 for both motors
     p1=gpio.PWM(EN_LM, 1000)
@@ -137,7 +134,11 @@ def init_gpio():
     # Start motors
     p1.start(30) #motor speeds
     p2.start(30)
-
+    
+    # initialize motor to go forward
+    set_motor(LEFT_MOTOR, FORWARD)
+    set_motor(RIGHT_MOTOR, FORWARD)
+    
     print("I GOT TO THE END OF INIT GPIO\n")
     ###### THIS WILL BE DIFFERENT PROBABLY ######
     # Set up GPIO for ultrasonic sensor as 4 bit input

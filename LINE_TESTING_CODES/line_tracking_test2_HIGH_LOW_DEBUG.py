@@ -142,7 +142,7 @@ gpio.setup(US_BIT3, gpio.IN)
 '''
 # 90 Degree Turn
 # This function will need to be improved by testing
-'''def turn_90(direction):
+def turn_90(direction):
     # high means that the right sensor was active so turn the vehicle 90 degrees right
     if direction == gpio.HIGH: ##HAVENT CHANGED
         # turn until the left middle sensor is active (vehicle has turned far enough to cross the line)
@@ -154,7 +154,9 @@ gpio.setup(US_BIT3, gpio.IN)
         while gpio.input(RM_SENSOR) == gpio.LOW:
             set_motor(LEFT_MOTOR, BACKWARD)
             set_motor(RIGHT_MOTOR, FORWARD)
-    print("END OF 90 TURN\n") logic not changed
+    print("END OF 90 TURN\n") 
+    
+    '''logic not changed
 # 180 Degree Turn
 # This function will need to be improved by testing
 def turn_around():
@@ -187,13 +189,13 @@ def main():
         # Set H-Bridge to go straight
      #   set_motor(LEFT_MOTOR, FORWARD)
       #  set_motor(RIGHT_MOTOR, FORWARD)
-    #try:
+    try:
     # main logic of program
         while TRUE:
-            #if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
             # Set H-Bridge to go straight
-             #   set_motor(LEFT_MOTOR, FORWARD)
-              #  set_motor(RIGHT_MOTOR, FORWARD)
+                set_motor(LEFT_MOTOR, FORWARD)
+                set_motor(RIGHT_MOTOR, FORWARD)
             #1. continue straight - innermost sensors are on and outer sensors are not on
             if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW:
             # Set H-Bridge to go straight
@@ -222,12 +224,11 @@ def main():
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
 
-    #finally:
+    finally:
         gpio.cleanup()
         exit()
         print("SUCCESS (END OF MAIN)\n")
 
 # program starts here. Boilerplate (reusable) python code for having a main function.
-while TRUE:
-    if __name__ == "__main__":
-        main()
+if __name__ == "__main__":
+    main()

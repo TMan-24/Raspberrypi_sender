@@ -50,7 +50,14 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for ultrasaound
+while TRUE:
+        gpio.output(RM_FORWARD, gpio.HIGH)
+        gpio.output(RM_BACKWARD, gpio.LOW)
+        gpio.output(LM_FORWARD, gpio.HIGH)
+        gpio.output(LM_BACKWARD, gpio.LOW)
 
+
+'''
 def set_motor(motor_num, state):
 
     print("I GOT TO SET MOTOR\n")
@@ -241,4 +248,4 @@ def main():
 
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":
-    main()
+    main()'''

@@ -204,16 +204,16 @@ def main():
             #3. correct back to line - use two middle sensors to determine
             if gpio.input(RM_SENSOR) == gpio.LOW:
                 set_motor(LEFT_MOTOR, FORWARD)
-                set_motor(RIGHT_MOTOR, BRAKE)
+                set_motor(RIGHT_MOTOR, BACKWARD)
             else:
-                set_motor(LEFT_MOTOR, BRAKE)
+                set_motor(LEFT_MOTOR, BACKWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)
-            if gpio.input(LM_SENSOR) == gpio.LOW:
-                set_motor(LEFT_MOTOR, FORWARD)
-                set_motor(RIGHT_MOTOR, BRAKE)
-            else:
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, FORWARD)
+            #if gpio.input(LM_SENSOR) == gpio.LOW:
+                #set_motor(LEFT_MOTOR, FORWARD)
+                #set_motor(RIGHT_MOTOR, BACKWARD)
+            #else:
+                #set_motor(LEFT_MOTOR, BACKWARD)
+                #set_motor(RIGHT_MOTOR, FORWARD)
             #2. 90deg turn - either rightmost or leftmost sensor true (on) 
             #elif gpio.input(R_SENSOR) == gpio.HIGH or gpio.input(L_SENSOR) == gpio.HIGH:
              #   turn_90(gpio.input(R_SENSOR))

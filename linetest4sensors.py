@@ -36,7 +36,7 @@ p2.start(30)
 
 try:
     while True:
-        if gpio.input(RightMiddlelinesensor) == False:
+        if gpio.input(LeftMiddlelinesensor) == False:
             #when it sees white
             print("hi")
             gpio.output(in1,gpio.HIGH)

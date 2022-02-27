@@ -92,7 +92,7 @@ def set_motor(motor_num, state):
         else:
             print("Invalid direction parameter")
 
-    else:
+    #else:
         print("Invalid motor paramter")
     print(FORWARD, "\n")
     print(BACKWARD, "\n")
@@ -190,7 +190,10 @@ def main():
     
     #begin initialization of the GPIO pins on the pi
     init_gpio()
-
+    gpio.output(RM_FORWARD, gpio.HIGH)
+    gpio.output(RM_BACKWARD, gpio.LOW)
+    gpio.output(LM_FORWARD, gpio.HIGH)
+    gpio.output(LM_BACKWARD, gpio.LOW)
     # Starting condition will be all four sensors are on, since starting square is all white
     # Check to see if the robot has come off the starting square
     while gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH:

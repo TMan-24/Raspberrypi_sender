@@ -197,10 +197,10 @@ def main():
     init_gpio()
     # Starting condition will be all four sensors are on, since starting square is all white
     # Check to see if the robot has come off the starting square
-    while gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH:
+    #while gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH:
         # Set H-Bridge to go straight
-        set_motor(LEFT_MOTOR, FORWARD)
-        set_motor(RIGHT_MOTOR, FORWARD)
+     #   set_motor(LEFT_MOTOR, FORWARD)
+      #  set_motor(RIGHT_MOTOR, FORWARD)
     
     # main logic of program
     while TRUE:

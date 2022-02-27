@@ -205,7 +205,7 @@ def main():
             if gpio.input(RM_SENSOR) == gpio.LOW:
                 set_motor(LEFT_MOTOR, FORWARD)
                 set_motor(RIGHT_MOTOR, BACKWARD)
-            else:
+            elif gpio.input(LM_SENSOR) == gpio.LOW:
                 set_motor(LEFT_MOTOR, BACKWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)
             #if gpio.input(LM_SENSOR) == gpio.LOW:

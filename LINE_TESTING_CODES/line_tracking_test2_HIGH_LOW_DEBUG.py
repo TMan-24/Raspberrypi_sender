@@ -94,6 +94,11 @@ def set_motor(motor_num, state):
 
     else:
         print("Invalid motor paramter")
+    print(FORWARD, "\n")
+    print(BACKWARD, "\n")
+    print(BRAKE, "\n")
+    print(LEFT_MOTOR, "\n")
+    print(RIGHT_MOTOR, "\n")
 
 
 def init_gpio():

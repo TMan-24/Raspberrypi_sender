@@ -138,7 +138,7 @@ def init_gpio():
     # initialize motor to go forward
     set_motor(LEFT_MOTOR, FORWARD)
     set_motor(RIGHT_MOTOR, FORWARD)
-    
+
     print("I GOT TO THE END OF INIT GPIO\n")
     ###### THIS WILL BE DIFFERENT PROBABLY ######
     # Set up GPIO for ultrasonic sensor as 4 bit input
@@ -195,10 +195,6 @@ def main():
     
     #begin initialization of the GPIO pins on the pi
     init_gpio()
-    gpio.output(RM_FORWARD, gpio.HIGH)
-    gpio.output(RM_BACKWARD, gpio.LOW)
-    gpio.output(LM_FORWARD, gpio.HIGH)
-    gpio.output(LM_BACKWARD, gpio.LOW)
     # Starting condition will be all four sensors are on, since starting square is all white
     # Check to see if the robot has come off the starting square
     while gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH:
@@ -208,6 +204,10 @@ def main():
     
     # main logic of program
     while TRUE:
+        gpio.output(RM_FORWARD, gpio.HIGH)
+        gpio.output(RM_BACKWARD, gpio.LOW)
+        gpio.output(LM_FORWARD, gpio.HIGH)
+        gpio.output(LM_BACKWARD, gpio.LOW)
         #1. continue straight - innermost sensors are on and outer sensors are not on
         if gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
             # Set H-Bridge to go straight

@@ -228,5 +228,6 @@ def main():
         print("SUCCESS (END OF MAIN)\n")
 
 # program starts here. Boilerplate (reusable) python code for having a main function.
-if __name__ == "__main__":
-    main()
+while TRUE:
+    if __name__ == "__main__":
+        main()

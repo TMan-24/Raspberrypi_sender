@@ -204,12 +204,12 @@ def main():
 
 
         #3. correct back to line - use two middle sensors to determine
-            elif gpio.input(RM_SENSOR) == gpio.LOW:
-                set_motor(LEFT_MOTOR, FORWARD)
-                set_motor(RIGHT_MOTOR, BRAKE)
-            else:
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, FORWARD)
+            #elif gpio.input(RM_SENSOR) == gpio.:
+                #set_motor(LEFT_MOTOR, FORWARD)
+                #set_motor(RIGHT_MOTOR, BRAKE)
+            #else:
+                #set_motor(LEFT_MOTOR, BRAKE)
+                #set_motor(RIGHT_MOTOR, FORWARD)
 
         #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
         #if read_ultrasound() < THRESHOLD_VALUE:

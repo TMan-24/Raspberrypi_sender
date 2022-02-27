@@ -7,11 +7,12 @@ import RPi.GPIO as gpio #RPi library for I/O purposes to Pi
 GPIO4 = 4 #RM_SENSOR
 GPIO5 = 5 #FREE #ultrasonic
 GPIO6 = 6 #FREE #ultrasonic
-GPIO14= 14 #L_SENSOR
+GPIO14 = 14 #L_SENSOR
 GPIO15 = 15 #R_SENSOR
 GPIO12 = 12 #enA
 GPIO13 = 13 #enB
 GPIO18 = 18 #FREE #ultrasonic
+GPIO19 = 19 #ultrasonic
 GPIO22 = 22 #RM_FORWARD
 GPIO23 = 23 #RM_BACKWARD
 GPIO24 = 24 #LM_FORWARD
@@ -37,10 +38,10 @@ EN_RM = GPIO13  #enB, black
 
 ###### THIS WILL LIKELY BE CHANGED #######
 # Pins for ultrasound sensor Assuming 4 bit ADC, add more gpio if needed
-US_BIT0 = GPIO18 #Ultrasonic sensor 1 - Trigger
-US_BIT1 = GPIO26 #Ultrasonic sensor 1 - Echo
-US_BIT2 = GPIO19 #Ultrasonic sensor 2 - Trigger
-US_BIT3 = GPIO6  #Ultrasonic sensor 2 - Echo
+#US_BIT0 = GPIO18 #Ultrasonic sensor 1 - Trigger
+#US_BIT1 = GPIO26 #Ultrasonic sensor 1 - Echo
+#US_BIT2 = GPIO19 #Ultrasonic sensor 2 - Trigger
+#US_BIT3 = GPIO6  #Ultrasonic sensor 2 - Echo
 
 # helpful constants
 FORWARD = 0
@@ -48,7 +49,7 @@ BACKWARD = 1
 BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
-THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for ultrasaound
+#THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for ultrasaound
 
 def set_motor(motor_num, state):
 
@@ -110,6 +111,11 @@ def init_gpio():
     gpio.setup(EN_LM, gpio.OUT)
     gpio.setup(EN_RM, gpio.OUT)
 
+   # gpio.output(RM_FORWARD, gpio.LOW)
+   # gpio.output(RM_BACKWARD, gpio.LOW)
+    #gpio.output(LM_FORWARD,  gpio.LOW)
+    #gpio.output(LM_BACKWARD, gpio.LOW)
+
     # initialize motor to go forward
     set_motor(LEFT_MOTOR, FORWARD)
     set_motor(RIGHT_MOTOR, FORWARD)
@@ -125,15 +131,14 @@ def init_gpio():
     ###### THIS WILL BE DIFFERENT PROBABLY ######
     # Set up GPIO for ultrasonic sensor as 4 bit input
     # This will require multiple GPIO pins 
-    gpio.setup(US_BIT0, gpio.IN)
-    gpio.setup(US_BIT1, gpio.IN)
-    gpio.setup(US_BIT2, gpio.IN)
-    gpio.setup(US_BIT3, gpio.IN)
-    
+   # gpio.setup(US_BIT0, gpio.IN)
+   # gpio.setup(US_BIT1, gpio.IN)
+   # gpio.setup(US_BIT2, gpio.IN)
+   # gpio.setup(US_BIT3, gpio.IN)
 
-def read_ultrasound():
+#def read_ultrasound():
     # convert binary to decimal. bit*2^0 + bit*2^1 + bit*2^2 + bit*2^3
-    return (1 * gpio.input(US_BIT0)) + (2 * gpio.input(US_BIT1)) + (4 * gpio.input(US_BIT2)) + (8 * gpio.input(US_BIT3))
+ #   return (1 * gpio.input(US_BIT0)) + (2 * gpio.input(US_BIT1)) + (4 * gpio.input(US_BIT2)) + (8 * gpio.input(US_BIT3))
 
 # 90 Degree Turn
 # This function will need to be improved by testing
@@ -178,7 +183,7 @@ def main():
 
     # Starting condition will be all four sensors are on, since starting square is all white
     # Check to see if the robot has come off the starting square
-    while gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH:
+    while gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
         # Set H-Bridge to go straight
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, FORWARD)
@@ -186,7 +191,7 @@ def main():
     # main logic of program
     while TRUE:
         #1. continue straight - innermost sensors are on and outer sensors are not on
-        if gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
+        if gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW:
             # Set H-Bridge to go straight
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, FORWARD)
@@ -204,8 +209,8 @@ def main():
             set_motor(RIGHT_MOTOR, FORWARD)
 
         #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-        if read_ultrasound() < THRESHOLD_VALUE:
-            turn_around()
+  #      if read_ultrasound() < THRESHOLD_VALUE:
+   #         turn_around()
 
         #5. if we get back to starting position, stop program
         if gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH:

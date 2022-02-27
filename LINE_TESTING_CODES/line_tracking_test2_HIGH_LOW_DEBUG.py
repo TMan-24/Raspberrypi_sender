@@ -51,65 +51,6 @@ LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for ultrasaound
 
-
-# Set pinout mode to Broadcom (board communication)
-gpio.setmode(gpio.BCM)
-
-# Line sensor setup as input digital pins
-gpio.setup(RM_SENSOR, gpio.IN)
-gpio.setup(LM_SENSOR, gpio.IN)
-gpio.setup(R_SENSOR, gpio.IN)
-gpio.setup(L_SENSOR, gpio.IN)
-
-# Setup H-bridge inputs as output pins
-gpio.setup(RM_FORWARD, gpio.OUT)
-gpio.setup(RM_BACKWARD, gpio.OUT)
-gpio.setup(LM_FORWARD, gpio.OUT)
-gpio.setup(LM_BACKWARD, gpio.OUT)
-gpio.output(RM_FORWARD,gpio.LOW)
-gpio.output(RM_BACKWARD,gpio.LOW)
-gpio.output(LM_FORWARD,gpio.LOW)
-gpio.output(LM_BACKWARD,gpio.LOW)
-
-    # Set H-bridge Enable motor signals as output pins 
-gpio.setup(EN_LM, gpio.OUT)
-gpio.setup(EN_RM, gpio.OUT)
-
-
-    # Set a PWM signal of 1000 for both motors
-p1=gpio.PWM(EN_LM, 1000)
-p2=gpio.PWM(EN_RM, 1000)
-
-    # Start motors
-p1.start(30) #motor speeds
-p2.start(30)
-    
-    # initialize motor to go forward
-    #set_motor(LEFT_MOTOR, FORWARD)
-    #set_motor(RIGHT_MOTOR, FORWARD)
-
-    
-    ###### THIS WILL BE DIFFERENT PROBABLY ######
-    # Set up GPIO for ultrasonic sensor as 4 bit input
-    # This will require multiple GPIO pins 
-    #gpio.setup(US_BIT0, gpio.IN)
-    #gpio.setup(US_BIT1, gpio.IN)
-    #gpio.setup(US_BIT2, gpio.IN)
-    #gpio.setup(US_BIT3, gpio.IN)
-print("I GOT TO THE END OF INIT GPIO\n")
-
-try:
-    #init_gpio()
-    while TRUE:
-            gpio.output(RM_FORWARD, gpio.HIGH)
-            gpio.output(RM_BACKWARD, gpio.LOW)
-            gpio.output(LM_FORWARD, gpio.HIGH)
-            gpio.output(LM_BACKWARD, gpio.LOW)
-finally:
-    gpio.cleanup()
-
-
-'''
 def set_motor(motor_num, state):
 
     print("I GOT TO SET MOTOR\n")
@@ -159,55 +100,63 @@ def set_motor(motor_num, state):
     print(LEFT_MOTOR, "\n")
     print(RIGHT_MOTOR, "\n")
 
-def init_gpio():
 
-    # Set pinout mode to Broadcom (board communication)
-    gpio.setmode(gpio.BCM)
+# Set pinout mode to Broadcom (board communication)
+gpio.setmode(gpio.BCM)
 
-    # Line sensor setup as input digital pins
-    gpio.setup(RM_SENSOR, gpio.IN)
-    gpio.setup(LM_SENSOR, gpio.IN)
-    gpio.setup(R_SENSOR, gpio.IN)
-    gpio.setup(L_SENSOR, gpio.IN)
+# Line sensor setup as input digital pins
+gpio.setup(RM_SENSOR, gpio.IN)
+gpio.setup(LM_SENSOR, gpio.IN)
+gpio.setup(R_SENSOR, gpio.IN)
+gpio.setup(L_SENSOR, gpio.IN)
 
-    # Setup H-bridge inputs as output pins
-    gpio.setup(RM_FORWARD, gpio.OUT)
-    gpio.setup(RM_BACKWARD, gpio.OUT)
-    gpio.setup(LM_FORWARD, gpio.OUT)
-    gpio.setup(LM_BACKWARD, gpio.OUT)
-    gpio.output(RM_FORWARD,gpio.LOW)
-    gpio.output(RM_BACKWARD,gpio.LOW)
-    gpio.output(LM_FORWARD,gpio.LOW)
-    gpio.output(LM_BACKWARD,gpio.LOW)
+# Setup H-bridge inputs as output pins
+gpio.setup(RM_FORWARD, gpio.OUT)
+gpio.setup(RM_BACKWARD, gpio.OUT)
+gpio.setup(LM_FORWARD, gpio.OUT)
+gpio.setup(LM_BACKWARD, gpio.OUT)
+gpio.output(RM_FORWARD,gpio.LOW)
+gpio.output(RM_BACKWARD,gpio.LOW)
+gpio.output(LM_FORWARD,gpio.LOW)
+gpio.output(LM_BACKWARD,gpio.LOW)
 
     # Set H-bridge Enable motor signals as output pins 
-    gpio.setup(EN_LM, gpio.OUT)
-    gpio.setup(EN_RM, gpio.OUT)
+gpio.setup(EN_LM, gpio.OUT)
+gpio.setup(EN_RM, gpio.OUT)
 
 
     # Set a PWM signal of 1000 for both motors
-    p1=gpio.PWM(EN_LM, 1000)
-    p2=gpio.PWM(EN_RM, 1000)
+p1=gpio.PWM(EN_LM, 1000)
+p2=gpio.PWM(EN_RM, 1000)
 
     # Start motors
-    p1.start(30) #motor speeds
-    p2.start(30)
+p1.start(30) #motor speeds
+p2.start(30)
     
-    # initialize motor to go forward
-    #set_motor(LEFT_MOTOR, FORWARD)
-    #set_motor(RIGHT_MOTOR, FORWARD)
+# initialize motor to go forward
+set_motor(LEFT_MOTOR, FORWARD)
+set_motor(RIGHT_MOTOR, FORWARD)
 
-    print("I GOT TO THE END OF INIT GPIO\n")
-    ###### THIS WILL BE DIFFERENT PROBABLY ######
-    # Set up GPIO for ultrasonic sensor as 4 bit input
-    # This will require multiple GPIO pins 
-    gpio.setup(US_BIT0, gpio.IN)
-    gpio.setup(US_BIT1, gpio.IN)
-    gpio.setup(US_BIT2, gpio.IN)
-    gpio.setup(US_BIT3, gpio.IN)
     
+###### THIS WILL BE DIFFERENT PROBABLY ######
+# Set up GPIO for ultrasonic sensor as 4 bit input
+# This will require multiple GPIO pins 
+gpio.setup(US_BIT0, gpio.IN)
+gpio.setup(US_BIT1, gpio.IN)
+gpio.setup(US_BIT2, gpio.IN)
+gpio.setup(US_BIT3, gpio.IN)
 
-def read_ultrasound():
+#try:
+    #init_gpio()
+ #   while TRUE:
+ #           gpio.output(RM_FORWARD, gpio.HIGH)
+ #           gpio.output(RM_BACKWARD, gpio.LOW)
+ #           gpio.output(LM_FORWARD, gpio.HIGH)
+  #          gpio.output(LM_BACKWARD, gpio.LOW)
+#finally:
+ #   gpio.cleanup()
+
+'''def read_ultrasound():
     # convert binary to decimal. bit*2^0 + bit*2^1 + bit*2^2 + bit*2^3
     return (1 * gpio.input(US_BIT0)) + (2 * gpio.input(US_BIT1)) + (4 * gpio.input(US_BIT2)) + (8 * gpio.input(US_BIT3))
 
@@ -247,18 +196,18 @@ def turn_around():
             lm_still_on_line = FALSE
         else:
             lm_still_on_line = TRUE
-    print("END OF TURN AROUND\n")
+    print("END OF TURN AROUND\n")'''
 
 def main():
     
     #begin initialization of the GPIO pins on the pi
-    init_gpio()
+    #init_gpio()
     # Starting condition will be all four sensors are on, since starting square is all white
     # Check to see if the robot has come off the starting square
-    #while gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH:
+    while gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH:
         # Set H-Bridge to go straight
-     #   set_motor(LEFT_MOTOR, FORWARD)
-      #  set_motor(RIGHT_MOTOR, FORWARD)
+        set_motor(LEFT_MOTOR, FORWARD)
+        set_motor(RIGHT_MOTOR, FORWARD)
     
     # main logic of program
     while TRUE:
@@ -273,8 +222,8 @@ def main():
             set_motor(RIGHT_MOTOR, FORWARD)
 
         #2. 90deg turn - either rightmost or leftmost sensor true (on) 
-        elif gpio.input(R_SENSOR) == gpio.HIGH or gpio.input(L_SENSOR) == gpio.HIGH:
-            turn_90(gpio.input(R_SENSOR))
+        #elif gpio.input(R_SENSOR) == gpio.HIGH or gpio.input(L_SENSOR) == gpio.HIGH:
+         #   turn_90(gpio.input(R_SENSOR))
 
         #3. correct back to line - use two middle sensors to determine
         elif gpio.input(RM_SENSOR) == gpio.HIGH:
@@ -285,8 +234,8 @@ def main():
             set_motor(RIGHT_MOTOR, FORWARD)
 
         #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-        if read_ultrasound() < THRESHOLD_VALUE:
-            turn_around()
+        #if read_ultrasound() < THRESHOLD_VALUE:
+         #   turn_around()
 
         #5. if we get back to starting position, stop program
         if gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH:
@@ -299,4 +248,4 @@ def main():
 
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":
-    main()'''
+    main()

@@ -98,12 +98,15 @@ def init_gpio():
     gpio.setup(US_BIT2, gpio.IN)
     gpio.setup(US_BIT3, gpio.IN)
 
-while TRUE:
-        init_gpio()
-        gpio.output(RM_FORWARD, gpio.HIGH)
-        gpio.output(RM_BACKWARD, gpio.LOW)
-        gpio.output(LM_FORWARD, gpio.HIGH)
-        gpio.output(LM_BACKWARD, gpio.LOW)
+try:
+    while TRUE:
+            init_gpio()
+            gpio.output(RM_FORWARD, gpio.HIGH)
+            gpio.output(RM_BACKWARD, gpio.LOW)
+            gpio.output(LM_FORWARD, gpio.HIGH)
+            gpio.output(LM_BACKWARD, gpio.LOW)
+finally:
+    gpio.cleanup()
 
 
 '''

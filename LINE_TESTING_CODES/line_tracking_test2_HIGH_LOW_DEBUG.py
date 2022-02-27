@@ -202,7 +202,7 @@ def main():
                 set_motor(LEFT_MOTOR, FORWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)
             #3. correct back to line - use two middle sensors to determine
-            if gpio.input(RM_SENSOR) == False:
+            elif gpio.input(RM_SENSOR) == False:
                 set_motor(LEFT_MOTOR, FORWARD)
                 set_motor(RIGHT_MOTOR, BACKWARD)
             elif gpio.input(LM_SENSOR) == False:

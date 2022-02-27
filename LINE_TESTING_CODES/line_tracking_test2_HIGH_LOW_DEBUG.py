@@ -117,6 +117,10 @@ def init_gpio():
     gpio.setup(RM_BACKWARD, gpio.OUT)
     gpio.setup(LM_FORWARD, gpio.OUT)
     gpio.setup(LM_BACKWARD, gpio.OUT)
+    gpio.output(RM_FORWARD,gpio.LOW)
+    gpio.output(RM_BACKWARD,gpio.LOW)
+    gpio.output(LM_FORWARD,gpio.LOW)
+    gpio.output(LM_BACKWARD,gpio.LOW)
 
     # Set H-bridge Enable motor signals as output pins 
     gpio.setup(EN_LM, gpio.OUT)

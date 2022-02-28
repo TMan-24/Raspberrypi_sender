@@ -251,7 +251,7 @@ def main():
         else:
             print("Right: 1")
     
-    sleep(5)
+    sleep(2)
     # main logic of program
     while TRUE:
         if gpio.input(L_SENSOR) == gpio.LOW:

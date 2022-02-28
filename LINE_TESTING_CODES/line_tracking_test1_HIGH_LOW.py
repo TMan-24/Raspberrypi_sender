@@ -51,6 +51,45 @@ LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for ultrasaound
 
+# Set pinout mode to Broadcom (board communication)
+gpio.setmode(gpio.BCM)
+
+    # Line sensor setup as input digital pins
+gpio.setup(RM_SENSOR, gpio.IN)
+gpio.setup(LM_SENSOR, gpio.IN)
+gpio.setup(R_SENSOR, gpio.IN)
+gpio.setup(L_SENSOR, gpio.IN)
+
+    # Setup H-bridge inputs as output pins
+gpio.setup(RM_FORWARD, gpio.OUT)
+gpio.setup(RM_BACKWARD, gpio.OUT)
+gpio.setup(LM_FORWARD, gpio.OUT)
+gpio.setup(LM_BACKWARD, gpio.OUT)
+
+    # Set H-bridge Enable motor signals as output pins 
+gpio.setup(EN_LM, gpio.OUT)
+gpio.setup(EN_RM, gpio.OUT)
+
+    # initialize motor to go forward
+    ##set_motor(LEFT_MOTOR, FORWARD)
+    ##set_motor(RIGHT_MOTOR, FORWARD)
+
+# Set a PWM signal of 1000 for both motors
+p1=gpio.PWM(EN_LM, 1000)
+p2=gpio.PWM(EN_RM, 1000)
+
+    # Start motors
+p1.start(30) #motor speeds
+p2.start(30)
+
+    ###### THIS WILL BE DIFFERENT PROBABLY ######
+    # Set up GPIO for ultrasonic sensor as 4 bit input
+    # This will require multiple GPIO pins 
+gpio.setup(US_BIT0, gpio.IN)
+gpio.setup(US_BIT1, gpio.IN)
+gpio.setup(US_BIT2, gpio.IN)
+gpio.setup(US_BIT3, gpio.IN)
+
 def set_motor(motor_num, state):
 
     print("I GOT TO SET MOTOR\n")
@@ -148,7 +187,7 @@ def main():
     
     #begin initialization of the GPIO pins on the pi
     #init_gpio()
-    # Set pinout mode to Broadcom (board communication)
+    '''# Set pinout mode to Broadcom (board communication)
     gpio.setmode(gpio.BCM)
 
     # Line sensor setup as input digital pins
@@ -185,7 +224,7 @@ def main():
     gpio.setup(US_BIT0, gpio.IN)
     gpio.setup(US_BIT1, gpio.IN)
     gpio.setup(US_BIT2, gpio.IN)
-    gpio.setup(US_BIT3, gpio.IN)
+    gpio.setup(US_BIT3, gpio.IN)'''
     # Starting condition will be all four sensors are off (0), since starting square is all white
     # Check to see if the robot has come off the starting square
     while gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:

@@ -107,8 +107,6 @@ def set_motor(motor_num, state):
             # make right motor forward
             gpio.output(RM_FORWARD, gpio.HIGH)
             gpio.output(RM_BACKWARD, gpio.LOW)
-            gpio.output(LM_FORWARD, gpio.LOW)
-            gpio.output(LM_BACKWARD, gpio.HIGH)
         elif state == BACKWARD:
             print("turning right")
             # make right motor backward
@@ -164,6 +162,7 @@ def turn_90(direction):
         # IF: leftmost sensor is ON (low), then zero-degree turn left, until LEFTmost sensor goes OFF (HIGH), and then back ON (high)
         # turn until the right middle sensor is active (vehicle has turned far enough to cross the line)
         while gpio.input(RM_SENSOR) == gpio.LOW:
+            print("turning left")
             set_motor(LEFT_MOTOR, BRAKE)
             set_motor(RIGHT_MOTOR, FORWARD)
 '''

@@ -103,17 +103,18 @@ def set_motor(motor_num, state):
     # determine which motor to set
     if motor_num == LEFT_MOTOR:
         if state == FORWARD:
-            print("turning left")
+            print("right motor FORWARD")
             # make right motor forward
             gpio.output(RM_FORWARD, gpio.HIGH)
             gpio.output(RM_BACKWARD, gpio.LOW)
         elif state == BACKWARD:
-            print("turning right")
+            print("right motor BACKWARD")
             # make right motor backward
             gpio.output(RM_FORWARD, gpio.LOW)
             gpio.output(RM_BACKWARD, gpio.HIGH)
         elif state == BRAKE:
             # make right motor brake
+            print("right motor BRAKE")
             gpio.output(RM_FORWARD, gpio.LOW)
             gpio.output(RM_BACKWARD, gpio.LOW)
         else:
@@ -122,14 +123,17 @@ def set_motor(motor_num, state):
     elif motor_num == RIGHT_MOTOR:
         if state == FORWARD:
             # make left motor forward
+            print("left motor forward")
             gpio.output(LM_FORWARD, gpio.HIGH)
             gpio.output(LM_BACKWARD, gpio.LOW)
         elif state == BACKWARD:
             # make left motor backward
+            print("left motor backward")
             gpio.output(LM_FORWARD, gpio.LOW)
             gpio.output(LM_BACKWARD, gpio.HIGH)
         elif state == BRAKE:
             # make right motor brake
+            print("left motor BRAKE")
             gpio.output(RM_FORWARD, gpio.LOW)
             gpio.output(RM_BACKWARD, gpio.LOW)
         else:

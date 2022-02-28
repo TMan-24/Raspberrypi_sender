@@ -290,12 +290,12 @@ def main():
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:
                 print("we are in state 3.1")
-                set_motor(LEFT_MOTOR, FORWARD)
-                set_motor(RIGHT_MOTOR, BACKWARD)
+                set_motor(RIGHT_MOTOR, FORWARD)
+                set_motor(LEFT_MOTOR, BACKWARD)
             else:
                 print("we are in state 3")
-                set_motor(LEFT_MOTOR, BACKWARD)
-                set_motor(RIGHT_MOTOR, FORWARD)
+                set_motor(RIGHT_MOTOR, BACKWARD)
+                set_motor(LEFT_MOTOR, FORWARD)
                 
 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn

@@ -72,8 +72,8 @@ p1=gpio.PWM(EN_LM, 1000)
 p2=gpio.PWM(EN_RM, 1000)
 
     # Start motors
-p1.start(15) #motor speeds
-p2.start(15)
+p1.start(20) #motor speeds
+p2.start(20)
 
     ###### THIS WILL BE DIFFERENT PROBABLY ######
     # Set up GPIO for ultrasonic sensor as 4 bit input
@@ -276,7 +276,7 @@ def main():
                 print("Right: 0") 
             else:
                 print("Right: 1")
-            
+            sleep(2)
             #1. continue straight - innermost sensors are on and outer sensors are not on
             if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
                 # Set H-Bridge to go straight

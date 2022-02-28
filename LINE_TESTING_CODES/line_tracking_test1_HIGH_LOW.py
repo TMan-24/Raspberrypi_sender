@@ -254,7 +254,7 @@ def main():
         else:
             print("Right: 1")'''
         #continue
-        sleep(1)
+        sleep(2)
     if gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR):
         main()
     else:
@@ -280,11 +280,11 @@ def main():
             if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
                 # Set H-Bridge to go straight
                 print("we are in state 1")
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, BRAKE)
+                set_motor(LEFT_MOTOR, FORWARD)
+                set_motor(RIGHT_MOTOR, FORWARD)
                 sleep(1)
                 set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(LEFT_MOTOR, BRAKE)
+                set_motor(RIGHT_MOTOR, BRAKE)
                 sleep(1)
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
             elif gpio.input(R_SENSOR) == gpio.LOW:
@@ -295,12 +295,12 @@ def main():
                 print("we are in state 3.1")
                 set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, BACKWARD)
-                sleep(0.01)
+                #sleep(0.01)
             else:
                 print("we are in state 3")
                 set_motor(RIGHT_MOTOR, BACKWARD)
                 set_motor(LEFT_MOTOR, FORWARD)
-                sleep(0.01)
+                #sleep(0.01)
                 
 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn

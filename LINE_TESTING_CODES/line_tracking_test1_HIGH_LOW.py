@@ -250,62 +250,63 @@ def main():
             print("Right: 0") 
         else:
             print("Right: 1")
-    
-    # main logic of program
-    while TRUE:
-        if gpio.input(L_SENSOR) == gpio.LOW:
-            print("left: 0")
-        else:
-            print("left: 1")
-        if gpio.input(LM_SENSOR) == gpio.LOW:
-            print("left Middle: 0")
-        else:
-            print("left middle: 1")
-        if gpio.input(RM_SENSOR) == gpio.LOW:
-            print("Right Middle: 0")
-        else:
-            print("Right Middle: 1")
-        if gpio.input(R_SENSOR) == gpio.LOW:
-            print("Right: 0") 
-        else:
-            print("Right: 1")
-        
-        sleep(2)
-        #1. continue straight - innermost sensors are on and outer sensors are not on
-        if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
-            # Set H-Bridge to go straight
-            print("we are in state 1")
-            set_motor(LEFT_MOTOR, FORWARD)
-            set_motor(RIGHT_MOTOR, FORWARD)
-        
-        #2. 90deg turn - either rightmost or leftmost sensor false (off) 
-        elif gpio.input(R_SENSOR) == gpio.LOW  or gpio.input(L_SENSOR) == gpio.LOW:
-            print("we are in state 2")
-            turn_90(gpio.input(R_SENSOR))
-
-        #3. correct back to line - use two middle sensors to determine
-        elif gpio.input(RM_SENSOR) == gpio.LOW:
-            print("we are in state 3.1")
-            set_motor(LEFT_MOTOR, FORWARD)
-            set_motor(RIGHT_MOTOR, BACKWARD)
-        else:
-            print("we are in state 3")
-            set_motor(LEFT_MOTOR, BACKWARD)
-            set_motor(RIGHT_MOTOR, FORWARD)
+    if gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR):
+        main()
+    else:
+     # main logic of program
+        while TRUE:
+            if gpio.input(L_SENSOR) == gpio.LOW:
+                print("left: 0")
+            else:
+                print("left: 1")
+            if gpio.input(LM_SENSOR) == gpio.LOW:
+                print("left Middle: 0")
+            else:
+                print("left middle: 1")
+            if gpio.input(RM_SENSOR) == gpio.LOW:
+                print("Right Middle: 0")
+            else:
+                print("Right Middle: 1")
+            if gpio.input(R_SENSOR) == gpio.LOW:
+                print("Right: 0") 
+            else:
+                print("Right: 1")
             
+            #1. continue straight - innermost sensors are on and outer sensors are not on
+            if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
+                # Set H-Bridge to go straight
+                print("we are in state 1")
+                set_motor(LEFT_MOTOR, FORWARD)
+                set_motor(RIGHT_MOTOR, FORWARD)
+            
+            #2. 90deg turn - either rightmost or leftmost sensor false (off) 
+            elif gpio.input(R_SENSOR) == gpio.LOW  or gpio.input(L_SENSOR) == gpio.LOW:
+                print("we are in state 2")
+                turn_90(gpio.input(R_SENSOR))
 
-        #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-        #if read_ultrasound() < THRESHOLD_VALUE:
-         #   turn_around()
+            #3. correct back to line - use two middle sensors to determine
+            elif gpio.input(RM_SENSOR) == gpio.LOW:
+                print("we are in state 3.1")
+                set_motor(LEFT_MOTOR, FORWARD)
+                set_motor(RIGHT_MOTOR, BACKWARD)
+            else:
+                print("we are in state 3")
+                set_motor(LEFT_MOTOR, BACKWARD)
+                set_motor(RIGHT_MOTOR, FORWARD)
+                
 
-        #5. if we get back to starting position, stop program
-        #if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
-            # turn off all gpio settings
-         #   set_motor(LEFT_MOTOR, BRAKE)
-          #  set_motor(RIGHT_MOTOR, BRAKE)
-           # print("we are in state 5")
-           # gpio.cleanup()
-            #exit()
+            #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
+            #if read_ultrasound() < THRESHOLD_VALUE:
+            #   turn_around()
+
+            #5. if we get back to starting position, stop program
+            #if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+                # turn off all gpio settings
+            #   set_motor(LEFT_MOTOR, BRAKE)
+            #  set_motor(RIGHT_MOTOR, BRAKE)
+            # print("we are in state 5")
+            # gpio.cleanup()
+                #exit()
 
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":

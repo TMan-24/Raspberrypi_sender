@@ -281,7 +281,7 @@ def main():
                 # Set H-Bridge to go straight
                 print("we are in state 1")
                 set_motor(LEFT_MOTOR, FORWARD)
-                set_motor(RIGHT_MOTOR, FORWARD)
+                #set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
                 sleep(40)

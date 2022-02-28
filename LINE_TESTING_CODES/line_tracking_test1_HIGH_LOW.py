@@ -280,7 +280,7 @@ def main():
             if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
                 # Set H-Bridge to go straight
                 print("we are in state 1")
-                set_motor(LEFT_MOTOR, FORWARD)
+                #set_motor(LEFT_MOTOR, FORWARD)
                 #set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)

@@ -168,8 +168,8 @@ def main():
     gpio.setup(EN_RM, gpio.OUT)
 
     # initialize motor to go forward
-    set_motor(LEFT_MOTOR, FORWARD)
-    set_motor(RIGHT_MOTOR, FORWARD)
+    ##set_motor(LEFT_MOTOR, FORWARD)
+    ##set_motor(RIGHT_MOTOR, FORWARD)
 
 # Set a PWM signal of 1000 for both motors
     p1=gpio.PWM(EN_LM, 1000)

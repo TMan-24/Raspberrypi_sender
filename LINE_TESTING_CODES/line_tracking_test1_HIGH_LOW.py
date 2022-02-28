@@ -298,7 +298,7 @@ def main():
             else:
                 print("we are in state 3")
                 set_motor(RIGHT_MOTOR, BACKWARD)
-                set_motor(LEFT_MOTOR, FORWARD)
+                #set_motor(LEFT_MOTOR, FORWARD)
                 #sleep(0.01)
                 
 

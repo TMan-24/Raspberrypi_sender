@@ -150,6 +150,7 @@ def set_motor(motor_num, state):
 # 90 Degree Turn
 # This function will need to be improved by testing
 def turn_90(direction):
+    exit()
     print("IM THE DIRECTION", direction)
     # LOW means that the right sensor was active so turn the vehicle 90 degrees right
     # IF: Rightmost sensor is ON (low), then zero-degree turn RIGHT, until Rightmost sensor goes OFF (HIGH), and then back ON (LOW)

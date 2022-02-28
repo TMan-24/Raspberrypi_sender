@@ -165,7 +165,7 @@ def turn_90(direction):
         while gpio.input(RM_SENSOR) == gpio.LOW:
             print("turning left for 90")
             set_motor(RIGHT_MOTOR, BRAKE)
-            set_motor(LEFT_MOTOR, FORWARD)
+            #set_motor(LEFT_MOTOR, FORWARD)
 '''
 # 180 Degree Turn
 # This function will need to be improved by testing

@@ -106,23 +106,24 @@ def set_motor(motor_num, state):
             # make right motor forward
             gpio.output(RM_FORWARD, gpio.HIGH)
             gpio.output(RM_BACKWARD, gpio.LOW)
-        else:
+        elif state == BACKWARD:
             # make right motor backward
             gpio.output(RM_FORWARD, gpio.LOW)
             gpio.output(RM_BACKWARD, gpio.HIGH)
+        
         #elif state == BRAKE:
             # make right motor brake
          #   gpio.output(RM_FORWARD, gpio.LOW)
           #  gpio.output(RM_BACKWARD, gpio.LOW)
-        #else:
-         #   print("Invalid direction parameter")
+        else:
+            print("Invalid direction parameter")
 
     elif motor_num == RIGHT_MOTOR:
         if state == FORWARD:
             # make left motor forward
             gpio.output(LM_FORWARD, gpio.HIGH)
             gpio.output(LM_BACKWARD, gpio.LOW)
-        else:
+        elif state == BACKWARD:
             # make left motor backward
             gpio.output(LM_FORWARD, gpio.LOW)
             gpio.output(LM_BACKWARD, gpio.HIGH)
@@ -130,8 +131,8 @@ def set_motor(motor_num, state):
             # make right motor brake
          #   gpio.output(RM_FORWARD, gpio.LOW)
           #  gpio.output(RM_BACKWARD, gpio.LOW)
-        #else:
-         #   print("Invalid direction parameter")
+        else:
+            print("Invalid direction parameter")
 
     else:
         print("Invalid motor paramter")

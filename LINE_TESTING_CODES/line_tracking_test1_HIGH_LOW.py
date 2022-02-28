@@ -72,8 +72,8 @@ p1=gpio.PWM(EN_LM, 1000)
 p2=gpio.PWM(EN_RM, 1000)
 
     # Start motors
-p1.start(20) #motor speeds
-p2.start(20)
+p1.start(25) #motor speeds
+p2.start(25)
 
     ###### THIS WILL BE DIFFERENT PROBABLY ######
     # Set up GPIO for ultrasonic sensor as 4 bit input
@@ -284,6 +284,8 @@ def main():
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
             elif gpio.input(R_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW:
                 print("we are in state 2")
+                set_motor(RIGHT_MOTOR, BRAKE)
+                set_motor(LEFT_MOTOR, BRAKE)
                 turn_90(gpio.input(R_SENSOR))
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:

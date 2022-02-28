@@ -235,8 +235,8 @@ def main():
     while gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
         print("LEAVE")
         # Set H-Bridge to go straight
-        set_motor(LEFT_MOTOR, FORWARD)
-        set_motor(RIGHT_MOTOR, FORWARD)
+        #set_motor(LEFT_MOTOR, FORWARD)
+        #set_motor(RIGHT_MOTOR, FORWARD)
         '''if gpio.input(L_SENSOR) == gpio.LOW:
             print("left: 0")
         else:

@@ -21,8 +21,8 @@ GPIO26 = 26 #FREE
 GPIO27 = 27 #LM_SENSOR
 
 # H-Bridge input control pins
-RM_FORWARD = GPIO23 #in4, blue
-RM_BACKWARD = GPIO22   #in3, green
+RM_FORWARD = GPIO22 #in4, blue
+RM_BACKWARD = GPIO23   #in3, green
 LM_FORWARD =  GPIO24    #in2, yellow
 LM_BACKWARD = GPIO25   #in1, orange
 

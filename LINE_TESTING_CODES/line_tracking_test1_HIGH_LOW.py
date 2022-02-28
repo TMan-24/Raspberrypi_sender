@@ -292,12 +292,12 @@ def main():
                 print("we are in state 3.1")
                 set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, BACKWARD)
-                sleep(1)
+                sleep(0.1)
             else:
                 print("we are in state 3")
                 set_motor(RIGHT_MOTOR, BACKWARD)
                 set_motor(LEFT_MOTOR, FORWARD)
-                sleep(1)
+                sleep(0.1)
                 
 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn

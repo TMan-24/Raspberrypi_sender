@@ -237,7 +237,22 @@ def main():
     
     # main logic of program
     while TRUE:
-        print("left: ", L_SENSOR, "Left middle: ", LM_SENSOR, "Right middle: ", RM_SENSOR, "Right: ", R_SENSOR)
+        if gpio.input(L_SENSOR) == gpio.LOW:
+            print("left: 0")
+        else:
+            print("left: 1")
+        if gpio.input(LM_SENSOR) == gpio.LOW:
+            print("left Middle: 0")
+        else:
+            print("left middle: 1")
+        if gpio.input(RM_SENSOR) == gpio.LOW:
+            print("Right Middle: 0")
+        else:
+            print("Right Middle: 1")
+        if gpio.input(R_SENSOR) == gpio.LOW:
+            print("Right: 0")
+        else:
+            print("Right: 1")
         #1. continue straight - innermost sensors are on and outer sensors are not on
         if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
             # Set H-Bridge to go straight

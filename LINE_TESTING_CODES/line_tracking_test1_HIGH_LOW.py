@@ -254,7 +254,7 @@ def main():
         else:
             print("Right: 1")'''
         #continue
-        sleep(2)
+        sleep(1)
     if gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR):
         main()
     else:

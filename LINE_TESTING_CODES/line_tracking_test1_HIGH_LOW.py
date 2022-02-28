@@ -113,10 +113,10 @@ def set_motor(motor_num, state):
             gpio.output(RM_FORWARD, gpio.LOW)
             gpio.output(RM_BACKWARD, gpio.HIGH)
         
-        #elif state == BRAKE:
+        elif state == BRAKE:
             # make right motor brake
-         #   gpio.output(RM_FORWARD, gpio.LOW)
-          #  gpio.output(RM_BACKWARD, gpio.LOW)
+            gpio.output(RM_FORWARD, gpio.LOW)
+            gpio.output(RM_BACKWARD, gpio.LOW)
         else:
             print("Invalid direction parameter")
 
@@ -129,10 +129,10 @@ def set_motor(motor_num, state):
             # make left motor backward
             gpio.output(LM_FORWARD, gpio.LOW)
             gpio.output(LM_BACKWARD, gpio.HIGH)
-        #elif state == BRAKE:
+        elif state == BRAKE:
             # make right motor brake
-         #   gpio.output(RM_FORWARD, gpio.LOW)
-          #  gpio.output(RM_BACKWARD, gpio.LOW)
+            gpio.output(RM_FORWARD, gpio.LOW)
+            gpio.output(RM_BACKWARD, gpio.LOW)
         else:
             print("Invalid direction parameter")
 
@@ -155,7 +155,7 @@ def turn_90(direction):
         while gpio.input(LM_SENSOR) == gpio.LOW:
             print("State 1 for turn90")
             set_motor(LEFT_MOTOR, FORWARD)
-            set_motor(RIGHT_MOTOR, BACKWARD)
+            set_motor(RIGHT_MOTOR, BRAKE)
         #while gpio.input(R_SENSOR) == gpio.LOW:
          #   set_motor(LEFT_MOTOR, BACKWARD)
           #  set_motor(RIGHT_MOTOR, FORWARD)
@@ -163,7 +163,7 @@ def turn_90(direction):
         # IF: leftmost sensor is ON (low), then zero-degree turn left, until LEFTmost sensor goes OFF (HIGH), and then back ON (high)
         # turn until the right middle sensor is active (vehicle has turned far enough to cross the line)
         while gpio.input(RM_SENSOR) == gpio.LOW:
-            set_motor(LEFT_MOTOR, BACKWARD)
+            set_motor(LEFT_MOTOR, BRAKE)
             set_motor(RIGHT_MOTOR, FORWARD)
 '''
 # 180 Degree Turn

@@ -283,7 +283,7 @@ def main():
                 set_motor(LEFT_MOTOR, FORWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
-            elif gpio.input(R_SENSOR) == gpio.LOW:
+            elif gpio.input(R_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW:
                 print("we are in state 2")
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)

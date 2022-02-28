@@ -282,7 +282,7 @@ def main():
                 print("we are in state 1")
                 set_motor(LEFT_MOTOR, FORWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)
-                sleep(1)
+                sleep(2)
                 set_motor(RIGHT_MOTOR, BRAKE)
                 set_motor(LEFT_MOTOR, BRAKE)
                 sleep(5)

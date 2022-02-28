@@ -21,10 +21,10 @@ GPIO26 = 26 #FREE
 GPIO27 = 27 #LM_SENSOR
 
 # H-Bridge input control pins
-RM_FORWARD = GPIO24   #in4, blue
-RM_BACKWARD = GPIO25    #in3, green
-LM_FORWARD =  GPIO22    #in2, yellow
-LM_BACKWARD = GPIO23    #in1, orange
+RM_FORWARD = GPIO25  #in4, blue
+RM_BACKWARD = GPIO24    #in3, green
+LM_FORWARD =  GPIO23    #in2, yellow
+LM_BACKWARD = GPIO22    #in1, orange
 
 # Line Sensor pins
 RM_SENSOR = GPIO4   #right middle sensor, green
@@ -112,7 +112,6 @@ def set_motor(motor_num, state):
             # make right motor backward
             gpio.output(RM_FORWARD, gpio.LOW)
             gpio.output(RM_BACKWARD, gpio.HIGH)
-        
         elif state == BRAKE:
             # make right motor brake
             gpio.output(RM_FORWARD, gpio.LOW)

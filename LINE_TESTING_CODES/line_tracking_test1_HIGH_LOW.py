@@ -107,6 +107,8 @@ def set_motor(motor_num, state):
             # make right motor forward
             gpio.output(RM_FORWARD, gpio.HIGH)
             gpio.output(RM_BACKWARD, gpio.LOW)
+            gpio.output(LM_FORWARD, gpio.LOW)
+            gpio.output(LM_BACKWARD, gpio.HIGH)
         elif state == BACKWARD:
             print("turning right")
             # make right motor backward

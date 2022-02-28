@@ -27,7 +27,7 @@ gpio.output(IN4,gpio.LOW)
 p1=gpio.PWM(ENA,1000)
 p2=gpio.PWM(ENB,1000)
 p1.start(45)
-p2.start(45)
+p2.start(44)
 
 try:
     while TRUE:

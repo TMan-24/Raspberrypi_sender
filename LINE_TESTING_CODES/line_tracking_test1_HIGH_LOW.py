@@ -157,15 +157,15 @@ def turn_90(direction):
         # turn until the left middle sensor is active (vehicle has turned far enough to cross the line)
         while gpio.input(LM_SENSOR) == gpio.LOW:
             print("State 1 for turn90")
-            set_motor(LEFT_MOTOR, FORWARD)
-            set_motor(RIGHT_MOTOR, BRAKE)
+            set_motor(RIGHT_MOTOR, FORWARD)
+            set_motor(LEFT_MOTOR, BRAKE)
     else:
         # IF: leftmost sensor is ON (low), then zero-degree turn left, until LEFTmost sensor goes OFF (HIGH), and then back ON (high)
         # turn until the right middle sensor is active (vehicle has turned far enough to cross the line)
         while gpio.input(RM_SENSOR) == gpio.LOW:
             print("turning left for 90")
-            set_motor(LEFT_MOTOR, BRAKE)
-            set_motor(RIGHT_MOTOR, FORWARD)
+            set_motor(RIGHT_MOTOR, BRAKE)
+            set_motor(LEFT_MOTOR, FORWARD)
 '''
 # 180 Degree Turn
 # This function will need to be improved by testing

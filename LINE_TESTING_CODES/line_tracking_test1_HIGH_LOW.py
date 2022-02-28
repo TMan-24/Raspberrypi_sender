@@ -43,13 +43,6 @@ US_BIT1 = GPIO26 #Ultrasonic sensor 1 - Echo
 US_BIT2 = GPIO19 #Ultrasonic sensor 2 - Trigger
 US_BIT3 = GPIO6  #Ultrasonic sensor 2 - Echo
 
-# helpful constants
-FORWARD = 0
-BACKWARD = 1
-BRAKE = 2
-LEFT_MOTOR = 0
-RIGHT_MOTOR = 1
-THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for ultrasaound
 
 # Set pinout mode to Broadcom (board communication)
 gpio.setmode(gpio.BCM)
@@ -90,6 +83,13 @@ gpio.setup(US_BIT1, gpio.IN)
 gpio.setup(US_BIT2, gpio.IN)
 gpio.setup(US_BIT3, gpio.IN)
 
+# helpful constants
+FORWARD = 0
+BACKWARD = 1
+BRAKE = 2
+LEFT_MOTOR = 0
+RIGHT_MOTOR = 1
+THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for ultrasaound
 def set_motor(motor_num, state):
 
     print("I GOT TO SET MOTOR\n")

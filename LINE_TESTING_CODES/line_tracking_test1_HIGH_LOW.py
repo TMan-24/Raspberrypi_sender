@@ -278,12 +278,10 @@ def main():
                 print("we are in state 1")
                 set_motor(LEFT_MOTOR, FORWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)
-            
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
-            elif gpio.input(R_SENSOR) == gpio.LOW  or gpio.input(L_SENSOR) == gpio.LOW:
-                print("we are in state 2")
-                turn_90(gpio.input(R_SENSOR))
-
+            #elif gpio.input(R_SENSOR) == gpio.LOW  or gpio.input(L_SENSOR) == gpio.LOW:
+             #   print("we are in state 2")
+              #  turn_90(gpio.input(R_SENSOR))
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:
                 print("we are in state 3.1")
@@ -293,6 +291,10 @@ def main():
                 print("we are in state 3")
                 set_motor(LEFT_MOTOR, BACKWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)
+
+            if gpio.input(R_SENSOR) == gpio.LOW  or gpio.input(L_SENSOR) == gpio.LOW:
+                print("we are in state 2")
+                turn_90(gpio.input(R_SENSOR))
                 
 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn

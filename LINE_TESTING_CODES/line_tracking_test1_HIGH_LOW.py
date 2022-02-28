@@ -54,7 +54,8 @@ THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for u
 def set_motor(motor_num, state):
 
     print("I GOT TO SET MOTOR\n")
-    print("motor num: {}\nstate: {}",motor_num, state)
+    print("motor num: ", motor_num, "\n")
+    print("state: ", state, "\n")
     '''print(FORWARD)
     print(BACKWARD)
     print(BRAKE)
@@ -198,18 +199,22 @@ def main():
             # Set H-Bridge to go straight
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, FORWARD)
+            print("we are in state 1")
 
         #2. 90deg turn - either rightmost or leftmost sensor false (off) 
         elif gpio.input(R_SENSOR) == gpio.LOW or gpio.input(L_SENSOR) == gpio.LOW:
             turn_90(gpio.input(R_SENSOR))
+            print("we are in state 2")
 
         #3. correct back to line - use two middle sensors to determine
         elif gpio.input(RM_SENSOR) == gpio.LOW:
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BRAKE)
+            print("we are in state 3.1")
         else:
             set_motor(LEFT_MOTOR, BRAKE)
             set_motor(RIGHT_MOTOR, FORWARD)
+            print("we are in state 3")
 
         #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
         #if read_ultrasound() < THRESHOLD_VALUE:
@@ -220,6 +225,7 @@ def main():
             # turn off all gpio settings
             set_motor(LEFT_MOTOR, BRAKE)
             set_motor(RIGHT_MOTOR, BRAKE)
+            print("we are in state 5")
             gpio.cleanup()
             exit()
 

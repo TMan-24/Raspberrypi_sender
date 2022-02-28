@@ -210,12 +210,12 @@ def main():
     # Set H-bridge Enable motor signals as output pins 
     gpio.setup(EN_LM, gpio.OUT)
     gpio.setup(EN_RM, gpio.OUT)
-
+    '''
     # initialize motor to go forward
-    ##set_motor(LEFT_MOTOR, FORWARD)
-    ##set_motor(RIGHT_MOTOR, FORWARD)
-
-# Set a PWM signal of 1000 for both motors
+    set_motor(LEFT_MOTOR, FORWARD)
+    set_motor(RIGHT_MOTOR, FORWARD)
+    '''
+    # Set a PWM signal of 1000 for both motors
     p1=gpio.PWM(EN_LM, 1000)
     p2=gpio.PWM(EN_RM, 1000)
 

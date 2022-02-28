@@ -293,7 +293,7 @@ def main():
             elif gpio.input(RM_SENSOR) == gpio.LOW:
                 print("we are in state 3.1")
                 set_motor(RIGHT_MOTOR, FORWARD)
-                set_motor(LEFT_MOTOR, BACKWARD)
+                #set_motor(LEFT_MOTOR, BACKWARD)
                 #sleep(0.01)
             else:
                 print("we are in state 3")

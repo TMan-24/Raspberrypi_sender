@@ -240,24 +240,25 @@ def main():
         #1. continue straight - innermost sensors are on and outer sensors are not on
         if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
             # Set H-Bridge to go straight
+            print("we are in state 1")
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, FORWARD)
-            print("we are in state 1")
 
         #2. 90deg turn - either rightmost or leftmost sensor false (off) 
         elif gpio.input(R_SENSOR) == gpio.LOW or gpio.input(L_SENSOR) == gpio.LOW:
-            turn_90(gpio.input(R_SENSOR))
             print("we are in state 2")
+            turn_90(gpio.input(R_SENSOR))
 
         #3. correct back to line - use two middle sensors to determine
         elif gpio.input(RM_SENSOR) == gpio.LOW:
+            print("we are in state 3.1")
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BACKWARD)
-            print("we are in state 3.1")
         else:
+            print("we are in state 3")
             set_motor(LEFT_MOTOR, BACKWARD)
             set_motor(RIGHT_MOTOR, FORWARD)
-            print("we are in state 3")
+            
 
         #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
         #if read_ultrasound() < THRESHOLD_VALUE:

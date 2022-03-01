@@ -1,4 +1,3 @@
-#Do our ultrasonic sensors have ADC's built in? If not, may need to purchase ADC or new sensors
 from pickle import FALSE, TRUE #pickle library for serializing data
 from time import sleep #time library for date/time types
 import RPi.GPIO as gpio #RPi library for I/O purposes to Pi
@@ -13,18 +12,18 @@ GPIO14 = 14 #L_SENSOR
 GPIO15 = 15 #R_SENSOR
 GPIO18 = 18 #Ultrasonic_1 - Trigger 
 GPIO19 = 19 #Ultrasonic_2 - Trigger
-GPIO22 = 25 #LM_FORWARD
-GPIO23 = 24 #LM_BACKWARD
-GPIO24 = 23 #RM_FORWARD
-GPIO25 = 22 #RM_BACKWARD
+GPIO22 = 22 #LM_FORWARD
+GPIO23 = 23 #LM_BACKWARD
+GPIO24 = 24 #RM_FORWARD
+GPIO25 = 25 #RM_BACKWARD
 GPIO26 = 26 #FREE
 GPIO27 = 27 #LM_SENSOR
 
 # H-Bridge input control pins
-RM_FORWARD = GPIO22 #in4, blue
-RM_BACKWARD = GPIO23   #in3, green
-LM_FORWARD =  GPIO24    #in2, yellow
-LM_BACKWARD = GPIO25   #in1, orange
+RM_FORWARD = GPIO25   #in4, blue
+RM_BACKWARD = GPIO24  #in3, green
+LM_FORWARD =  GPIO23  #in2, yellow
+LM_BACKWARD = GPIO22  #in1, orange
 
 # Line Sensor pins
 RM_SENSOR = GPIO4   #right middle sensor, green
@@ -39,7 +38,7 @@ EN_RM = GPIO13  #enB, black
 ###### THIS WILL LIKELY BE CHANGED #######
 # Pins for ultrasound sensor Assuming 4 bit ADC, add more gpio if needed
 US_BIT0 = GPIO18 #Ultrasonic sensor 1 - Trigger
-US_BIT1 = GPIO26 #Ultrasonic sensor 1 - Echo
+US_BIT1 = GPIO5 #Ultrasonic sensor 1 - Echo
 US_BIT2 = GPIO19 #Ultrasonic sensor 2 - Trigger
 US_BIT3 = GPIO6  #Ultrasonic sensor 2 - Echo
 
@@ -90,50 +89,36 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 THRESHOLD_VALUE = 14 # TODO: determine what the actual threshold should be for ultrasaound
-def set_motor(motor_num, state):
 
-    print("I GOT TO SET MOTOR\n")
-    print("motor num: ", motor_num, "\n")
-    print("state: ", state, "\n")
-    '''print(FORWARD)
-    print(BACKWARD)
-    print(BRAKE)
-    print(LEFT_MOTOR)
-    print(RIGHT_MOTOR)'''
+def set_motor(motor_num, state):
     # determine which motor to set
-    if motor_num == LEFT_MOTOR:
+    if motor_num == RIGHT_MOTOR:
         if state == FORWARD:
-            print("right motor FORWARD")
             # make right motor forward
             gpio.output(RM_FORWARD, gpio.HIGH)
             gpio.output(RM_BACKWARD, gpio.LOW)
         elif state == BACKWARD:
-            print("right motor BACKWARD")
             # make right motor backward
             gpio.output(RM_FORWARD, gpio.LOW)
             gpio.output(RM_BACKWARD, gpio.HIGH)
         elif state == BRAKE:
             # make right motor brake
-            print("right motor BRAKE")
             gpio.output(RM_FORWARD, gpio.LOW)
             gpio.output(RM_BACKWARD, gpio.LOW)
         else:
             print("Invalid direction parameter")
 
-    elif motor_num == RIGHT_MOTOR:
+    elif motor_num == LEFT_MOTOR:
         if state == FORWARD:
             # make left motor forward
-            print("left motor forward")
             gpio.output(LM_FORWARD, gpio.HIGH)
             gpio.output(LM_BACKWARD, gpio.LOW)
         elif state == BACKWARD:
             # make left motor backward
-            print("left motor backward")
             gpio.output(LM_FORWARD, gpio.LOW)
             gpio.output(LM_BACKWARD, gpio.HIGH)
         elif state == BRAKE:
             # make right motor brake
-            print("left motor BRAKE")
             gpio.output(LM_FORWARD, gpio.LOW)
             gpio.output(LM_BACKWARD, gpio.LOW)
         else:
@@ -150,22 +135,19 @@ def set_motor(motor_num, state):
 # 90 Degree Turn
 # This function will need to be improved by testing
 def turn_90(direction):
-    print("IM THE DIRECTION", direction)
     # LOW means that the right sensor was active so turn the vehicle 90 degrees right
-    # IF: Rightmost sensor is ON (low), then zero-degree turn RIGHT, until Rightmost sensor goes OFF (HIGH), and then back ON (LOW)
+    # IF: Rightmost sensor is OFF (LOW), then zero-degree turn RIGHT, until Leftmost sensor goes OFF (LOW) from being HIGH
     if direction == gpio.LOW:
         # turn until the left middle sensor is active (vehicle has turned far enough to cross the line)
         while gpio.input(L_SENSOR) == gpio.HIGH:
-            print("State 1 for turn90")
-            set_motor(RIGHT_MOTOR, FORWARD)
-            set_motor(LEFT_MOTOR, BRAKE)
+            set_motor(LEFT_MOTOR, FORWARD)
+            set_motor(RIGHT_MOTOR, BRAKE)
     #else:
-        # IF: leftmost sensor is ON (low), then zero-degree turn left, until LEFTmost sensor goes OFF (HIGH), and then back ON (high)
+        # IF: leftmost sensor is OFF (LOW), then zero-degree turn left, until Rightmost sensor goes OFF (LOW) from being HIGH
         # turn until the right middle sensor is active (vehicle has turned far enough to cross the line)
-        #while gpio.input(R_SENSOR) == gpio.LOW:
-            #print("turning left for 90")
-            #set_motor(RIGHT_MOTOR, BRAKE)
-            #set_motor(LEFT_MOTOR, FORWARD)
+        #while gpio.input(R_SENSOR) == gpio.HIGH:
+            #set_motor(LEFT_MOTOR, BRAKE)
+            #set_motor(RIGHT_MOTOR, FORWARD)
 '''
 # 180 Degree Turn
 # This function will need to be improved by testing
@@ -230,73 +212,34 @@ def main():
     gpio.setup(US_BIT1, gpio.IN)
     gpio.setup(US_BIT2, gpio.IN)
     gpio.setup(US_BIT3, gpio.IN)'''
+
     # Starting condition will be all four sensors are off (0), since starting square is all white
     # Check to see if the robot has come off the starting square
     while gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
-        print("LEAVE")
         # Set H-Bridge to go straight
-        set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, FORWARD)
-        '''if gpio.input(L_SENSOR) == gpio.LOW:
-            print("left: 0")
-        else:
-            print("left: 1")
-        if gpio.input(LM_SENSOR) == gpio.LOW:
-            print("left Middle: 0")
-        else:
-            print("left middle: 1")
-        if gpio.input(RM_SENSOR) == gpio.LOW:
-            print("Right Middle: 0")
-        else:
-            print("Right Middle: 1")
-        if gpio.input(R_SENSOR) == gpio.LOW:
-            print("Right: 0") 
-        else:
-            print("Right: 1")'''
-        #continue
+        set_motor(LEFT_MOTOR, FORWARD)
         sleep(1)
     if gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR):
         main()
     else:
      # main logic of program
         while TRUE:
-            if gpio.input(L_SENSOR) == gpio.LOW:
-                print("left: 0")
-            else:
-                print("left: 1")
-            if gpio.input(LM_SENSOR) == gpio.LOW:
-                print("left Middle: 0")
-            else:
-                print("left middle: 1")
-            if gpio.input(RM_SENSOR) == gpio.LOW:
-                print("Right Middle: 0")
-            else:
-                print("Right Middle: 1")
-            if gpio.input(R_SENSOR) == gpio.LOW:
-                print("Right: 0") 
-            else:
-                print("Right: 1")
             #1. continue straight - innermost sensors are on and outer sensors are not on
             if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
                 # Set H-Bridge to go straight
-                print("we are in state 1")
-                set_motor(LEFT_MOTOR, FORWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)
+                set_motor(LEFT_MOTOR, FORWARD)
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
             elif gpio.input(R_SENSOR) == gpio.LOW:
-                print("we are in state 2")
                 turn_90(gpio.input(R_SENSOR))
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:
-                print("we are in state 3.1")
-                set_motor(RIGHT_MOTOR, FORWARD)
-                set_motor(LEFT_MOTOR, BACKWARD)
-                #sleep(0.01)
-            else:
-                print("we are in state 3")
-                set_motor(RIGHT_MOTOR, BACKWARD)
                 set_motor(LEFT_MOTOR, FORWARD)
-                #sleep(0.01)
+                set_motor(RIGHT_MOTOR, BACKWARD)
+            else:
+                set_motor(LEFT_MOTOR, BACKWARD)
+                set_motor(RIGHT_MOTOR, FORWARD)
                 
 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn

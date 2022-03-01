@@ -142,6 +142,7 @@ def turn_90(direction):
         while gpio.input(L_SENSOR) == gpio.HIGH:
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BACKWARD)
+            sleep(1)
             set_motor(RIGHT_MOTOR, BRAKE)
         #while gpio.input(R_SENSOR) == gpio.HIGH:
          #   set_motor(LEFT_MOTOR, BACKWARD)

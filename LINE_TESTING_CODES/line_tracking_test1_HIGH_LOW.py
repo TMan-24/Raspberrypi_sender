@@ -234,7 +234,7 @@ def main():
             elif gpio.input(R_SENSOR) == gpio.LOW:
                 set_motor(RIGHT_MOTOR, BACKWARD)
                 set_motor(LEFT_MOTOR, BACKWARD)
-                sleep(5)
+                sleep(1)
                 turn_90(gpio.input(R_SENSOR))
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:

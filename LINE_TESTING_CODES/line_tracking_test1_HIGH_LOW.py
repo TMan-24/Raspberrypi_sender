@@ -1,4 +1,5 @@
 from pickle import FALSE, TRUE #pickle library for serializing data
+import time
 from time import sleep
 from turtle import delay #time library for date/time types
 import RPi.GPIO as gpio #RPi library for I/O purposes to Pi
@@ -143,7 +144,7 @@ def turn_90(direction):
         while gpio.input(L_SENSOR) == gpio.HIGH:
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BACKWARD)
-            delay(1)
+            time.sleep(1)
             set_motor(RIGHT_MOTOR, BRAKE)
         #while gpio.input(R_SENSOR) == gpio.HIGH:
          #   set_motor(LEFT_MOTOR, BACKWARD)

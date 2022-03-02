@@ -10,16 +10,16 @@ ECHO1 = 5
 MAX_TIME = 0.04
  
 #set GPIO direction (IN / OUT)
-GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
-GPIO.setup(GPIO_ECHO, GPIO.IN)
+GPIO.setup(TRIGGER1, GPIO.OUT)
+GPIO.setup(ECHO1, GPIO.IN)
  
 def distance():
     # set Trigger to HIGH
-    GPIO.output(GPIO_TRIGGER, True)
+    GPIO.output(TRIGGER1, True)
  
     # set Trigger after 0.01ms to LOW
     time.sleep(0.00001)
-    GPIO.output(GPIO_TRIGGER, False)
+    GPIO.output(TRIGGER1, False)
     
     StartTime = time.time()
     timeout = StartTime + MAX_TIME
@@ -28,9 +28,9 @@ def distance():
         StartTime = time.time()
     
     StopTime = time.time()
-    timeout = StopTime + max_Time
+    timeout = StopTime + MAX_TIME
     # save time of arrival
-    while gpio.input(ECHO1) == 1 and StopTime < timeout:
+    while GPIO.input(ECHO1) == 1 and StopTime < timeout:
         StopTime = time.time()
  
     # time difference between start and arrival

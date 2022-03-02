@@ -280,7 +280,7 @@ def main():
                 
 
             #4. 180deg turn (tur around) - additional logic needed to avoid 180deg turn at first 90deg turn
-            if read_ultrasound() == THRESHOLD_VALUE: 
+            if read_ultrasound() < THRESHOLD_VALUE: 
                turn_around()
 
             #5. if we get back to starting position, stop program

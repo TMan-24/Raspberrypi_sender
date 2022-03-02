@@ -277,7 +277,8 @@ def main():
                 
 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-            print(read_ultrasound())
+            dist = read_ultrasound()
+            print ("Measured Distance = %.1f cm" % dist)
                #turn_around()
 
             #5. if we get back to starting position, stop program

@@ -183,7 +183,6 @@ def turn_90(direction):
 # 180 Degree Turn
 # This function will need to be improved by testing
 def turn_around():
-    exit()
    # to turn 180deg we need left middle sensor to cross the line twice
     lm_crossed_line = 0
     lm_still_on_line = FALSE
@@ -278,8 +277,8 @@ def main():
                 
 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-            #if read_ultrasound() < THRESHOLD_VALUE:
-             #  turn_around()
+            if read_ultrasound() < THRESHOLD_VALUE:
+               turn_around()
 
             #5. if we get back to starting position, stop program
             #if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:

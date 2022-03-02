@@ -131,6 +131,7 @@ def set_motor(motor_num, state):
     
 
 def read_ultrasound():
+    max_Time = 0.04
      # set Trigger to HIGH
     gpio.output(TRIGGER1, True)
  
@@ -138,15 +139,18 @@ def read_ultrasound():
     time.sleep(0.00001)
     gpio.output(TRIGGER1, False)
  
-    StartTime = time.time()
     StopTime = time.time()
- 
+    
+    StartTime = time.time()
+    timeout = StartTime + max_Time
     # save StartTime
-    while gpio.input(ECHO1) == 0:
+    while gpio.input(ECHO1) == 0 and StartTime < timeout:
         StartTime = time.time()
- 
+    
+    StopTime = time.time()
+    timeout = StopTime + max_Time
     # save time of arrival
-    while gpio.input(ECHO1) == 1:
+    while gpio.input(ECHO1) == 1 and StopTime < timeout:
         StopTime = time.time()
  
     # time difference between start and arrival

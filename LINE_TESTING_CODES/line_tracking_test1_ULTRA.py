@@ -90,6 +90,7 @@ BACKWARD = 1
 BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
+MAX_TIME = 0.04
 THRESHOLD_VALUE = 20.0 # TODO: determine what the actual threshold should be for ultrasaound
 
 def set_motor(motor_num, state):
@@ -131,23 +132,21 @@ def set_motor(motor_num, state):
     
 
 def read_ultrasound():
-    max_Time = 0.04
      # set Trigger to HIGH
     gpio.output(TRIGGER1, True)
  
     # set Trigger after 0.01ms to LOW
     time.sleep(0.00001)
     gpio.output(TRIGGER1, False)
- 
     
     StartTime = time.time()
-    timeout = StartTime + max_Time
+    timeout = StartTime + MAX_TIME
     # save StartTime
     while gpio.input(ECHO1) == 0 and StartTime < timeout:
         StartTime = time.time()
     
     StopTime = time.time()
-    timeout = StopTime + max_Time
+    timeout = StopTime + MAX_TIME
     # save time of arrival
     while gpio.input(ECHO1) == 1 and StopTime < timeout:
         StopTime = time.time()

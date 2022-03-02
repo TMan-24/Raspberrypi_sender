@@ -1,7 +1,7 @@
 from pickle import FALSE, TRUE #pickle library for serializing data
 import time
 from time import sleep
-from turtle import delay #time library for date/time types
+from turtle import delay, distance #time library for date/time types
 import RPi.GPIO as gpio #RPi library for I/O purposes to Pi
 
 # All GPIO sensor connections
@@ -155,6 +155,7 @@ def read_ultrasound():
     # and divide by 2, because there and back
     distance1 = (TimeElapsed * 34300) / 2
  
+    print("Measured Distance = %.1f cm" % distance)
     return distance1
 
 # 90 Degree Turn
@@ -277,9 +278,9 @@ def main():
                 
 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-            dist = read_ultrasound()
-            print ("Measured Distance = %.1f cm" % dist)
-            time.sleep(1)
+            #dist = read_ultrasound()
+            #print("Measured Distance = %.1f cm" % dist)
+            #time.sleep(1)
                #turn_around()
 
             #5. if we get back to starting position, stop program

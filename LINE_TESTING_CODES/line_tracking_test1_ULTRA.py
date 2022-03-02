@@ -279,8 +279,8 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 
 
-            #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-            if read_ultrasound() <= THRESHOLD_VALUE: 
+            #4. 180deg turn (tur around) - additional logic needed to avoid 180deg turn at first 90deg turn
+            if read_ultrasound() == THRESHOLD_VALUE: 
                turn_around()
 
             #5. if we get back to starting position, stop program

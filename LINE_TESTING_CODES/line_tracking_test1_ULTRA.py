@@ -254,7 +254,6 @@ def main():
         set_motor(RIGHT_MOTOR, FORWARD)
         set_motor(LEFT_MOTOR, FORWARD)
         sleep(1)
-        read_ultrasound()
     if gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR):
         main()
     else:

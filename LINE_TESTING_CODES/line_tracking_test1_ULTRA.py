@@ -185,7 +185,8 @@ def turn_90(direction):
 # 180 Degree Turn
 # This function will need to be improved by testing
 def turn_around():
-   # to turn 180deg we need left middle sensor to cross the line twice
+    exit()
+    # to turn 180deg we need left middle sensor to cross the line twice
     lm_crossed_line = 0
     lm_still_on_line = FALSE
 

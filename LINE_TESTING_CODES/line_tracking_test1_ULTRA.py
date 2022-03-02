@@ -79,8 +79,8 @@ p2.start(30)
     ###### THIS WILL BE DIFFERENT PROBABLY ######
     # Set up GPIO for ultrasonic sensor as 4 bit input
     # This will require multiple GPIO pins 
-gpio.setup(TRIGGER1, gpio.IN)
-gpio.setup(TRIGGER2, gpio.IN)
+gpio.setup(TRIGGER1, gpio.OUT)
+gpio.setup(TRIGGER2, gpio.OUT)
 gpio.setup(ECHO1, gpio.IN)
 gpio.setup(ECHO2, gpio.IN)
 

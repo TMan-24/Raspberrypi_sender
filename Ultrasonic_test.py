@@ -7,6 +7,7 @@ GPIO.setmode(GPIO.BCM)
 #set GPIO Pins
 GPIO_TRIGGER = 18
 GPIO_ECHO = 5
+MAX_TIME = 0.04
  
 #set GPIO direction (IN / OUT)
 GPIO.setup(GPIO_TRIGGER, GPIO.OUT)
@@ -19,16 +20,17 @@ def distance():
     # set Trigger after 0.01ms to LOW
     time.sleep(0.00001)
     GPIO.output(GPIO_TRIGGER, False)
- 
+    
     StartTime = time.time()
-    StopTime = time.time()
- 
+    timeout = StartTime + MAX_TIME
     # save StartTime
-    while GPIO.input(GPIO_ECHO) == 0:
+    while GPIO.input(ECHO1) == 0 and StartTime < timeout:
         StartTime = time.time()
- 
+    
+    StopTime = time.time()
+    timeout = StopTime + max_Time
     # save time of arrival
-    while GPIO.input(GPIO_ECHO) == 1:
+    while gpio.input(ECHO1) == 1 and StopTime < timeout:
         StopTime = time.time()
  
     # time difference between start and arrival

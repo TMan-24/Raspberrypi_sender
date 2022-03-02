@@ -91,7 +91,7 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 MAX_TIME = 0.04
-THRESHOLD_VALUE = 5.0 # TODO: determine what the actual threshold should be for ultrasaound
+THRESHOLD_VALUE = 2.0 # TODO: determine what the actual threshold should be for ultrasaound
 
 def set_motor(motor_num, state):
     # determine which motor to set

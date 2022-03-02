@@ -1,7 +1,7 @@
-#Do our ultrasonic sensors have ADC's built in? If not, may need to purchase ADC or new sensors
 from pickle import FALSE, TRUE #pickle library for serializing data
-import time #for ultrasonic
-from time import sleep #time library for date/time types
+import time
+from time import sleep
+from turtle import delay #time library for date/time types
 import RPi.GPIO as gpio #RPi library for I/O purposes to Pi
 
 # All GPIO sensor connections
@@ -22,10 +22,10 @@ GPIO26 = 26 #FREE
 GPIO27 = 27 #LM_SENSOR
 
 # H-Bridge input control pins
-RM_FORWARD = GPIO25 #in4, blue
-RM_BACKWARD = GPIO24   #in3, green
-LM_FORWARD =  GPIO23    #in2, yellow
-LM_BACKWARD = GPIO22   #in1, orange
+RM_FORWARD = GPIO25   #in4, blue
+RM_BACKWARD = GPIO24  #in3, green
+LM_FORWARD =  GPIO23  #in2, yellow
+LM_BACKWARD = GPIO22  #in1, orange
 
 # Line Sensor pins
 RM_SENSOR = GPIO4   #right middle sensor, green
@@ -43,7 +43,6 @@ TRIGGER1 = GPIO18 #Ultrasonic sensor 1 - Trigger
 ECHO1 = GPIO5     #Ultrasonic sensor 1 - Echo
 TRIGGER2 = GPIO19 #Ultrasonic sensor 2 - Trigger
 ECHO2 = GPIO6     #Ultrasonic sensor 2 - Echo
-
 
 
 # Set pinout mode to Broadcom (board communication)
@@ -91,7 +90,7 @@ BACKWARD = 1
 BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
-THRESHOLD_VALUE = 14.0 # TODO: determine what the actual threshold should be for ultrasaound
+THRESHOLD_VALUE = 20.0 # TODO: determine what the actual threshold should be for ultrasaound
 
 def set_motor(motor_num, state):
     # determine which motor to set
@@ -162,32 +161,37 @@ def read_ultrasound():
 # This function will need to be improved by testing
 def turn_90(direction):
     # LOW means that the right sensor was active so turn the vehicle 90 degrees right
-    # IF: Rightmost sensor is ON (low), then zero-degree turn RIGHT, until Rightmost sensor goes OFF (HIGH), and then back ON (LOW)
+    # IF: Rightmost sensor is OFF (LOW), then zero-degree turn RIGHT, until Leftmost sensor goes OFF (LOW) from being HIGH
     if direction == gpio.LOW:
         # turn until the left middle sensor is active (vehicle has turned far enough to cross the line)
         while gpio.input(L_SENSOR) == gpio.HIGH:
             set_motor(LEFT_MOTOR, FORWARD)
-            set_motor(RIGHT_MOTOR, BRAKE)
+            set_motor(RIGHT_MOTOR, BACKWARD)
+        while gpio.input(RM_SENSOR) == gpio.HIGH:
+            set_motor(LEFT_MOTOR, BACKWARD)
+            set_motor(RIGHT_MOTOR, FORWARD)
+    #while gpio.input(LM_SENSOR) == gpio.HIGH:
+      #  set_motor(LEFT_MOTOR, FORWARD)
+       # set_motor(RIGHT_MOTOR, BACKWARD)
     #else:
-        # IF: leftmost sensor is ON (low), then zero-degree turn left, until LEFTmost sensor goes OFF (HIGH), and then back ON (high)
+        # IF: leftmost sensor is OFF (LOW), then zero-degree turn left, until Rightmost sensor goes OFF (LOW) from being HIGH
         # turn until the right middle sensor is active (vehicle has turned far enough to cross the line)
-        #while gpio.input(R_SENSOR) == gpio.LOW:
-            #print("turning left for 90")
-            #set_motor(RIGHT_MOTOR, BRAKE)
-            #set_motor(LEFT_MOTOR, FORWARD)
+        #while gpio.input(R_SENSOR) == gpio.HIGH:
+         #   set_motor(LEFT_MOTOR, BACKWARD)
+          #  set_motor(RIGHT_MOTOR, FORWARD)
 
-#### LOW AND HIGH MIGHT BE WRONG ####
 # 180 Degree Turn
 # This function will need to be improved by testing
 def turn_around():
-    # to turn 180deg we need left middle sensor to cross the line twice
+    exit()
+   # to turn 180deg we need left middle sensor to cross the line twice
     lm_crossed_line = 0
     lm_still_on_line = FALSE
 
     # turn one motor forward other backwards (0 point turn)
     while lm_crossed_line < 2:
-        set_motor(RIGHT_MOTOR, FORWARD)
-        set_motor(LEFT_MOTOR, BACKWARD)
+        set_motor(LEFT_MOTOR, FORWARD)
+        set_motor(RIGHT_MOTOR, BACKWARD)
         
         # prevent double counting of lm sensor by using dummy variable (will increment really fast while still over the line without and give preemptively kill turn)
         if gpio.input(LM_SENSOR) == gpio.LOW and not lm_still_on_line:
@@ -247,7 +251,6 @@ def main():
         # Set H-Bridge to go straight
         set_motor(RIGHT_MOTOR, FORWARD)
         set_motor(LEFT_MOTOR, FORWARD)
-
         sleep(1)
     if gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR):
         main()
@@ -260,7 +263,10 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, FORWARD)
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
-            elif gpio.input(R_SENSOR) == gpio.LOW or gpio.input(L_SENSOR) == gpio.LOW:
+            elif gpio.input(R_SENSOR) == gpio.LOW:
+                #set_motor(RIGHT_MOTOR, BACKWARD)
+                #R_SENSOR = gpio.LOW
+                #sleep(0.25)
                 turn_90(gpio.input(R_SENSOR))
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:

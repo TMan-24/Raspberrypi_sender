@@ -157,7 +157,6 @@ def read_ultrasound():
     # and divide by 2, because there and back
     distance1 = (TimeElapsed * 34300) / 2
  
-    print("Measured Distance = %.1f cm" % distance1)
     return distance1
 
 # 90 Degree Turn
@@ -281,10 +280,8 @@ def main():
                 
 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-            #dist = read_ultrasound()
-            #print("Measured Distance = %.1f cm" % dist)
-            #time.sleep(1)
-               #turn_around()
+            if read_ultrasound() <= THRESHOLD_VALUE: 
+               turn_around()
 
             #5. if we get back to starting position, stop program
             #if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:

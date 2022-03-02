@@ -6,7 +6,7 @@ GPIO.setmode(GPIO.BCM)
  
 #set GPIO Pins
 TRIGGER1 = 18
-ECHO1 = 5
+ECHO1 = 26
 MAX_TIME = 0.04
  
 #set GPIO direction (IN / OUT)

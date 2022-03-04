@@ -102,7 +102,7 @@ p1=gpio.PWM(EN_LM, 1000)
 p2=gpio.PWM(EN_RM, 1000)
 
 # Start motors
-p1.start(31) #motor speeds
+p1.start(32) #motor speeds
 p2.start(30)
 
 # Set up GPIO for ultrasonic sensor

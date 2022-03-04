@@ -98,12 +98,12 @@ gpio.setup(EN_RM, gpio.OUT)
 #set_motor(RIGHT_MOTOR, FORWARD)
 
 # Set a PWM signal of 1000 for both motors
-p1=gpio.PWM(EN_LM, 1000)
-p2=gpio.PWM(EN_RM, 1000)
+p1=gpio.PWM(EN_RM, 1000)
+p2=gpio.PWM(EN_LM, 1000)
 
 # Start motors
-p1.start(32) #motor speeds
-p2.start(30)
+p1.start(30) #motor speeds
+p2.start(32)
 
 # Set up GPIO for ultrasonic sensor
 gpio.setup(TRIGGER1, gpio.OUT)

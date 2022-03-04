@@ -75,6 +75,7 @@ LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
 THRESHOLD_VALUE = 14 #cm # TODO: determine what the actual threshold should be for ultrasaound
+FLAG = FALSE
 
 # Set pinout mode to Broadcom (board communication)
 gpio.setmode(gpio.BCM)
@@ -174,6 +175,7 @@ def turn_90(direction):
         while gpio.input(LM_SENSOR) == gpio.HIGH:
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BACKWARD)
+            FLAG == True
 
 # read_ultrasound function - sends a sound wave to calculate distances
 def read_ultrasound():
@@ -320,7 +322,7 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, FORWARD)
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
-            elif gpio.input(RM_SENSOR) == gpio.LOW or gpio.input(R_SENSOR) == gpio.LOW:
+            elif gpio.input(R_SENSOR) == gpio.LOW:
                 print("hi from right sensor")
                 turn_90(gpio.input(R_SENSOR))
             elif gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
@@ -343,45 +345,46 @@ def main():
                 turn_around()
 
             #5. if we get back to starting position, stop program
+            if FLAG == True:
+                if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+                    # turn off all gpio settings
+                    print("we are in state 5.1")
+                    sleep(1.6)
+                    set_motor(LEFT_MOTOR, BRAKE)
+                    set_motor(RIGHT_MOTOR, BRAKE)
+                    gpio.cleanup()
+                    exit()
+                
+                
+                elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW:
+                    # turn off all gpio settings
+                    print("we are in state 5.2")
+                    sleep(1.6)
+                    set_motor(LEFT_MOTOR, BRAKE)
+                    set_motor(RIGHT_MOTOR, BRAKE)
+                    gpio.cleanup()
+                    exit()
+                
+                elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH:
+                    # turn off all gpio settings
+                    print("we are in state 5.3")
+                    sleep(1.6)
+                    set_motor(LEFT_MOTOR, BRAKE)
+                    set_motor(RIGHT_MOTOR, BRAKE)
+                    gpio.cleanup()
+                    exit()
+                
+                elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+                    # turn off all gpio settings
+                    print("we are in state 5.4")
+                    sleep(1.6)
+                    set_motor(LEFT_MOTOR, BRAKE)
+                    set_motor(RIGHT_MOTOR, BRAKE)
+                    gpio.cleanup()
+                    exit()
             
-            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
-                # turn off all gpio settings
-                print("we are in state 5.1")
-                sleep(1.6)
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, BRAKE)
-                gpio.cleanup()
-                exit()
             
-            
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW:
-                # turn off all gpio settings
-                print("we are in state 5.2")
-                sleep(1.6)
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, BRAKE)
-                gpio.cleanup()
-                exit()
-            
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH:
-                # turn off all gpio settings
-                print("we are in state 5.3")
-                sleep(1.6)
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, BRAKE)
-                gpio.cleanup()
-                exit()
-            
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
-                # turn off all gpio settings
-                print("we are in state 5.4")
-                sleep(1.6)
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, BRAKE)
-                gpio.cleanup()
-                exit()
-            
-            
+
 
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":

@@ -326,7 +326,6 @@ def main():
             elif gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
                 print("hi from left")
                 turn_90(gpio.input(L_SENSOR))
-                sleep(3)
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:
                 set_motor(LEFT_MOTOR, FORWARD)
@@ -344,7 +343,7 @@ def main():
                 turn_around()
 
             #5. if we get back to starting position, stop program
-            if gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
                 # turn off all gpio settings
                 sleep(1.6)
                 set_motor(LEFT_MOTOR, BRAKE)

@@ -201,9 +201,8 @@ def read_ultrasound():
     # multiply with the sonic speed (17150 cm/s)
     # and divide by 2, because there and back
     distance1 = (TimeElapsed * 17150)
-    print ("Measured Distance = %.1f cm" % distance1)
-    sleep(1)
-    return distance1
+
+    return math.trunc(distance1)
 
 # 180 Degree Turn
 # This function will need to be improved by testing
@@ -293,8 +292,9 @@ def main():
                 set_motor(LEFT_MOTOR, BACKWARD)
                 set_motor(RIGHT_MOTOR, FORWARD)
                 
-            #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-            read_ultrasound() 
+            #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn 
+            print ("Measured Distance = ", read_ultrasound())
+            sleep(1)
                 #print("value from sensor: ", read_ultrasound())
                 #print("value from sensor: ", THRESHOLD_VALUE)
                 #turn_around()

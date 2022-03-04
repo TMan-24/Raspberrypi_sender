@@ -296,8 +296,7 @@ def main():
             dist = read_ultrasound()
             sleep(1)
             if dist <= THRESHOLD_VALUE:
-                print("hi")
-                #turn_around()
+                turn_around()
 
             #5. if we get back to starting position, stop program
             #if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:

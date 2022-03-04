@@ -72,7 +72,7 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
-THRESHOLD_VALUE = 10 #cm # TODO: determine what the actual threshold should be for ultrasaound
+THRESHOLD_VALUE = 5 #cm # TODO: determine what the actual threshold should be for ultrasaound
 
 # Set pinout mode to Broadcom (board communication)
 gpio.setmode(gpio.BCM)
@@ -173,7 +173,7 @@ def turn_90(direction):
             #set_motor(LEFT_MOTOR, FORWARD)
             #set_motor(RIGHT_MOTOR, BACKWARD)
 
-'''# read_ultrasound function - sends a sound wave to calculate distances
+# read_ultrasound function - sends a sound wave to calculate distances
 def read_ultrasound():
      # set Trigger to HIGH
     gpio.output(TRIGGER1, True)
@@ -223,7 +223,6 @@ def turn_around():
             lm_still_on_line = FALSE
         else:
             lm_still_on_line = TRUE
-'''
 # Main program function
 def main():
     
@@ -292,8 +291,8 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-            #if read_ultrasound() == THRESHOLD_VALUE: 
-            #   turn_around()
+            if read_ultrasound() == THRESHOLD_VALUE: 
+               turn_around()
 
             #5. if we get back to starting position, stop program
             #if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:

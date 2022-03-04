@@ -201,7 +201,7 @@ def read_ultrasound():
     # multiply with the sonic speed (17150 cm/s)
     # and divide by 2, because there and back
     distance1 = (TimeElapsed * 17150)
-    distance1
+    print(distance1)
     return math.trunc(distance1)
 
 # 180 Degree Turn

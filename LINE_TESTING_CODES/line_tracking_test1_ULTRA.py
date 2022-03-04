@@ -343,6 +343,15 @@ def main():
                 turn_around()
 
             #5. if we get back to starting position, stop program
+            if gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+                # turn off all gpio settings
+                sleep(1.6)
+                set_motor(LEFT_MOTOR, BRAKE)
+                set_motor(RIGHT_MOTOR, BRAKE)
+                print("we are in state 5")
+                gpio.cleanup()
+                exit()
+            
             if gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW:
                 # turn off all gpio settings
                 sleep(1.6)

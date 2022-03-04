@@ -20,6 +20,7 @@
 #Libraries
 from pickle import FALSE, TRUE     #pickle library for serializing data
 import time                        #Main time library for making ultrasonic sensors
+import math
 from time import sleep             #time library for stoping the code for a set amount of time
 from turtle import delay, distance #time library for date/time types
 import RPi.GPIO as gpio            #RPi library for I/O purposes to Pi
@@ -71,7 +72,7 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
-THRESHOLD_VALUE = 0.5 # TODO: determine what the actual threshold should be for ultrasaound
+THRESHOLD_VALUE = 10 #cm # TODO: determine what the actual threshold should be for ultrasaound
 
 # Set pinout mode to Broadcom (board communication)
 gpio.setmode(gpio.BCM)
@@ -182,14 +183,12 @@ def read_ultrasound():
     gpio.output(TRIGGER1, False)
     
     # starting pulse
-    StartTime = time.time()
     timeout = StartTime + MAX_TIME
-    # save StartTime
+    # start StartTime
     while gpio.input(ECHO1) == 0 and StartTime < timeout:
         StartTime = time.time()
     
     # stoping pulse
-    StopTime = time.time()
     timeout = StopTime + MAX_TIME
     # save time of arrival
     while gpio.input(ECHO1) == 1 and StopTime < timeout:
@@ -197,11 +196,11 @@ def read_ultrasound():
  
     # time difference between start and arrival
     TimeElapsed = StopTime - StartTime
-    # multiply with the sonic speed (34300 cm/s)
+    # multiply with the sonic speed (17150 cm/s)
     # and divide by 2, because there and back
-    distance1 = (TimeElapsed * 34300) / 2
+    distance1 = (TimeElapsed * 17150)
  
-    return distance1
+    return math.trunc(distance1)
 
 # 180 Degree Turn
 # This function will need to be improved by testing
@@ -293,7 +292,7 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn
-            #if read_ultrasound() < THRESHOLD_VALUE: 
+            #if read_ultrasound() == THRESHOLD_VALUE: 
             #   turn_around()
 
             #5. if we get back to starting position, stop program

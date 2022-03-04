@@ -339,7 +339,7 @@ def main():
             dist2 = read_ultrasound2()
             print ("Measured Distance1 = %.1f cm" % dist1)
             print ("Measured Distance1 = %.1f cm" % dist2)
-            if ((dist1 and dist2) <= THRESHOLD_VALUE):
+            if ((dist1 and dist2) == THRESHOLD_VALUE):
                 turn_around()
 
             #5. if we get back to starting position, stop program

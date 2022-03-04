@@ -18,7 +18,8 @@
         when it sees black, it sends a 1
 '''
 #Libraries
-from pickle import FALSE, TRUE     #pickle library for serializing data
+from pickle import FALSE, TRUE
+from sre_parse import FLAGS     #pickle library for serializing data
 import time                        #Main time library for making ultrasonic sensors
 import math
 from time import sleep             #time library for stoping the code for a set amount of time
@@ -248,7 +249,6 @@ def turn_around():
     # to turn 180deg we need left middle sensor to cross the line twice
     lm_crossed_line = 0
     lm_still_on_line = FALSE
-
     # turn one motor forward other backwards (0 point turn)
     TRIGGER1 = GPIO18 #Ultrasonic sensor 1 - Trigger
     ECHO1 = GPIO26   #Ultrasonic sensor 1 - Echo
@@ -307,7 +307,7 @@ def main():
     # Starting condition will be all four sensors are off (0), since starting square is all white
     # Check to see if the robot has come off the starting square
     while gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
-        Flag = 0
+        FLAG = TRUE
         # Set H-Bridge to go straight
         set_motor(RIGHT_MOTOR, FORWARD)
         set_motor(LEFT_MOTOR, FORWARD)
@@ -341,9 +341,8 @@ def main():
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn 
             dist1 = read_ultrasound()
             dist2 = read_ultrasound2()
-            if (dist1 and dist2) <= THRESHOLD_VALUE and Flag == FALSE:
-                Flag = True
-                turn_around()
+            if ((dist1 and dist2) <= THRESHOLD_VALUE) and FLAG == TRUE:
+                turn_around(FLAG)
 
             #5. if we get back to starting position, stop program
             if gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:

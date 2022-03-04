@@ -307,6 +307,7 @@ def main():
     # Starting condition will be all four sensors are off (0), since starting square is all white
     # Check to see if the robot has come off the starting square
     while gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+        FLAG = FALSE
         # Set H-Bridge to go straight
         set_motor(RIGHT_MOTOR, FORWARD)
         set_motor(LEFT_MOTOR, FORWARD)
@@ -340,7 +341,8 @@ def main():
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn 
             dist1 = read_ultrasound()
             dist2 = read_ultrasound2()
-            if (dist1 and dist2) <= THRESHOLD_VALUE:
+            if (dist1 and dist2 and FLAG == FALSE) <= THRESHOLD_VALUE:
+                FLAG = True
                 turn_around()
 
             #5. if we get back to starting position, stop program

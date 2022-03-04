@@ -242,18 +242,18 @@ def turn_around():
     lm_still_on_line = FALSE
 
     # turn one motor forward other backwards (0 point turn)
-    while lm_crossed_line < 2:
-        set_motor(RIGHT_MOTOR, FORWARD)
-        set_motor(LEFT_MOTOR, BACKWARD)
-        
+    
+    set_motor(RIGHT_MOTOR, FORWARD)
+    set_motor(LEFT_MOTOR, BACKWARD)
+    sleep(10)
         # prevent double counting of lm sensor by using dummy variable (will increment really fast while still over the line without and give preemptively kill turn)
-        if gpio.input(LM_SENSOR) == gpio.HIGH and not lm_still_on_line:
+    '''if gpio.input(LM_SENSOR) == gpio.HIGH and not lm_still_on_line:
             lm_crossed_line = lm_crossed_line + 1 #increment left middle 
             lm_still_on_line = TRUE
         elif gpio.input(LM_SENSOR) == gpio.HIGH:
             lm_still_on_line = FALSE
         else:
-            lm_still_on_line = TRUE
+            lm_still_on_line = TRUE'''
 # Main program function
 def main():
     

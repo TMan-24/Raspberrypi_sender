@@ -26,6 +26,7 @@ from turtle import delay, distance #time library for date/time types
 import RPi.GPIO as gpio            #RPi library for I/O purposes to Pi
 
 # All GPIO sensor connections
+GPIO3 = 3 #DUMMY
 GPIO4 = 4   #RM_SENSOR
 GPIO5 = 5   #Ultrasonic_1 - Echo
 GPIO6 = 6   #Ultrasonic_2 - Echo
@@ -72,7 +73,7 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
-THRESHOLD_VALUE = 14 #cm # TODO: determine what the actual threshold should be for ultrasaound
+THRESHOLD_VALUE = 12 #cm # TODO: determine what the actual threshold should be for ultrasaound
 
 # Set pinout mode to Broadcom (board communication)
 gpio.setmode(gpio.BCM)
@@ -175,6 +176,10 @@ def turn_90(direction):
 
 # read_ultrasound function - sends a sound wave to calculate distances
 def read_ultrasound():
+    '''# Pins for ultrasound sensor
+    TRIGGER1 = GPIO18 #Ultrasonic sensor 1 - Trigger
+    ECHO1 = GPIO5     #Ultrasonic sensor 1 - Echo'''
+
      # set Trigger to HIGH
     gpio.output(TRIGGER1, True)
  
@@ -205,6 +210,9 @@ def read_ultrasound():
     return math.trunc(distance1)
 
 def read_ultrasound2():
+    '''TRIGGER2 = GPIO19 #Ultrasonic sensor 2 - Trigger
+    ECHO2 = GPIO6     #Ultrasonic sensor 2 - Echo'''
+
      # set Trigger to HIGH
     gpio.output(TRIGGER2, True)
  
@@ -242,7 +250,11 @@ def turn_around():
     lm_still_on_line = FALSE
 
     # turn one motor forward other backwards (0 point turn)
-    
+    TRIGGER1 = GPIO18 #Ultrasonic sensor 1 - Trigger
+    ECHO1 = GPIO26   #Ultrasonic sensor 1 - Echo
+    TRIGGER2 = GPIO19 #Ultrasonic sensor 2 - Trigger
+    ECHO2 =  GPIO3    #Ultrasonic sensor 2 - Echo
+
     set_motor(RIGHT_MOTOR, FORWARD)
     set_motor(LEFT_MOTOR, BACKWARD)
     sleep(8)

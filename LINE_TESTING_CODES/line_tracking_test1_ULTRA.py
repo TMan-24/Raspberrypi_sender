@@ -237,7 +237,6 @@ def read_ultrasound2():
 # 180 Degree Turn
 # This function will need to be improved by testing
 def turn_around():
-    exit()
     # to turn 180deg we need left middle sensor to cross the line twice
     lm_crossed_line = 0
     lm_still_on_line = FALSE
@@ -312,7 +311,7 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, FORWARD)
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
-            elif gpio.input(R_SENSOR) == gpio.LOW:
+            elif gpio.input(R_SENSOR) == gpio.LOW or gpio.input(L_SENSOR) == gpio.LOW:
                 turn_90(gpio.input(R_SENSOR))
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:

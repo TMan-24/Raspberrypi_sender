@@ -14,6 +14,8 @@ MAX_TIME = 0.04
 #set GPIO direction (IN / OUT)
 GPIO.setup(TRIGGER1, GPIO.OUT)
 GPIO.setup(ECHO1, GPIO.IN)
+GPIO.setup(TRIGGER2, GPIO.OUT)
+GPIO.setup(ECHO2, GPIO.IN)
  
 def distance1():
     # set Trigger to HIGH

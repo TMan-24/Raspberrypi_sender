@@ -249,11 +249,7 @@ def turn_around():
     # to turn 180deg we need left middle sensor to cross the line twice
     lm_crossed_line = 0
     lm_still_on_line = FALSE
-    # turn one motor forward other backwards (0 point turn)
-    TRIGGER1 = GPIO18 #Ultrasonic sensor 1 - Trigger
-    ECHO1 = GPIO26   #Ultrasonic sensor 1 - Echo
-    TRIGGER2 = GPIO19 #Ultrasonic sensor 2 - Trigger
-    ECHO2 =  GPIO3    #Ultrasonic sensor 2 - Echo
+    # turn one motor forward other backwards (0 point turn
 
     set_motor(RIGHT_MOTOR, FORWARD)
     set_motor(LEFT_MOTOR, BACKWARD)

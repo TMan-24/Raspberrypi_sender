@@ -323,8 +323,10 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, FORWARD)
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
-            elif gpio.input(R_SENSOR) == gpio.LOW or gpio.input(L_SENSOR) == gpio.LOW:
+            elif gpio.input(R_SENSOR) == gpio.LOW:
                 turn_90(gpio.input(R_SENSOR))
+            elif gpio.input(L_SENSOR) == gpio.LOW:
+                turn_90(gpio.input(L_SENSOR))
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:
                 set_motor(LEFT_MOTOR, FORWARD)

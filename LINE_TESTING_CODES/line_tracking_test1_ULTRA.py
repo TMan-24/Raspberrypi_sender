@@ -73,7 +73,7 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
-THRESHOLD_VALUE = 12 #cm # TODO: determine what the actual threshold should be for ultrasaound
+THRESHOLD_VALUE = 10 #cm # TODO: determine what the actual threshold should be for ultrasaound
 
 # Set pinout mode to Broadcom (board communication)
 gpio.setmode(gpio.BCM)

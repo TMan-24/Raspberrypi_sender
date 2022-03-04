@@ -77,10 +77,9 @@ if __name__ == '__main__':
     try:
         while True:
             dist1 = distance1()
-            print ("Measured Distance = %.1f cm" % dist1)
-            time.sleep(1)
+            print ("Measured Distance1 = %.1f cm" % dist1)
             dist2 = distance2()
-            print ("Measured Distance = %.1f cm" % dist2)
+            print ("Measured Distance2 = %.1f cm" % dist2)
             time.sleep(1)
  
         # Reset by pressing CTRL + C

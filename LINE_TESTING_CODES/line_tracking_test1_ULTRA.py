@@ -175,7 +175,7 @@ def turn_90(direction):
         while gpio.input(LM_SENSOR) == gpio.HIGH:
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BACKWARD)
-            FLAG == True
+            FLAG = True
 
 # read_ultrasound function - sends a sound wave to calculate distances
 def read_ultrasound():

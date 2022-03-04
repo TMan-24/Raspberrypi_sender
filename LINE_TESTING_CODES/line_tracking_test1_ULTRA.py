@@ -245,7 +245,7 @@ def turn_around():
     
     set_motor(RIGHT_MOTOR, FORWARD)
     set_motor(LEFT_MOTOR, BACKWARD)
-    sleep(10)
+    sleep(6)
         # prevent double counting of lm sensor by using dummy variable (will increment really fast while still over the line without and give preemptively kill turn)
     '''if gpio.input(LM_SENSOR) == gpio.HIGH and not lm_still_on_line:
             lm_crossed_line = lm_crossed_line + 1 #increment left middle 

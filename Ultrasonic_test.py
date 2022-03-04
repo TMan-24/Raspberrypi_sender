@@ -42,7 +42,7 @@ def distance1():
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
     distance1 = (TimeElapsed * 17150)
- 
+    time.sleep(1)
     return distance1
  
 def distance2():
@@ -70,7 +70,7 @@ def distance2():
     # multiply with the sonic speed (34300 cm/s)
     # and divide by 2, because there and back
     distance2 = (TimeElapsed * 17150)
- 
+    time.sleep(1)
     return distance2
 
 if __name__ == '__main__':
@@ -80,7 +80,6 @@ if __name__ == '__main__':
             print ("Measured Distance1 = %.1f cm" % dist1)
             dist2 = distance2()
             print ("Measured Distance2 = %.1f cm" % dist2)
-            time.sleep(1)
  
         # Reset by pressing CTRL + C
     except KeyboardInterrupt:

@@ -202,6 +202,7 @@ def read_ultrasound():
     # and divide by 2, because there and back
     distance1 = (TimeElapsed * 17150)
     print ("Measured Distance = %.1f cm" % distance1)
+    sleep(1)
     return distance1
 
 # 180 Degree Turn

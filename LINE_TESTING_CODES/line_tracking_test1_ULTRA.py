@@ -55,8 +55,8 @@ R_SENSOR = GPIO15   #right sensor, yellow
 L_SENSOR = GPIO14   #left sensor, purple
 
 # H-bridge enable pins
-EN_LM = GPIO12  #enA, white  #look into changing comments
-EN_RM = GPIO13  #enB, black
+EN_RM = GPIO12  #enA, white  #look into changing comments
+EN_LM = GPIO13  #enB, black
 
 
 # Pins for ultrasound sensor

@@ -182,12 +182,14 @@ def read_ultrasound():
     time.sleep(0.00001)
     gpio.output(TRIGGER1, False)
     
+    StartTime = time.time()
     # starting pulse
     timeout = StartTime + MAX_TIME
     # start StartTime
     while gpio.input(ECHO1) == 0 and StartTime < timeout:
         StartTime = time.time()
     
+    StopTime = time.time()
     # stoping pulse
     timeout = StopTime + MAX_TIME
     # save time of arrival

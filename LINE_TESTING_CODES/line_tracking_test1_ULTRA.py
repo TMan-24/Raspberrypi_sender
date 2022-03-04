@@ -295,7 +295,7 @@ def main():
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn 
                 if read_ultrasound() == THRESHOLD_VALUE:
                     sleep(1)
-                    print ("Measured Distance = ", read_ultrasound())
+                    print ("Measured Distance")
                 #print("value from sensor: ", read_ultrasound())
                 #print("value from sensor: ", THRESHOLD_VALUE)
                 #turn_around()

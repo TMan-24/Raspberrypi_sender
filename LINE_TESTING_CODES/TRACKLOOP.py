@@ -22,12 +22,12 @@
 '''
 
 #Libraries
-from pickle import FALSE, TRUE     #pickle library for serializing data
-import time                        #Main time library for making ultrasonic sensors
-import math
-from time import sleep             #time library for stoping the code for a set amount of time
-from turtle import delay, distance #time library for date/time types
-import RPi.GPIO as gpio            #RPi library for I/O purposes to Pi
+from pickle import FALSE, TRUE     # pickle library for serializing data
+import time                        # Main time library for TX/RX ultrasonic sensors
+import math                        # Math library
+from time import sleep             # time library for stopping execution of the code for a set amount of time
+from turtle import delay, distance # time library for date/time types
+import RPi.GPIO as gpio            # RPi library for I/O purposes to Pi
 
 # All GPIO sensor connections
 GPIO4 = 4   #RM_SENSOR

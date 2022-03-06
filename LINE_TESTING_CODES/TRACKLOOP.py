@@ -1,10 +1,13 @@
 ''' 
-    Programmers: Tony Anderson, Grant Yates
+    Main programmers: Tony Anderson, Grant Yates
+    Debugging/Acknowledgements: Joseph Miller, Casey Lee
     Date Created: 02/11/2022
     File Name: Auto_Loop.py
-    Program Description: Uses Line Sensors and Ultrasonic 
-    sensors to control two DC motors to drive a metal constructed
-    robot on a white centerend line track.
+    
+    Program Description: Uses Line Sensors for course 
+    navigation via the control of two DC motors and Ultrasonic 
+    sensors for barricade detection and assistance in turning 
+    the vehicle when necessary.
 
     Legend:
         R = Right
@@ -15,11 +18,11 @@
         
         The Line Sensors work on a binary signal (0, 1)
         so when the sensors see white, it sends a 0, and
-        when it sees black, it sends a 1
+        when it sees black, it sends a 1 to the Raspberry Pi
 '''
+
 #Libraries
-from pickle import FALSE, TRUE
-from sre_parse import FLAGS     #pickle library for serializing data
+from pickle import FALSE, TRUE     #pickle library for serializing data
 import time                        #Main time library for making ultrasonic sensors
 import math
 from time import sleep             #time library for stoping the code for a set amount of time
@@ -27,7 +30,6 @@ from turtle import delay, distance #time library for date/time types
 import RPi.GPIO as gpio            #RPi library for I/O purposes to Pi
 
 # All GPIO sensor connections
-GPIO3 = 3 #DUMMY
 GPIO4 = 4   #RM_SENSOR
 GPIO5 = 5   #Ultrasonic_1 - Echo
 GPIO6 = 6   #Ultrasonic_2 - Echo
@@ -45,20 +47,20 @@ GPIO26 = 26 #FREE
 GPIO27 = 27 #LM_SENSOR
 
 # H-Bridge input control pins
-RM_FORWARD = GPIO25   #in4, blue
-RM_BACKWARD = GPIO24  #in3, green #look into changing comments
-LM_FORWARD =  GPIO23  #in2, yellow
-LM_BACKWARD = GPIO22  #in1, orange
+RM_FORWARD = GPIO25   # blue
+RM_BACKWARD = GPIO24  # green
+LM_FORWARD =  GPIO23  # yellow
+LM_BACKWARD = GPIO22  # orange
 
 # Line Sensor pins
-RM_SENSOR = GPIO4   #right middle sensor, green
-LM_SENSOR = GPIO27  #left middle sensor, blue #look into changing comments
-R_SENSOR = GPIO15   #right sensor, yellow
-L_SENSOR = GPIO14   #left sensor, purple
+RM_SENSOR = GPIO4   # green
+LM_SENSOR = GPIO27  # blue
+R_SENSOR = GPIO15   # yellow
+L_SENSOR = GPIO14   # purple
 
 # H-bridge enable pins
-EN_RM = GPIO12  #enA, white  #look into changing comments
-EN_LM = GPIO13  #enB, black
+EN_RM = GPIO12  # white
+EN_LM = GPIO13  # black
 
 
 # Pins for ultrasound sensor
@@ -74,8 +76,9 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
-THRESHOLD_VALUE = 14 #cm # TODO: determine what the actual threshold should be for ultrasaound
+TURN_AROUND_VALUE = 14 #number in cm for when to turn around
 
+#### FIND OUT IF THIS NEEDS TO BE HERE OR IN MAIN (Shouldn'nt matter, but might)
 # Set pinout mode to Broadcom (board communication)
 gpio.setmode(gpio.BCM)
 
@@ -94,10 +97,6 @@ gpio.setup(LM_BACKWARD, gpio.OUT)
 # Set H-bridge Enable motor signals as output pins 
 gpio.setup(EN_LM, gpio.OUT)
 gpio.setup(EN_RM, gpio.OUT)
-
-# initialize motor to go forward
-#set_motor(LEFT_MOTOR, FORWARD)
-#set_motor(RIGHT_MOTOR, FORWARD)
 
 # Set a PWM signal of 1000 for both motors
 p1=gpio.PWM(EN_RM, 1000)
@@ -177,10 +176,6 @@ def turn_90(direction):
 
 # read_ultrasound function - sends a sound wave to calculate distances
 def read_ultrasound():
-    '''# Pins for ultrasound sensor
-    TRIGGER1 = GPIO18 #Ultrasonic sensor 1 - Trigger
-    ECHO1 = GPIO5     #Ultrasonic sensor 1 - Echo'''
-
      # set Trigger to HIGH
     gpio.output(TRIGGER1, True)
  
@@ -211,9 +206,6 @@ def read_ultrasound():
     return math.trunc(distance1)
 
 def read_ultrasound2():
-    '''TRIGGER2 = GPIO19 #Ultrasonic sensor 2 - Trigger
-    ECHO2 = GPIO6     #Ultrasonic sensor 2 - Echo'''
-
      # set Trigger to HIGH
     gpio.output(TRIGGER2, True)
  
@@ -246,22 +238,23 @@ def read_ultrasound2():
 # 180 Degree Turn
 # This function will need to be improved by testing
 def turn_around():
-    # to turn 180deg we need left middle sensor to cross the line twice
-    lm_crossed_line = 0
-    lm_still_on_line = FALSE
-    # turn one motor forward other backwards (0 point turn
-
     set_motor(RIGHT_MOTOR, FORWARD)
     set_motor(LEFT_MOTOR, BACKWARD)
     sleep(7)
+
+    '''# to turn 180deg we need left middle sensor to cross the line twice
+        lm_crossed_line = 0
+        lm_still_on_line = FALSE
+        # turn one motor forward other backwards (0 point turn
         # prevent double counting of lm sensor by using dummy variable (will increment really fast while still over the line without and give preemptively kill turn)
-    '''if gpio.input(LM_SENSOR) == gpio.HIGH and not lm_still_on_line:
+        if gpio.input(LM_SENSOR) == gpio.HIGH and not lm_still_on_line:
             lm_crossed_line = lm_crossed_line + 1 #increment left middle 
             lm_still_on_line = TRUE
         elif gpio.input(LM_SENSOR) == gpio.HIGH:
             lm_still_on_line = FALSE
         else:
             lm_still_on_line = TRUE'''
+
 # Main program function
 def main():
     
@@ -303,7 +296,6 @@ def main():
     # Starting condition will be all four sensors are off (0), since starting square is all white
     # Check to see if the robot has come off the starting square
     while gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
-        FLAG = TRUE
         # Set H-Bridge to go straight
         set_motor(RIGHT_MOTOR, FORWARD)
         set_motor(LEFT_MOTOR, FORWARD)
@@ -340,7 +332,7 @@ def main():
             dist2 = read_ultrasound2()
             print ("Measured Distance1 = %.1f cm" % dist1)
             print ("Measured Distance2 = %.1f cm" % dist2)
-            if ((dist1 and dist2) == THRESHOLD_VALUE):
+            if ((dist1 and dist2) == TURN_AROUND_VALUE):
                 turn_around()
 
             #5. if we get back to starting position, stop program

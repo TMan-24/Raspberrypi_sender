@@ -1,10 +1,13 @@
 ''' 
-    Programmers: Tony Anderson, Grant Yates
+    Main programmers: Tony Anderson, Grant Yates
+    Debugging/Acknowledgements: Joseph Miller, Casey Lee
     Date Created: 02/11/2022
     File Name: Auto_Loop.py
-    Program Description: Uses Line Sensors and Ultrasonic 
-    sensors to control two DC motors to drive a metal constructed
-    robot on a white centerend line track.
+    
+    Program Description: Uses Line Sensors for course 
+    navigation via the control of two DC motors and Ultrasonic 
+    sensors for barricade detection and assistance in turning 
+    the vehicle when necessary.
 
     Legend:
         R = Right
@@ -15,8 +18,9 @@
         
         The Line Sensors work on a binary signal (0, 1)
         so when the sensors see white, it sends a 0, and
-        when it sees black, it sends a 1
+        when it sees black, it sends a 1 to the Raspberry Pi
 '''
+
 #Libraries
 from pickle import FALSE, TRUE     #pickle library for serializing data
 import time                        #Main time library for making ultrasonic sensors
@@ -26,7 +30,6 @@ from turtle import delay, distance #time library for date/time types
 import RPi.GPIO as gpio            #RPi library for I/O purposes to Pi
 
 # All GPIO sensor connections
-GPIO3 = 3 #DUMMY
 GPIO4 = 4   #RM_SENSOR
 GPIO5 = 5   #Ultrasonic_1 - Echo
 GPIO6 = 6   #Ultrasonic_2 - Echo
@@ -44,20 +47,20 @@ GPIO26 = 26 #FREE
 GPIO27 = 27 #LM_SENSOR
 
 # H-Bridge input control pins
-RM_FORWARD = GPIO25   #in4, blue
-RM_BACKWARD = GPIO24  #in3, green #look into changing comments
-LM_FORWARD =  GPIO23  #in2, yellow
-LM_BACKWARD = GPIO22  #in1, orange
+RM_FORWARD = GPIO25   # blue
+RM_BACKWARD = GPIO24  # green #look into changing comments
+LM_FORWARD =  GPIO23  # yellow
+LM_BACKWARD = GPIO22  # orange
 
 # Line Sensor pins
-RM_SENSOR = GPIO4   #right middle sensor, green
-LM_SENSOR = GPIO27  #left middle sensor, blue #look into changing comments
-R_SENSOR = GPIO15   #right sensor, yellow
-L_SENSOR = GPIO14   #left sensor, purple
+RM_SENSOR = GPIO4   # green
+LM_SENSOR = GPIO27  # blue
+R_SENSOR = GPIO15   # yellow
+L_SENSOR = GPIO14   # purple
 
 # H-bridge enable pins
-EN_RM = GPIO12  #enA, white  #look into changing comments
-EN_LM = GPIO13  #enB, black
+EN_RM = GPIO12  # white
+EN_LM = GPIO13  # black
 
 
 # Pins for ultrasound sensor
@@ -76,6 +79,7 @@ MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
 TURN_AROUND_VALUE = 14 #number in cm for when to turn around
 END_PROGRAM_VALUE = 5 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
 
+### FIND OUT IF THIS NEEDS TO BE HERE OR IN MAIN (Shouldn'nt matter, but might)
 # Set pinout mode to Broadcom (board communication)
 gpio.setmode(gpio.BCM)
 
@@ -94,10 +98,6 @@ gpio.setup(LM_BACKWARD, gpio.OUT)
 # Set H-bridge Enable motor signals as output pins 
 gpio.setup(EN_LM, gpio.OUT)
 gpio.setup(EN_RM, gpio.OUT)
-
-# initialize motor to go forward
-#set_motor(LEFT_MOTOR, FORWARD)
-#set_motor(RIGHT_MOTOR, FORWARD)
 
 # Set a PWM signal of 1000 for both motors
 p1=gpio.PWM(EN_RM, 1000)
@@ -165,7 +165,7 @@ def turn_90(direction):
         while gpio.input(RM_SENSOR) == gpio.HIGH:
             set_motor(LEFT_MOTOR, BACKWARD)
             set_motor(RIGHT_MOTOR, FORWARD)
-    else:
+    #else:
         # IF: leftmost sensor is OFF (LOW), then zero-degree turn left, until Rightmost sensor goes OFF (LOW) from being HIGH
         # turn until the right sensor is active (vehicle has turned far enough to cross the line)
         while gpio.input(R_SENSOR) == gpio.HIGH:

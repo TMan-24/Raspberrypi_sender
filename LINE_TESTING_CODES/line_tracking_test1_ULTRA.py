@@ -76,8 +76,8 @@ BRAKE = 2
 LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
-TURN_AROUND_VALUE = 14 #number in cm for when to turn around
-END_PROGRAM_VALUE = 5 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
+TURN_AROUND_VALUE = 8 #number in cm for when to turn around
+END_PROGRAM_VALUE = 20 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
 
 ### FIND OUT IF THIS NEEDS TO BE HERE OR IN MAIN (Shouldn'nt matter, but might)
 # Set pinout mode to Broadcom (board communication)
@@ -344,9 +344,9 @@ def main():
             print ("Measured Distance2 = %.1f cm" % dist2)
             if (dist1 and dist2) == TURN_AROUND_VALUE:
                 turn_around()
+            '''
 
-
-            '''   SOLUTION ATTEMPT FOR ENDING PROGRAM AT START POSITION  '''
+               SOLUTION ATTEMPT FOR ENDING PROGRAM AT START POSITION 
             #5. if we get back to starting position, stop program
             if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
                 # turn off all gpio settings
@@ -384,7 +384,7 @@ def main():
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
                 gpio.cleanup()
-                exit()
+                exit()'''
             
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":

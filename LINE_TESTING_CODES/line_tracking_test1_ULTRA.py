@@ -81,6 +81,7 @@ TURN_AROUND_VALUE = 8 #number in cm for when to turn around
 END_PROGRAM_VALUE1 = 19 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
 END_PROGRAM_VALUE2 = 20 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
 
+'''
 ### FIND OUT IF THIS NEEDS TO BE HERE OR IN MAIN (Shouldn'nt matter, but might)
 # Set pinout mode to Broadcom (board communication)
 gpio.setmode(gpio.BCM)
@@ -114,7 +115,7 @@ gpio.setup(TRIGGER1, gpio.OUT)
 gpio.setup(TRIGGER2, gpio.OUT)
 gpio.setup(ECHO1, gpio.IN)
 gpio.setup(ECHO2, gpio.IN)
-
+'''
 # Set_motor function - sets motor to forward/backward/brake
 def set_motor(motor_num, state):
     # determine which motor to set
@@ -265,7 +266,7 @@ def main():
     
     #begin initialization of the GPIO pins on the pi
 
-    '''# Set pinout mode to Broadcom (board communication)
+    # Set pinout mode to Broadcom (board communication)
     gpio.setmode(gpio.BCM)
 
     # Line sensor setup as input digital pins
@@ -296,7 +297,7 @@ def main():
     gpio.setup(TRIGGER1, gpio.OUT)
     gpio.setup(TRIGGER2, gpio.OUT)
     gpio.setup(ECHO1, gpio.IN)
-    gpio.setup(ECHO2, gpio.IN)'''
+    gpio.setup(ECHO2, gpio.IN)
 
     # Starting condition will be all four sensors are off (0), since starting square is all white
     # Check to see if the robot has come off the starting square

@@ -78,7 +78,7 @@ LEFT_MOTOR = 0
 RIGHT_MOTOR = 1
 MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
 TURN_AROUND_VALUE = 8 #number in cm for when to turn around
-END_PROGRAM_VALUE = 20 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
+END_PROGRAM_VALUE = 19 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
 
 ### FIND OUT IF THIS NEEDS TO BE HERE OR IN MAIN (Shouldn'nt matter, but might)
 # Set pinout mode to Broadcom (board communication)

@@ -241,8 +241,8 @@ def read_ultrasound2():
 # 180 Degree Turn
 # This function will need to be improved by testing
 def turn_around():
-    set_motor(RIGHT_MOTOR, FORWARD)
-    set_motor(LEFT_MOTOR, BRAKE)
+    set_motor(LEFT_MOTOR, FORWARD)
+    set_motor(RIGHT_MOTOR, BACKWARD)
     sleep(6.5)
     
     '''    

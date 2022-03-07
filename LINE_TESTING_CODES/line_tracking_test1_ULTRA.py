@@ -245,7 +245,7 @@ def read_ultrasound2():
 def turn_around():
     set_motor(LEFT_MOTOR, FORWARD)
     set_motor(RIGHT_MOTOR, BACKWARD)
-    sleep(5)
+    sleep(4.5)
     
     '''    
     # to turn 180deg we need left middle sensor to cross the line twice

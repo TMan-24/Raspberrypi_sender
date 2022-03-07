@@ -241,16 +241,16 @@ def read_ultrasound2():
 # 180 Degree Turn
 # This function will need to be improved by testing
 def turn_around():
+    '''set_motor(RIGHT_MOTOR, FORWARD)
+    set_motor(LEFT_MOTOR, BACKWARD)
+    sleep(6.5)'''
+    #IDEA FOR MAKING TURNING AROUND MORE RELIABLE
     set_motor(RIGHT_MOTOR, FORWARD)
     set_motor(LEFT_MOTOR, BACKWARD)
-    sleep(6.5)
-    '''IDEA FOR MAKING TURNING AROUND MORE RELIABLE
-    set_motor(RIGHT_MOTOR, FORWARD)
-    set_motor(LEFT_MOTOR, BACKWARD)
-    sleep(3)
+    sleep(4)
     while gpio.input(R_SENSOR) == gpio.HIGH:
         set_motor(RIGHT_MOTOR, FORWARD)
-        set_motor(LEFT_MOTOR, BACKWARD)'''
+        set_motor(LEFT_MOTOR, BACKWARD)
     
     '''    
     # to turn 180deg we need left middle sensor to cross the line twice

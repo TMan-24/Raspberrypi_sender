@@ -247,7 +247,7 @@ def turn_around():
     #IDEA FOR MAKING TURNING AROUND MORE RELIABLE
     set_motor(RIGHT_MOTOR, FORWARD)
     set_motor(LEFT_MOTOR, BACKWARD)
-    sleep(4)
+    sleep(6)
     while gpio.input(R_SENSOR) == gpio.HIGH:
         set_motor(RIGHT_MOTOR, FORWARD)
         set_motor(LEFT_MOTOR, BACKWARD)

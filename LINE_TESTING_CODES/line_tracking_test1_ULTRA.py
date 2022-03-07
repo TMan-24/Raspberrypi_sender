@@ -22,6 +22,7 @@
 '''
 
 #Libraries
+from dis import dis
 from pickle import FALSE, TRUE     # pickle library for serializing data
 import time                        # Main time library for TX/RX ultrasonic sensors
 import math                        # Math library
@@ -336,24 +337,24 @@ def main():
             print ("Measured Distance2 = %.1f cm" % dist2)
             if (dist1 and dist2) == TURN_AROUND_VALUE:
                 turn_around()
-            '''
+            
 
-               SOLUTION ATTEMPT FOR ENDING PROGRAM AT START POSITION 
+               #SOLUTION ATTEMPT FOR ENDING PROGRAM AT START POSITION 
             #5. if we get back to starting position, stop program
-            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE):
                 # turn off all gpio settings
                 print("we are in state 5.1")
-                sleep(1.6)
+                #sleep(1.6)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
                 gpio.cleanup()
                 exit()
             
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW:
+            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE):
                 # turn off all gpio settings
                 print("we are in state 5.2")
-                sleep(1.6)
+                #sleep(1.6)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
                 gpio.cleanup()
@@ -363,20 +364,20 @@ def main():
             elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH and ((dist1 and dist2) == END_PROGRAM_VALUE):
                 # turn off all gpio settings
                 print("we are in state 5.3")
-                sleep(1.6)
+                #sleep(1.6)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
                 gpio.cleanup()
                 exit()
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE):
                 # turn off all gpio settings
                 print("we are in state 5.4")
-                sleep(1.6)
+                #sleep(1.6)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
                 gpio.cleanup()
-                exit()'''
+                exit()
             
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":

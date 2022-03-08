@@ -288,7 +288,7 @@ def main():
             elif gpio.input(R_SENSOR) == gpio.LOW:
                 print("hi from right sensor")
                 turn_90(gpio.input(R_SENSOR))
-            elif gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+            elif gpio.input(L_SENSOR) == gpio.LOW:
                 print("hi from left")
                 turn_90(gpio.input(R_SENSOR))
             #3. correct back to line - use two middle sensors to determine

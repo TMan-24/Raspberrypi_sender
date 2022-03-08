@@ -212,7 +212,10 @@ def turn_around():
     set_motor(LEFT_MOTOR, FORWARD)
     set_motor(RIGHT_MOTOR, BACKWARD)
     sleep(4.5)
-    
+    if R_SENSOR == gpio.LOW:
+        while gpio.input(L_SENSOR) == gpio.HIGH:
+            set_motor(LEFT_MOTOR, FORWARD)
+            set_motor(RIGHT_MOTOR, BACKWARD)
     '''    
     # to turn 180deg we need left middle sensor to cross the line twice
     lm_crossed_line = 0

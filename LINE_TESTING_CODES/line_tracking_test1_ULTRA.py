@@ -300,7 +300,7 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn 
-            '''dist1 = read_ultrasound()
+            dist1 = read_ultrasound()
             dist2 = read_ultrasound2()
             print ("Measured Distance1 = %.1f cm" % dist1)
             print ("Measured Distance2 = %.1f cm" % dist2)
@@ -349,7 +349,7 @@ def main():
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
                 gpio.cleanup()
-                exit()'''
+                exit()
             
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":

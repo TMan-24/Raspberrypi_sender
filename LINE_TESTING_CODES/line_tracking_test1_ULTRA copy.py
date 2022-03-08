@@ -130,18 +130,18 @@ def turn_90(direction):
         while gpio.input(L_SENSOR) == gpio.HIGH:
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BACKWARD)
-        #while gpio.input(RM_SENSOR) == gpio.HIGH:
-         #   set_motor(LEFT_MOTOR, BACKWARD)
-          #  set_motor(RIGHT_MOTOR, FORWARD)
+        while gpio.input(RM_SENSOR) == gpio.HIGH:
+            set_motor(LEFT_MOTOR, BACKWARD)
+            set_motor(RIGHT_MOTOR, FORWARD)
     else:
         # IF: leftmost sensor is OFF (LOW), then zero-degree turn left, until Rightmost sensor goes OFF (LOW) from being HIGH
         # turn until the right sensor is active (vehicle has turned far enough to cross the line)
         while gpio.input(R_SENSOR) == gpio.HIGH:
             set_motor(LEFT_MOTOR, BACKWARD)
             set_motor(RIGHT_MOTOR, FORWARD)
-        #while gpio.input(LM_SENSOR) == gpio.HIGH:
-         #   set_motor(LEFT_MOTOR, FORWARD)
-          #  set_motor(RIGHT_MOTOR, BACKWARD)
+        while gpio.input(LM_SENSOR) == gpio.HIGH:
+            set_motor(LEFT_MOTOR, FORWARD)
+            set_motor(RIGHT_MOTOR, BACKWARD)
 
 # read_ultrasound function - sends a sound wave to calculate distances
 def read_ultrasound():
@@ -303,9 +303,6 @@ def main():
             print ("Measured Distance1 = %.1f cm" % dist1)
             print ("Measured Distance2 = %.1f cm" % dist2)
             if (dist1 and dist2) == TURN_AROUND_VALUE:
-                set_motor(LEFT_MOTOR, BACKWARD)
-                set_motor(RIGHT_MOTOR, BACKWARD)
-                sleep(0.5)
                 turn_around()
             
 

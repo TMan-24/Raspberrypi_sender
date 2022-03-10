@@ -23,7 +23,7 @@
 
 #Libraries
 from dis import dis
-import playsound
+from playsound import playsound
 from pickle import FALSE, TRUE     # pickle library for serializing data
 import time                        # Main time library for TX/RX ultrasonic sensors
 import math                        # Math library

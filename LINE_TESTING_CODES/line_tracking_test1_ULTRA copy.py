@@ -80,6 +80,7 @@ MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
 TURN_AROUND_VALUE = 8 #number in cm for when to turn around
 END_PROGRAM_VALUE1 = 19 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
 END_PROGRAM_VALUE2 = 20 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
+END_PROGRAM_VALUE2 = 21 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
 
 # Set_motor function - sets motor to forward/backward/brake
 def set_motor(motor_num, state):
@@ -306,7 +307,7 @@ def main():
 
                #SOLUTION ATTEMPT FOR ENDING PROGRAM AT START POSITION 
             #5. if we get back to starting position, stop program
-            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
+            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
                 # turn off all gpio settings
                 #print("Going Home")
                 print("we are in state 5.1")
@@ -317,7 +318,7 @@ def main():
                 exit()
             
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
+            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
                 # turn off all gpio settings
                 #print("Going Home")
                 print("we are in state 5.2")
@@ -328,7 +329,7 @@ def main():
                 exit()
             
             #IF ROBOT TURNS RIGHT, MEANING IT DOESNT GO INTO THIS CONDITIONAL, SOLUTION WORKED
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
+            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
                 # turn off all gpio settings
                 #print("Going Home")
                 print("we are in state 5.3")
@@ -338,7 +339,7 @@ def main():
                 gpio.cleanup()
                 exit()
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
+            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
                 #print("Going Home")
                 # turn off all gpio settings
                 print("we are in state 5.4")

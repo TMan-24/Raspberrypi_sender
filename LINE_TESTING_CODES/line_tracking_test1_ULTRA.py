@@ -213,26 +213,14 @@ def turn_around():
     set_motor(RIGHT_MOTOR, BACKWARD)
     sleep(6)
     while gpio.input(L_SENSOR) == gpio.HIGH:
-        print("hi from turn")
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, BACKWARD)
-    
-    '''    
-    # to turn 180deg we need left middle sensor to cross the line twice
-    lm_crossed_line = 0
-    lm_still_on_line = FALSE
-    # turn one motor forward other backwards (0 point turn
-        # prevent double counting of lm sensor by using dummy variable (will increment really fast while still over the line without and give preemptively kill turn)
-    if gpio.input(LM_SENSOR) == gpio.HIGH and not lm_still_on_line:
-            lm_crossed_line = lm_crossed_line + 1 #increment left middle 
-            lm_still_on_line = TRUE
-        elif gpio.input(LM_SENSOR) == gpio.HIGH:
-            lm_still_on_line = FALSE
-        else:
-            lm_still_on_line = TRUE'''
 # Main program function
 def main():
-    
+    print(" ######  Welcome to Autonomous Robot ######")
+    print("\n")
+    print("\n")
+    print("DRIVING STRAIGHT")
     #begin initialization of the GPIO pins on the pi
 
     # Set pinout mode to Broadcom (board communication)
@@ -271,6 +259,7 @@ def main():
     # Starting condition will be all four sensors are off (0), since starting square is all white
     # Check to see if the robot has come off the starting square
     while gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+        print("Leaving White Square")
         # Set H-Bridge to go straight
         set_motor(RIGHT_MOTOR, FORWARD)
         set_motor(LEFT_MOTOR, FORWARD)
@@ -283,15 +272,16 @@ def main():
         while TRUE:
             #1. continue straight - innermost sensors are on and outer sensors are on
             if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
+                print("DRIVING STRAIGHT")
                 # Set H-Bridge to go straight
                 set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, FORWARD)
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
             elif gpio.input(R_SENSOR) == gpio.LOW:
-                print("hi from right sensor")
+                print("Right 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
             elif gpio.input(L_SENSOR) == gpio.LOW:
-                print("hi from left")
+                print("Left 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
             #3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:
@@ -304,9 +294,8 @@ def main():
             #4. 180deg turn (turn around) - additional logic needed to avoid 180deg turn at first 90deg turn 
             dist1 = read_ultrasound()
             dist2 = read_ultrasound2()
-            print ("Measured Distance1 = %.1f cm" % dist1)
-            print ("Measured Distance2 = %.1f cm" % dist2)
             if (dist1 and dist2) == TURN_AROUND_VALUE:
+                print("180 Turn Around")
                 set_motor(LEFT_MOTOR, BACKWARD)
                 set_motor(RIGHT_MOTOR, BACKWARD)
                 sleep(0.5)
@@ -317,7 +306,7 @@ def main():
             #5. if we get back to starting position, stop program
             if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
                 # turn off all gpio settings
-                print("we are in state 5.1")
+                print("Going Home")
                 sleep(1.46)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
@@ -327,7 +316,7 @@ def main():
             
             elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
                 # turn off all gpio settings
-                print("we are in state 5.2")
+                print("Going Home")
                 sleep(1.46)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
@@ -337,7 +326,7 @@ def main():
             #IF ROBOT TURNS RIGHT, MEANING IT DOESNT GO INTO THIS CONDITIONAL, SOLUTION WORKED
             elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
                 # turn off all gpio settings
-                print("we are in state 5.3")
+                print("Going Home")
                 sleep(1.46)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
@@ -345,8 +334,8 @@ def main():
                 exit()
             
             elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
+                print("Going Home")
                 # turn off all gpio settings
-                print("we are in state 5.4")
                 sleep(1.46)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)

@@ -280,7 +280,7 @@ def main():
             #2. 90deg turn - either rightmost or leftmost sensor false (off) 
             elif gpio.input(R_SENSOR) == gpio.LOW:
                 print("Right 90 Turn")
-                playsound('mr-mackey-umkay.mp3')
+                playsound("Raspberrypi_sender/LINE_TESTING_CODES/mr-mackey-umkay.mp3")
                 turn_90(gpio.input(R_SENSOR))
             elif gpio.input(L_SENSOR) == gpio.LOW:
                 print("Left 90 Turn")
@@ -309,7 +309,7 @@ def main():
             if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
                 # turn off all gpio settings
                 print("Going Home")
-                playsound('cartman.mp3')
+                playsound("Raspberrypi_sender/LINE_TESTING_CODES/cartman.mp3")
                 sleep(1.46)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
@@ -320,7 +320,7 @@ def main():
             elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
                 # turn off all gpio settings
                 print("Going Home")
-                playsound('cartman.mp3')
+                playsound("Raspberrypi_sender/LINE_TESTING_CODES/cartman.mp3")
                 sleep(1.46)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
@@ -331,7 +331,7 @@ def main():
             elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
                 # turn off all gpio settings
                 print("Going Home")
-                playsound('cartman.mp3')
+                playsound("Raspberrypi_sender/LINE_TESTING_CODES/cartman.mp3")
                 sleep(1.46)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)
@@ -341,7 +341,7 @@ def main():
             elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2):
                 # turn off all gpio settings
                 print("Going Home")
-                playsound('cartman.mp3')
+                playsound("Raspberrypi_sender/LINE_TESTING_CODES/cartman.mp3")
                 sleep(1.46)
                 set_motor(LEFT_MOTOR, BRAKE)
                 set_motor(RIGHT_MOTOR, BRAKE)

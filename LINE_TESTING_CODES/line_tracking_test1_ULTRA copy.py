@@ -80,7 +80,7 @@ MAX_TIME = 0.04 # a timeout to exit loops for ultrasonic
 TURN_AROUND_VALUE = 8 #number in cm for when to turn around
 END_PROGRAM_VALUE1 = 19 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
 END_PROGRAM_VALUE2 = 20 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
-END_PROGRAM_VALUE2 = 21 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
+END_PROGRAM_VALUE3 = 21 #NOT REAL AT THE MOMENT, TODO: NEED TO FIND OUT REAL VALUE
 
 # Set_motor function - sets motor to forward/backward/brake
 def set_motor(motor_num, state):

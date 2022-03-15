@@ -114,30 +114,30 @@ notes = {
 
 
 melody = [
-  notes['E7'], notes['E7'], 0, notes['E7'],
-  0, notes['C7'], notes['E7'], 0,
-  notes['G7'], 0, 0,  0,
-  notes['G6'], 0, 0, 0,
+  notes['E5'], notes['E5'], 0, notes['E5'],
+  0, notes['C5'], notes['E5'], 0,
+  notes['G5'], 0, 0,  0,
+  notes['G4'], 0, 0, 0,
  
-  notes['C7'], 0, 0, notes['G6'],
-  0, 0, notes['E6'], 0,
-  0, notes['A6'], 0, notes['B6'],
-  0, notes['AS6'], notes['A6'], 0,
+  notes['C5'], 0, 0, notes['G4'],
+  0, 0, notes['E4'], 0,
+  0, notes['A4'], 0, notes['B4'],
+  0, notes['AS4'], notes['A4'], 0,
  
-  notes['G6'], notes['E7'], notes['G7'],
-  notes['A7'], 0, notes['F7'], notes['G7'],
-  0, notes['E7'], 0, notes['C7'],
-  notes['D7'], notes['B6'], 0, 0,
+  notes['G4'], notes['E5'], notes['G5'],
+  notes['A5'], 0, notes['F5'], notes['G5'],
+  0, notes['E5'], 0, notes['C5'],
+  notes['D5'], notes['B4'], 0, 0,
  
-  notes['C7'], 0, 0, notes['G6'],
-  0, 0, notes['E6'], 0,
-  0, notes['A6'], 0, notes['B6'],
-  0, notes['AS6'], notes['A6'], 0,
+  notes['C5'], 0, 0, notes['G5'],
+  0, 0, notes['E4'], 0,
+  0, notes['A4'], 0, notes['B4'],
+  0, notes['AS4'], notes['A4'], 0,
  
-  notes['G6'], notes['E7'], notes['G7'],
-  notes['A7'], 0, notes['F7'], notes['G7'],
-  0, notes['E7'], 0, notes['C7'],
-  notes['D7'], notes['B6'], 0, 0
+  notes['G4'], notes['E5'], notes['G5'],
+  notes['A5'], 0, notes['F5'], notes['G5'],
+  0, notes['E5'], 0, notes['C5'],
+  notes['D5'], notes['B4'], 0, 0
 ]
 tempo = [
   12, 12, 12, 12,
@@ -639,11 +639,11 @@ def main():
         print("Super Mario Theme")
         play(melody, tempo, 1.3, 0.800)
         time.sleep(2)
-        print("Super Mario Underworld Theme")
-        play(underworld_melody, underworld_tempo, 1.3, 0.800)
-        time.sleep(2)
-        print("Adventure Time Theme")
-        play(adventure_time_melody, adventure_time_tempo, 1.3, 1.500)
+        #print("Super Mario Underworld Theme")
+        #play(underworld_melody, underworld_tempo, 1.3, 0.800)
+        #time.sleep(2)
+        #print("Adventure Time Theme")
+        #play(adventure_time_melody, adventure_time_tempo, 1.3, 1.500)
         
         destroy()
     except KeyboardInterrupt:  	# When 'Ctrl+C' is pressed, the child program destroy() will be executed

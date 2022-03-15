@@ -129,7 +129,7 @@ melody = [
   0, notes['E5'], 0, notes['C5'],
   notes['D5'], notes['B4'], 0, 0,
  
-  notes['C5'], 0, 0, notes['G5'],
+  notes['C5'], 0, 0, notes['G4'],
   0, 0, notes['E4'], 0,
   0, notes['A4'], 0, notes['B4'],
   0, notes['AS4'], notes['A4'], 0,

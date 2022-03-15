@@ -138,7 +138,10 @@ melody = [
   notes['A5'], 0, notes['F5'], notes['G5'],
   0, notes['E5'], 0, notes['C5'],
   notes['D5'], notes['B4'], 0, 0
+
+
 ]
+
 tempo = [
   12, 12, 12, 12,
   12, 12, 12, 12,
@@ -610,8 +613,11 @@ def play(melody,tempo,pause,pace=0.800):
 	
 	
 def main():
-    try:
-        setup()
+	while True:
+		setup()
+		print("Super Mario Theme")
+		play(melody, tempo, 1.3, 0.800)
+		time.sleep(2)
         #print("The Final Countdown")
         #play(final_countdown_melody, final_countdown_tempo, 0.30, 1.2000)
         #time.sleep(2)
@@ -636,18 +642,15 @@ def main():
         #print("Star Wars Theme")
         #play(star_wars_melody, star_wars_tempo, 0.50, 1.000)
         #time.sleep(2)
-        print("Super Mario Theme")
-        play(melody, tempo, 1.3, 0.800)
-        time.sleep(2)
+		#print("Super Mario Theme")
+		#play(melody, tempo, 1.3, 0.800)
+		#time.sleep(2)
         #print("Super Mario Underworld Theme")
         #play(underworld_melody, underworld_tempo, 1.3, 0.800)
         #time.sleep(2)
         #print("Adventure Time Theme")
         #play(adventure_time_melody, adventure_time_tempo, 1.3, 1.500)
         
-        destroy()
-    except KeyboardInterrupt:  	# When 'Ctrl+C' is pressed, the child program destroy() will be executed
-        destroy()
 
 if __name__ == '__main__':		# Program start from here
 	main()

@@ -40,262 +40,105 @@
 import RPi.GPIO as GPIO
 import time
 
-buzzer_pin = 26
+buzzer_pin = 27
 
-NOTE_B0 = 31
-NOTE_C1 =33
-NOTE_CS1 =35
-NOTE_D1  =37
-NOTE_DS1 =39
-NOTE_E1  =41
-NOTE_F1  =44
-NOTE_FS1 =46
-NOTE_G1  =49
-NOTE_GS1 =52
-NOTE_A1  =55
-NOTE_AS1 =58
-NOTE_B1  =62
-NOTE_C2  =65
-NOTE_CS2 =69
-NOTE_D2  =73
-NOTE_DS2 =78
-NOTE_E2  =82
-NOTE_F2  =87
-NOTE_FS2 =93
-NOTE_G2  =98
-NOTE_GS2 =104
-NOTE_A2  =110
-NOTE_AS2 =117
-NOTE_B2  =123
-NOTE_C3  =131
-NOTE_CS3 =139
-NOTE_D3  =147
-NOTE_DS3 =156
-NOTE_E3  =165
-NOTE_F3  =175
-NOTE_FS3 =185
-NOTE_G3  =196
-NOTE_GS3 =208
-NOTE_A3  =220
-NOTE_AS3 =233
-NOTE_B3  =247
-NOTE_C4  =262
-NOTE_CS4 =277
-NOTE_D4  =294
-NOTE_DS4 =311
-NOTE_E4  =330
-NOTE_F4  =349
-NOTE_FS4 =370
-NOTE_G4  =392
-NOTE_GS4 =415
-NOTE_A4  =440
-NOTE_AS4 =466
-NOTE_B4  =494
-NOTE_C5  =523
-NOTE_CS5 =554
-NOTE_D5  =587
-NOTE_DS5 =622
-NOTE_E5  =659
-NOTE_F5  =698
-NOTE_FS5 =740
-NOTE_G5  =784
-NOTE_GS5 =831
-NOTE_A5  =880
-NOTE_AS5 =932
-NOTE_B5  =988
-NOTE_C6  =1047
-NOTE_CS6 =1109
-NOTE_D6  =1175
-NOTE_DS6 =1245
-NOTE_E6  =1319
-NOTE_F6  =1397
-NOTE_FS6 =1480
-NOTE_G6  =1568
-NOTE_GS6 =1661
-NOTE_A6  =1760
-NOTE_AS6 =1865
-NOTE_B6  =1976
-NOTE_C7  =2093
-NOTE_CS7 =2217
-NOTE_D7  =2349
-NOTE_DS7 =2489
-NOTE_E7  =2637
-NOTE_F7  =2794
-NOTE_FS7 =2960
-NOTE_G7  =3136
-NOTE_GS7 =3322
-NOTE_A7  =3520
-NOTE_AS7 =3729
-NOTE_B7  =3951
-NOTE_C8  =4186
-NOTE_CS8 =4435
-NOTE_D8  =4699
-NOTE_DS8 =4978
-REST = 0
+notes = {
+	'B0' : 31,
+	'C1' : 33, 'CS1' : 35,
+	'D1' : 37, 'DS1' : 39,
+	'EB1' : 39,
+	'E1' : 41,
+	'F1' : 44, 'FS1' : 46,
+	'G1' : 49, 'GS1' : 52,
+	'A1' : 55, 'AS1' : 58,
+	'BB1' : 58,
+	'B1' : 62,
+	'C2' : 65, 'CS2' : 69,
+	'D2' : 73, 'DS2' : 78,
+	'EB2' : 78,
+	'E2' : 82,
+	'F2' : 87, 'FS2' : 93,
+	'G2' : 98, 'GS2' : 104,
+	'A2' : 110, 'AS2' : 117,
+	'BB2' : 123,
+	'B2' : 123,
+	'C3' : 131, 'CS3' : 139,
+	'D3' : 147, 'DS3' : 156,
+	'EB3' : 156,
+	'E3' : 165,
+	'F3' : 175, 'FS3' : 185,
+	'G3' : 196, 'GS3' : 208,
+	'A3' : 220, 'AS3' : 233,
+	'BB3' : 233,
+	'B3' : 247,
+	'C4' : 262, 'CS4' : 277,
+	'D4' : 294, 'DS4' : 311,
+	'EB4' : 311,
+	'E4' : 330,
+	'F4' : 349, 'FS4' : 370,
+	'G4' : 392, 'GS4' : 415,
+	'A4' : 440, 'AS4' : 466,
+	'BB4' : 466,
+	'B4' : 494,
+	'C5' : 523, 'CS5' : 554,
+	'D5' : 587, 'DS5' : 622,
+	'EB5' : 622,
+	'E5' : 659,
+	'F5' : 698, 'FS5' : 740,
+	'G5' : 784, 'GS5' : 831,
+	'A5' : 880, 'AS5' : 932,
+	'BB5' : 932,
+	'B5' : 988,
+	'C6' : 1047, 'CS6' : 1109,
+	'D6' : 1175, 'DS6' : 1245,
+	'EB6' : 1245,
+	'E6' : 1319,
+	'F6' : 1397, 'FS6' : 1480,
+	'G6' : 1568, 'GS6' : 1661,
+	'A6' : 1760, 'AS6' : 1865,
+	'BB6' : 1865,
+	'B6' : 1976,
+	'C7' : 2093, 'CS7' : 2217,
+	'D7' : 2349, 'DS7' : 2489,
+	'EB7' : 2489,
+	'E7' : 2637,
+	'F7' : 2794, 'FS7' : 2960,
+	'G7' : 3136, 'GS7' : 3322,
+	'A7' : 3520, 'AS7' : 3729,
+	'BB7' : 3729,
+	'B7' : 3951,
+	'C8' : 4186, 'CS8' : 4435,
+	'D8' : 4699, 'DS8' : 4978
+}
 
-'''notes = {
-	'NOTE_B0' : 31,
-	'NOTE_C1' : 33, 'NOTE_CS1' : 35,
-	'NOTE_D1' : 37, 'NOTE_DS1' : 39,
-	'NOTE_EB1' : 39,
-	'NOTE_E1' : 41,
-	'NOTE_F1' : 44, 'NOTE_FS1' : 46,
-	'NOTE_G1' : 49, 'NOTE_GS1' : 52,
-	'NOTE_A1' : 55, 'NOTE_AS1' : 58,
-	'NOTE_BB1' : 58,
-	'NOTE_B1' : 62,
-	'NOTE_C2' : 65, 'NOTE_CS2' : 69,
-	'NOTE_D2' : 73, 'NOTE_DS2' : 78,
-	'NOTE_EB2' : 78,
-	'NOTE_E2' : 82,
-	'NOTE_F2' : 87, 'NOTE_FS2' : 93,
-	'NOTE_G2' : 98, 'NOTE_GS2' : 104,
-	'NOTE_A2' : 110, 'NOTE_AS2' : 117,
-	'NOTE_BB2' : 123,
-	'NOTE_B2' : 123,
-	'NOTE_C3' : 131, 'NOTE_CS3' : 139,
-	'NOTE_D3' : 147, 'NOTE_DS3' : 156,
-	'NOTE_EB3' : 156,
-	'NOTE_E3' : 165,
-	'NOTE_F3' : 175, 'NOTE_FS3' : 185,
-	'NOTE_G3' : 196, 'NOTE_GS3' : 208,
-	'NOTE_A3' : 220, 'NOTE_AS3' : 233,
-	'NOTE_BB3' : 233,
-	'NOTE_B3' : 247,
-	'NOTE_C4' : 262, 'NOTE_CS4' : 277,
-	'NOTE_D4' : 294, 'NOTE_DS4' : 311,
-	'NOTE_EB4' : 311,
-	'NOTE_E4' : 330,
-	'NOTE_F4' : 349, 'NOTE_FS4' : 370,
-	'NOTE_G4' : 392, 'NOTE_GS4' : 415,
-	'NOTE_A4' : 440, 'NOTE_AS4' : 466,
-	'NOTE_BB4' : 466,
-	'NOTE_B4' : 494,
-	'NOTE_C5' : 523, 'NOTE_CS5' : 554,
-	'NOTE_D5' : 587, 'NOTE_DS5' : 622,
-	'NOTE_EB5' : 622,
-	'NOTE_E5' : 659,
-	'NOTE_F5' : 698, 'NOTE_FS5' : 740,
-	'NOTE_G5' : 784, 'NOTE_GS5' : 831,
-	'NOTE_A5' : 880, 'NOTE_AS5' : 932,
-	'NOTE_BB5' : 932,
-	'NOTE_B5' : 988,
-	'NOTE_C6' : 1047, 'NOTE_CS6' : 1109,
-	'NOTE_D6' : 1175, 'NOTE_DS6' : 1245,
-	'NOTE_EB6' : 1245,
-	'NOTE_E6' : 1319,
-	'NOTE_F6' : 1397, 'NOTE_FS6' : 1480,
-	'NOTE_G6' : 1568, 'NOTE_GS6' : 1661,
-	'NOTE_A6' : 1760, 'NOTE_AS6' : 1865,
-	'NOTE_BB6' : 1865,
-	'NOTE_B6' : 1976,
-	'NOTE_C7' : 2093, 'NOTE_CS7' : 2217,
-	'NOTE_D7' : 2349, 'NOTE_DS7' : 2489,
-	'NOTE_EB7' : 2489,
-	'NOTE_E7' : 2637,
-	'NOTE_F7' : 2794, 'NOTE_FS7' : 2960,
-	'NOTE_G7' : 3136, 'NOTE_GS7' : 3322,
-	'NOTE_A7' : 3520, 'NOTE_AS7' : 3729,
-	'NOTE_BB7' : 3729,
-	'NOTE_B7' : 3951,
-	'NOTE_C8' : 4186, 'NOTE_CS8' : 4435,
-	'NOTE_D8' : 4699, 'NOTE_DS8' : 4978
-}'''
 
-#// change this to make the song slower or faster
-#tempo = 200
-
-#// change this to whichever pin you want to use
-#buzzer = 11
 
 melody = [
-  
-  
-  NOTE_E5,8, NOTE_E5,8, REST,8, NOTE_E5,8, REST,8, NOTE_C5,8, NOTE_E5,8, #//1
-  NOTE_G5,4, REST,4, NOTE_G4,8, REST,4, 
-  NOTE_C5,-4, NOTE_G4,8, REST,4, NOTE_E4,-4, #// 3
-  NOTE_A4,4, NOTE_B4,4, NOTE_AS4,8, NOTE_A4,4,
-  NOTE_G4,-8, NOTE_E5,-8, NOTE_G5,-8, NOTE_A5,4, NOTE_F5,8, NOTE_G5,8,
-  REST,8, NOTE_E5,4,NOTE_C5,8, NOTE_D5,8, NOTE_B4,-4,
-  NOTE_C5,-4, NOTE_G4,8, REST,4, NOTE_E4,-4, #// repeats from 3
-  NOTE_A4,4, NOTE_B4,4, NOTE_AS4,8, NOTE_A4,4,
-  NOTE_G4,-8, NOTE_E5,-8, NOTE_G5,-8, NOTE_A5,4, NOTE_F5,8, NOTE_G5,8,
-  REST,8, NOTE_E5,4,NOTE_C5,8, NOTE_D5,8, NOTE_B4,-4,
-
-  
-  REST,4, NOTE_G5,8, NOTE_FS5,8, NOTE_F5,8, NOTE_DS5,4, NOTE_E5,8,#//7
-  REST,8, NOTE_GS4,8, NOTE_A4,8, NOTE_C4,8, REST,8, NOTE_A4,8, NOTE_C5,8, NOTE_D5,8,
-  REST,4, NOTE_DS5,4, REST,8, NOTE_D5,-4,
-  NOTE_C5,2, REST,2,
-
-  REST,4, NOTE_G5,8, NOTE_FS5,8, NOTE_F5,8, NOTE_DS5,4, NOTE_E5,8,#//repeats from 7
-  REST,8, NOTE_GS4,8, NOTE_A4,8, NOTE_C4,8, REST,8, NOTE_A4,8, NOTE_C5,8, NOTE_D5,8,
-  REST,4, NOTE_DS5,4, REST,8, NOTE_D5,-4,
-  NOTE_C5,2, REST,2,
-
-  NOTE_C5,8, NOTE_C5,4, NOTE_C5,8, REST,8, NOTE_C5,8, NOTE_D5,4,#//11
-  NOTE_E5,8, NOTE_C5,4, NOTE_A4,8, NOTE_G4,2,
-
-  NOTE_C5,8, NOTE_C5,4, NOTE_C5,8, REST,8, NOTE_C5,8, NOTE_D5,8, NOTE_E5,8,#//13
-  REST,1, 
-  NOTE_C5,8, NOTE_C5,4, NOTE_C5,8, REST,8, NOTE_C5,8, NOTE_D5,4,
-  NOTE_E5,8, NOTE_C5,4, NOTE_A4,8, NOTE_G4,2,
-  NOTE_E5,8, NOTE_E5,8, REST,8, NOTE_E5,8, REST,8, NOTE_C5,8, NOTE_E5,4,
-  NOTE_G5,4, REST,4, NOTE_G4,4, REST,4, 
-  NOTE_C5,-4, NOTE_G4,8, REST,4, NOTE_E4,-4, #// 19
-  
-  NOTE_A4,4, NOTE_B4,4, NOTE_AS4,8, NOTE_A4,4,
-  NOTE_G4,-8, NOTE_E5,-8, NOTE_G5,-8, NOTE_A5,4, NOTE_F5,8, NOTE_G5,8,
-  REST,8, NOTE_E5,4, NOTE_C5,8, NOTE_D5,8, NOTE_B4,-4,
-
-  NOTE_C5,-4, NOTE_G4,8, REST,4, NOTE_E4,-4, #// repeats from 19
-  NOTE_A4,4, NOTE_B4,4, NOTE_AS4,8, NOTE_A4,4,
-  NOTE_G4,-8, NOTE_E5,-8, NOTE_G5,-8, NOTE_A5,4, NOTE_F5,8, NOTE_G5,8,
-  REST,8, NOTE_E5,4, NOTE_C5,8, NOTE_D5,8, NOTE_B4,-4,
-
-  NOTE_E5,8, NOTE_C5,4, NOTE_G4,8, REST,4, NOTE_GS4,4,#//23
-  NOTE_A4,8, NOTE_F5,4, NOTE_F5,8, NOTE_A4,2,
-  NOTE_D5,-8, NOTE_A5,-8, NOTE_A5,-8, NOTE_A5,-8, NOTE_G5,-8, NOTE_F5,-8,
-  
-  NOTE_E5,8, NOTE_C5,4, NOTE_A4,8, NOTE_G4,2, #//26
-  NOTE_E5,8, NOTE_C5,4, NOTE_G4,8, REST,4, NOTE_GS4,4,
-  NOTE_A4,8, NOTE_F5,4, NOTE_F5,8, NOTE_A4,2,
-  NOTE_B4,8, NOTE_F5,4, NOTE_F5,8, NOTE_F5,-8, NOTE_E5,-8, NOTE_D5,-8,
-  NOTE_C5,8, NOTE_E4,4, NOTE_E4,8, NOTE_C4,2,
-
-  NOTE_E5,8, NOTE_C5,4, NOTE_G4,8, REST,4, NOTE_GS4,4,#//repeats from 23
-  NOTE_A4,8, NOTE_F5,4, NOTE_F5,8, NOTE_A4,2,
-  NOTE_D5,-8, NOTE_A5,-8, NOTE_A5,-8, NOTE_A5,-8, NOTE_G5,-8, NOTE_F5,-8,
-  
-  NOTE_E5,8, NOTE_C5,4, NOTE_A4,8, NOTE_G4,2, #//26
-  NOTE_E5,8, NOTE_C5,4, NOTE_G4,8, REST,4, NOTE_GS4,4,
-  NOTE_A4,8, NOTE_F5,4, NOTE_F5,8, NOTE_A4,2,
-  NOTE_B4,8, NOTE_F5,4, NOTE_F5,8, NOTE_F5,-8, NOTE_E5,-8, NOTE_D5,-8,
-  NOTE_C5,8, NOTE_E4,4, NOTE_E4,8, NOTE_C4,2,
-  NOTE_C5,8, NOTE_C5,4, NOTE_C5,8, REST,8, NOTE_C5,8, NOTE_D5,8, NOTE_E5,8,
-  REST,1,
-
-  NOTE_C5,8, NOTE_C5,4, NOTE_C5,8, REST,8, NOTE_C5,8, NOTE_D5,4, #//33
-  NOTE_E5,8, NOTE_C5,4, NOTE_A4,8, NOTE_G4,2,
-  NOTE_E5,8, NOTE_E5,8, REST,8, NOTE_E5,8, REST,8, NOTE_C5,8, NOTE_E5,4,
-  NOTE_G5,4, REST,4, NOTE_G4,4, REST,4, 
-  NOTE_E5,8, NOTE_C5,4, NOTE_G4,8, REST,4, NOTE_GS4,4,
-  NOTE_A4,8, NOTE_F5,4, NOTE_F5,8, NOTE_A4,2,
-  NOTE_D5,-8, NOTE_A5,-8, NOTE_A5,-8, NOTE_A5,-8, NOTE_G5,-8, NOTE_F5,-8,
-  
-  NOTE_E5,8, NOTE_C5,4, NOTE_A4,8, NOTE_G4,2, #//40
-  NOTE_E5,8, NOTE_C5,4, NOTE_G4,8, REST,4, NOTE_GS4,4,
-  NOTE_A4,8, NOTE_F5,4, NOTE_F5,8, NOTE_A4,2,
-  NOTE_B4,8, NOTE_F5,4, NOTE_F5,8, NOTE_F5,-8, NOTE_E5,-8, NOTE_D5,-8,
-  NOTE_C5,8, NOTE_E4,4, NOTE_E4,8, NOTE_C4,2,
-  
-  #//game over sound
-  NOTE_C5,-4, NOTE_G4,-4, NOTE_E4,4, #//45
-  NOTE_A4,-8, NOTE_B4,-8, NOTE_A4,-8, NOTE_GS4,-8, NOTE_AS4,-8, NOTE_GS4,-8,
-  NOTE_G4,8, NOTE_D4,8, NOTE_E4,-2,  
-
+  notes['E7'], notes['E7'], 0, notes['E7'],
+  0, notes['C7'], notes['E7'], 0,
+  notes['G7'], 0, 0,  0,
+  notes['G6'], 0, 0, 0,
+ 
+  notes['C7'], 0, 0, notes['G6'],
+  0, 0, notes['E6'], 0,
+  0, notes['A6'], 0, notes['B6'],
+  0, notes['AS6'], notes['A6'], 0,
+ 
+  notes['G6'], notes['E7'], notes['G7'],
+  notes['A7'], 0, notes['F7'], notes['G7'],
+  0, notes['E7'], 0, notes['C7'],
+  notes['D7'], notes['B6'], 0, 0,
+ 
+  notes['C7'], 0, 0, notes['G6'],
+  0, 0, notes['E6'], 0,
+  0, notes['A6'], 0, notes['B6'],
+  0, notes['AS6'], notes['A6'], 0,
+ 
+  notes['G6'], notes['E7'], notes['G7'],
+  notes['A7'], 0, notes['F7'], notes['G7'],
+  0, notes['E7'], 0, notes['C7'],
+  notes['D7'], notes['B6'], 0, 0
 ]
-
 tempo = [
   12, 12, 12, 12,
   12, 12, 12, 12,
@@ -323,63 +166,7 @@ tempo = [
   12, 12, 12, 12,
 ]
 
-'''melody = [
-  notes['E5'], notes['E5'], 0, notes['E5'],
-  0, notes['C5'], notes['E5'], 0,
-  notes['G5'], 0, 0,  0,
-  notes['G4'], 0, 0, 0,
- 
-  notes['C5'], 0, 0, notes['G4'],
-  0, 0, notes['E4'], 0,
-  0, notes['A4'], 0, notes['B4'],
-  0, notes['AS4'], notes['A4'], 0,
- 
-  notes['G4'], notes['E5'], notes['G5'],
-  notes['A5'], 0, notes['F5'], notes['G5'],
-  0, notes['E5'], 0, notes['C5'],
-  notes['D5'], notes['B4'], 0, 0,
- 
-  notes['C5'], 0, 0, notes['G4'],
-  0, 0, notes['E4'], 0,
-  0, notes['A4'], 0, notes['B4'],
-  0, notes['AS4'], notes['A4'], 0,
- 
-  notes['G4'], notes['E5'], notes['G5'],
-  notes['A5'], 0, notes['F5'], notes['G5'],
-  0, notes['E5'], 0, notes['C5'],
-  notes['D5'], notes['B4'], 0, 0
 
-
-]
-
-tempo = [
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
- 
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
- 
-  9, 9, 9,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
- 
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
- 
-  9, 9, 9,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-  12, 12, 12, 12,
-]
-'''
-'''
 underworld_melody = [
   notes['C4'], notes['C5'], notes['A3'], notes['A4'],
   notes['AS3'], notes['AS4'], 0,
@@ -784,14 +571,6 @@ final_countdown_tempo = [
 	2,8,4,16,16,
 	1,
 ]
-'''
-
-
-#// this calculates the duration of a whole note in ms
-#wholenote = (60000 * 4) / tempo
-
-#divider = 0, 
-#noteDuration = 0
 
 def buzz(frequency, length):	 #create the function "buzz" and feed it the pitch and duration)
 
@@ -830,51 +609,43 @@ def play(melody,tempo,pause,pace=0.800):
 		time.sleep(pauseBetweenNotes)
 	
 	
-def main():
-	while True:
-		setup()
-		#print("Popcorn Melody")
-		#play(popcorn_melody, popcorn_tempo, 0.50, 1.000)
-		#time.sleep(2)
-		#print("Manaderna (Symphony No. 9) Melody")
-		#play(manaderna_melody, manaderna_tempo, 0.30, 0.800)
-		#time.sleep(2)
-		print("Super Mario Theme")
-		play(melody, tempo, 1.3, 0.800)
-		time.sleep(15)
-        #print("The Final Countdown")
-        #play(final_countdown_melody, final_countdown_tempo, 0.30, 1.2000)
-        #time.sleep(2)
-        #print("Per Olssons Bonnagard (Old MacDonald Had A Farm) Melody")
-        #play(bonnagard_melody, bonnagard_tempo, 0.30, 0.800)
-        #time.sleep(2)
-        #print("Manaderna (Symphony No. 9) Melody")
-        #play(manaderna_melody, manaderna_tempo, 0.30, 0.800)
-        #time.sleep(2)
-        #print("Deck The Halls Melody")
-        #play(deck_the_halls_melody, deck_the_halls_tempo, 0.30, 0.800)
-        #time.sleep(2)
-        #print("Crazy Frog (Axel F) Theme")
-        #play(crazy_frog_melody, crazy_frog_tempo, 0.30, 0.900)
-        #time.sleep(2)
-        #print("Twinkle, Twinkle, Little Star Melody")
-        #play(twinkle_twinkle_melody, twinkle_twinkle_tempo, 0.50, 1.000)
-        #time.sleep(2)
-        #print("Popcorn Melody")
-        #play(popcorn_melody, popcorn_tempo, 0.50, 1.000)
-        #time.sleep(2)
-        #print("Star Wars Theme")
-        #play(star_wars_melody, star_wars_tempo, 0.50, 1.000)
-        #time.sleep(2)
-		#print("Super Mario Theme")
-		#play(melody, tempo, 1.3, 0.800)
-		#time.sleep(2)
-        #print("Super Mario Underworld Theme")
-        #play(underworld_melody, underworld_tempo, 1.3, 0.800)
-        #time.sleep(2)
-        #print("Adventure Time Theme")
-        #play(adventure_time_melody, adventure_time_tempo, 1.3, 1.500)
-        
 
 if __name__ == '__main__':		# Program start from here
-	main()
+	try:
+		setup()
+		print("The Final Countdown")
+		play(final_countdown_melody, final_countdown_tempo, 0.30, 1.2000)
+		time.sleep(2)
+		print("Per Olssons Bonnagard (Old MacDonald Had A Farm) Melody")
+		play(bonnagard_melody, bonnagard_tempo, 0.30, 0.800)
+		time.sleep(2)
+		print("Manaderna (Symphony No. 9) Melody")
+		play(manaderna_melody, manaderna_tempo, 0.30, 0.800)
+		time.sleep(2)
+		print("Deck The Halls Melody")
+		play(deck_the_halls_melody, deck_the_halls_tempo, 0.30, 0.800)
+		time.sleep(2)
+		print("Crazy Frog (Axel F) Theme")
+		play(crazy_frog_melody, crazy_frog_tempo, 0.30, 0.900)
+		time.sleep(2)
+		print("Twinkle, Twinkle, Little Star Melody")
+		play(twinkle_twinkle_melody, twinkle_twinkle_tempo, 0.50, 1.000)
+		time.sleep(2)
+		print("Popcorn Melody")
+		play(popcorn_melody, popcorn_tempo, 0.50, 1.000)
+		time.sleep(2)
+		print("Star Wars Theme")
+		play(star_wars_melody, star_wars_tempo, 0.50, 1.000)
+		time.sleep(2)
+		print("Super Mario Theme")
+		play(melody, tempo, 1.3, 0.800)
+		time.sleep(2)
+		print("Super Mario Underworld Theme")
+		play(underworld_melody, underworld_tempo, 1.3, 0.800)
+		time.sleep(2)
+		print("Adventure Time Theme")
+		play(adventure_time_melody, adventure_time_tempo, 1.3, 1.500)
+		
+		destroy()
+	except KeyboardInterrupt:  	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
+		destroy()

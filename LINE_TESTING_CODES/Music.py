@@ -788,10 +788,10 @@ final_countdown_tempo = [
 
 
 #// this calculates the duration of a whole note in ms
-wholenote = (60000 * 4) / tempo
+#wholenote = (60000 * 4) / tempo
 
-divider = 0, 
-noteDuration = 0
+#divider = 0, 
+#noteDuration = 0
 
 def buzz(frequency, length):	 #create the function "buzz" and feed it the pitch and duration)
 

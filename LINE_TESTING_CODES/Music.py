@@ -615,9 +615,12 @@ def play(melody,tempo,pause,pace=0.800):
 def main():
 	while True:
 		setup()
-		print("Manaderna (Symphony No. 9) Melody")
-		play(manaderna_melody, manaderna_tempo, 0.30, 0.800)
+		print("Popcorn Melody")
+		play(popcorn_melody, popcorn_tempo, 0.50, 1.000)
 		time.sleep(2)
+		#print("Manaderna (Symphony No. 9) Melody")
+		#play(manaderna_melody, manaderna_tempo, 0.30, 0.800)
+		#time.sleep(2)
 		#print("Super Mario Theme")
 		#play(melody, tempo, 1.3, 0.800)
 		#time.sleep(2)

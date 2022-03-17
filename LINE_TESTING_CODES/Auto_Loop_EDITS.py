@@ -309,7 +309,7 @@ def main():
                 print("180 Turn Around")
                 set_motor(LEFT_MOTOR, BACKWARD)
                 set_motor(RIGHT_MOTOR, BACKWARD)
-                sleep(1)
+                sleep(0.5)
                 turn_around()
                 print("Robot is now Driving Straight")
             

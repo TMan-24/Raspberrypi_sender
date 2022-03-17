@@ -22,7 +22,8 @@
 '''
 
 #Libraries
-from pickle import FALSE, TRUE     # pickle library for serializing data
+from pickle import FALSE, TRUE
+import Music                       # pickle library for serializing data
 import time                        # Main time library for TX/RX ultrasonic sensors
 import math                        # Math library
 from time import sleep             # time library for stopping execution of the code for a set amount of time
@@ -354,3 +355,4 @@ def main():
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":
     main()
+    Music.final_countdown_melody

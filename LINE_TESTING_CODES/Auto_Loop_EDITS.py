@@ -354,5 +354,4 @@ def main():
             
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":
-    Music.main()
-    main()
+    Music.main(), main()

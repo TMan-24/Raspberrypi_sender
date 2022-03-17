@@ -609,8 +609,7 @@ def play(melody,tempo,pause,pace=0.800):
 		time.sleep(pauseBetweenNotes)
 	
 	
-
-if __name__ == '__main__':		# Program start from here
+def main():
 	try:
 		setup()
 		print("The Final Countdown")
@@ -649,3 +648,6 @@ if __name__ == '__main__':		# Program start from here
 		destroy()
 	except KeyboardInterrupt:  	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.
 		destroy()
+
+if __name__ == '__main__':		# Program start from here
+	main()

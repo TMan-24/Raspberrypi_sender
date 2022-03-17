@@ -841,7 +841,7 @@ def main():
 		#time.sleep(2)
 		print("Super Mario Theme")
 		play(melody, tempo, 1.3, 0.800)
-		time.sleep(2)
+		time.sleep(15)
         #print("The Final Countdown")
         #play(final_countdown_melody, final_countdown_tempo, 0.30, 1.2000)
         #time.sleep(2)

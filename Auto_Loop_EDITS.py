@@ -290,7 +290,7 @@ def main():
                 print("Right 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
                 print("Robot is now Driving Straight")
-            elif gpio.input(L_SENSOR) == gpio.LOW:
+            elif gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.HIGH:
                 print("Left 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
                 print("Robot is now Driving Straight")
@@ -313,7 +313,7 @@ def main():
                 set_motor(RIGHT_MOTOR, BACKWARD)
                 sleep(0.5)
                 turn_around()
-                print("Robot is now Driving Straight")
+                #print("Robot is now Driving Straight")
             
 
             #5. if we get back to starting position, stop program

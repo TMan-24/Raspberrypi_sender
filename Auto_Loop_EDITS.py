@@ -305,8 +305,8 @@ def main():
             # State 4. 180deg turn (turn around)
             dist1 = read_ultrasound()
             dist2 = read_ultrasound2()
-            #print ("Measured Distance1 = %.1f cm" % dist1)
-            #print ("Measured Distance2 = %.1f cm" % dist2)
+            print ("Measured Distance1 = %.1f cm" % dist1)
+            print ("Measured Distance2 = %.1f cm" % dist2)
             if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:
                 print("180 Turn Around")
                 set_motor(LEFT_MOTOR, BACKWARD)

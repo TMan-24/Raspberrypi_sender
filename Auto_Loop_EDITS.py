@@ -43,7 +43,7 @@ GPIO22 = 22 #LM_FORWARD
 GPIO23 = 23 #LM_BACKWARD
 GPIO24 = 24 #RM_FORWARD
 GPIO25 = 25 #RM_BACKWARD
-GPIO26 = 26 #FREE #Probably for music box or servo
+GPIO26 = 26 #BUZZER PIN
 GPIO27 = 27 #LM_SENSOR
 
 # H-Bridge input control pins
@@ -304,8 +304,6 @@ def main():
             # State 4. 180deg turn (turn around)
             dist1 = read_ultrasound()
             dist2 = read_ultrasound2()
-            #print ("Measured Distance1 = %.1f cm" % dist1)
-            #print ("Measured Distance2 = %.1f cm" % dist2)
             if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:
                 print("180 Turn Around")
                 set_motor(LEFT_MOTOR, BACKWARD)

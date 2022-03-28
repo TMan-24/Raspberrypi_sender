@@ -80,7 +80,6 @@ TURN_AROUND_VALUE = 8   # Distance in cm for when to turn around
 END_PROGRAM_VALUE1 = 19 # Distance in cm for ending wall
 END_PROGRAM_VALUE2 = 20 # Distance in cm for ending wall (correcting for hardware error)
 END_PROGRAM_VALUE3 = 21 # Error variable
-TURN_LEFT_VALUE = 10
 
 # Set_motor function - sets motor to forward/backward/brake
 def set_motor(motor_num, state):
@@ -217,6 +216,14 @@ def turn_around():
         print("keep going")
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, BACKWARD)
+    if(R_SENSOR == gpio.HIGH):
+        print("right hi")
+    if(L_SENSOR == gpio.HIGH):
+        print("LEFT hi")
+    if(RM_SENSOR == gpio.HIGH):
+        print("RIGHT MIDDLE hi")
+    if(LM_SENSOR == gpio.HIGH):
+        print("LEFT MIDDLE hi")        
 
 # Main program function
 def main():
@@ -294,7 +301,7 @@ def main():
                 print("Right 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
                 print("Robot is now Driving Straight")
-            elif gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.HIGH and (dist1 and dist2 == TURN_LEFT_VALUE):
+            elif gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.HIGH:
                 print("Left 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
                 print("Robot is now Driving Straight")

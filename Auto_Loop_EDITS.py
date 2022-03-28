@@ -213,16 +213,16 @@ def turn_around():
     set_motor(RIGHT_MOTOR, BACKWARD)
     sleep(6)
     while gpio.input(L_SENSOR) == gpio.HIGH:
-        print("keep going")
+        #print("keep going")
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, BACKWARD)
-        if(R_SENSOR == gpio.HIGH):
+        if(R_SENSOR == gpio.LOW):
             print("right hi")
-        if(L_SENSOR == gpio.HIGH):
+        if(L_SENSOR == gpio.LOW):
             print("LEFT hi")
-        if(RM_SENSOR == gpio.HIGH):
+        if(RM_SENSOR == gpio.LOW):
             print("RIGHT MIDDLE hi")
-        if(LM_SENSOR == gpio.HIGH):
+        if(LM_SENSOR == gpio.LOW):
             print("LEFT MIDDLE hi")        
 
 # Main program function
@@ -314,8 +314,8 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 
             # State 4. 180deg turn (turn around)
-            print ("Measured Distance1 = %.1f cm" % dist1)
-            print ("Measured Distance2 = %.1f cm" % dist2)
+            #print ("Measured Distance1 = %.1f cm" % dist1)
+            #print ("Measured Distance2 = %.1f cm" % dist2)
             if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:
                 print("180 Turn Around")
                 set_motor(LEFT_MOTOR, BACKWARD)

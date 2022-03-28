@@ -216,14 +216,14 @@ def turn_around():
         print("keep going")
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, BACKWARD)
-    if(R_SENSOR == gpio.HIGH):
-        print("right hi")
-    if(L_SENSOR == gpio.HIGH):
-        print("LEFT hi")
-    if(RM_SENSOR == gpio.HIGH):
-        print("RIGHT MIDDLE hi")
-    if(LM_SENSOR == gpio.HIGH):
-        print("LEFT MIDDLE hi")        
+        if(R_SENSOR == gpio.HIGH):
+            print("right hi")
+        if(L_SENSOR == gpio.HIGH):
+            print("LEFT hi")
+        if(RM_SENSOR == gpio.HIGH):
+            print("RIGHT MIDDLE hi")
+        if(LM_SENSOR == gpio.HIGH):
+            print("LEFT MIDDLE hi")        
 
 # Main program function
 def main():

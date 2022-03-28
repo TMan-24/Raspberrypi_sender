@@ -212,19 +212,10 @@ def turn_around():
     set_motor(LEFT_MOTOR, FORWARD)
     set_motor(RIGHT_MOTOR, BACKWARD)
     sleep(6)
-    while gpio.input(L_SENSOR) == gpio.HIGH:
+    while gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
         #print("keep going")
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, BACKWARD)
-        if(R_SENSOR == gpio.LOW):
-            print("right hi")
-        if(L_SENSOR == gpio.LOW):
-            print("LEFT hi")
-        if(RM_SENSOR == gpio.LOW):
-            print("RIGHT MIDDLE hi")
-        if(LM_SENSOR == gpio.LOW):
-            print("LEFT MIDDLE hi")        
-
 # Main program function
 def main():
     
@@ -301,7 +292,7 @@ def main():
                 print("Right 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
                 print("Robot is now Driving Straight")
-            elif gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.HIGH:
+            elif gpio.input(L_SENSOR) == gpio.LOW:
                 print("Left 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
                 print("Robot is now Driving Straight")

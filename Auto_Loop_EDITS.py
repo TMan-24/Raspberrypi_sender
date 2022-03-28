@@ -80,6 +80,7 @@ TURN_AROUND_VALUE = 8   # Distance in cm for when to turn around
 END_PROGRAM_VALUE1 = 19 # Distance in cm for ending wall
 END_PROGRAM_VALUE2 = 20 # Distance in cm for ending wall (correcting for hardware error)
 END_PROGRAM_VALUE3 = 21 # Error variable
+TURN_LEFT_VALUE = 10
 
 # Set_motor function - sets motor to forward/backward/brake
 def set_motor(motor_num, state):
@@ -280,6 +281,9 @@ def main():
      # main logic of program
         print("Robot is now Driving Straight")
         while TRUE:
+            dist1 = read_ultrasound()
+            dist2 = read_ultrasound2()
+
             # State 1. continue straight - innermost sensors are on and outer sensors are on
             if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
                 # Set H-Bridge to go straight
@@ -290,7 +294,7 @@ def main():
                 print("Right 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
                 print("Robot is now Driving Straight")
-            elif gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.HIGH:
+            elif gpio.input(L_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.HIGH and (dist1 and dist2 == TURN_LEFT_VALUE):
                 print("Left 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
                 print("Robot is now Driving Straight")
@@ -303,8 +307,6 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 
             # State 4. 180deg turn (turn around)
-            dist1 = read_ultrasound()
-            dist2 = read_ultrasound2()
             print ("Measured Distance1 = %.1f cm" % dist1)
             print ("Measured Distance2 = %.1f cm" % dist2)
             if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:

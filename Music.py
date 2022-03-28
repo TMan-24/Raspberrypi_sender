@@ -621,7 +621,7 @@ def main():
 		#print("Manaderna (Symphony No. 9) Melody")
 		play(manaderna_melody, manaderna_tempo, 0.30, 0.800)
 		time.sleep(2)
-		#print("Deck The Halls Melody")
+		'''#print("Deck The Halls Melody")
 		play(deck_the_halls_melody, deck_the_halls_tempo, 0.30, 0.800)
 		time.sleep(2)
 		#print("Crazy Frog (Axel F) Theme")
@@ -643,7 +643,7 @@ def main():
 		play(underworld_melody, underworld_tempo, 1.3, 0.800)
 		time.sleep(2)
 		#print("Adventure Time Theme")
-		play(adventure_time_melody, adventure_time_tempo, 1.3, 1.500)
+		play(adventure_time_melody, adventure_time_tempo, 1.3, 1.500)'''
 		
 		destroy()
 	except KeyboardInterrupt:  	# When 'Ctrl+C' is pressed, the child program destroy() will be  executed.

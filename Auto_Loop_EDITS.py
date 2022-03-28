@@ -279,9 +279,6 @@ def main():
      # main logic of program
         print("Robot is now Driving Straight")
         while TRUE:
-            dist1 = read_ultrasound()
-            dist2 = read_ultrasound2()
-
             # State 1. continue straight - innermost sensors are on and outer sensors are on
             if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
                 # Set H-Bridge to go straight
@@ -305,6 +302,8 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 
             # State 4. 180deg turn (turn around)
+            dist1 = read_ultrasound()
+            dist2 = read_ultrasound2()
             #print ("Measured Distance1 = %.1f cm" % dist1)
             #print ("Measured Distance2 = %.1f cm" % dist2)
             if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:

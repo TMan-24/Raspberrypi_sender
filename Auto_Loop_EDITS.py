@@ -304,8 +304,8 @@ def main():
             # State 4. 180deg turn (turn around)
             dist1 = read_ultrasound()
             dist2 = read_ultrasound2()
-            print ("Measured Distance1 = %.1f cm" % dist1)
-            print ("Measured Distance2 = %.1f cm" % dist2)
+            #print ("Measured Distance1 = %.1f cm" % dist1)
+            #print ("Measured Distance2 = %.1f cm" % dist2)
             if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:
                 print("180 Turn Around")
                 set_motor(LEFT_MOTOR, BACKWARD)
@@ -316,7 +316,7 @@ def main():
             
 
             #5. if we get back to starting position, stop program
-            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 == END_PROGRAM_VALUE1) or (dist1 == END_PROGRAM_VALUE2) or (dist1 == END_PROGRAM_VALUE3) or (dist2 == END_PROGRAM_VALUE1) or (dist2 == END_PROGRAM_VALUE2) or (dist2 == END_PROGRAM_VALUE3)):
+            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((((dist1 == END_PROGRAM_VALUE1) or (dist1 == END_PROGRAM_VALUE2) or (dist1 == END_PROGRAM_VALUE3)) or ((dist2 == END_PROGRAM_VALUE1) or (dist2 == END_PROGRAM_VALUE2) or (dist2 == END_PROGRAM_VALUE3)))):
                 # Stop motors and turn off all gpio settings
                 print("Going Home")
                 sleep(1.46)
@@ -325,7 +325,7 @@ def main():
                 gpio.cleanup()
                 exit()
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 == END_PROGRAM_VALUE1) or (dist1 == END_PROGRAM_VALUE2) or (dist1 == END_PROGRAM_VALUE3) or (dist2 == END_PROGRAM_VALUE1) or (dist2 == END_PROGRAM_VALUE2) or (dist2 == END_PROGRAM_VALUE3)):
+            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW and ((((dist1 == END_PROGRAM_VALUE1) or (dist1 == END_PROGRAM_VALUE2) or (dist1 == END_PROGRAM_VALUE3)) or ((dist2 == END_PROGRAM_VALUE1) or (dist2 == END_PROGRAM_VALUE2) or (dist2 == END_PROGRAM_VALUE3)))):
                 # Stop motors and turn off all gpio settings
                 print("Going Home")
                 sleep(1.46)
@@ -334,7 +334,7 @@ def main():
                 gpio.cleanup()
                 exit()
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH and ((dist1 == END_PROGRAM_VALUE1) or (dist1 == END_PROGRAM_VALUE2) or (dist1 == END_PROGRAM_VALUE3) or (dist2 == END_PROGRAM_VALUE1) or (dist2 == END_PROGRAM_VALUE2) or (dist2 == END_PROGRAM_VALUE3)):
+            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH and ((((dist1 == END_PROGRAM_VALUE1) or (dist1 == END_PROGRAM_VALUE2) or (dist1 == END_PROGRAM_VALUE3)) or ((dist2 == END_PROGRAM_VALUE1) or (dist2 == END_PROGRAM_VALUE2) or (dist2 == END_PROGRAM_VALUE3)))):
                 # Stop motors and turn off all gpio settings
                 print("Going Home")
                 sleep(1.46)
@@ -343,7 +343,7 @@ def main():
                 gpio.cleanup()
                 exit()
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 == END_PROGRAM_VALUE1) or (dist1 == END_PROGRAM_VALUE2) or (dist1 == END_PROGRAM_VALUE3) or (dist2 == END_PROGRAM_VALUE1) or (dist2 == END_PROGRAM_VALUE2) or (dist2 == END_PROGRAM_VALUE3)):
+            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((((dist1 == END_PROGRAM_VALUE1) or (dist1 == END_PROGRAM_VALUE2) or (dist1 == END_PROGRAM_VALUE3)) or ((dist2 == END_PROGRAM_VALUE1) or (dist2 == END_PROGRAM_VALUE2) or (dist2 == END_PROGRAM_VALUE3)))):
                 # Stop motors and turn off all gpio settings
                 print("Going Home")
                 sleep(1.46)

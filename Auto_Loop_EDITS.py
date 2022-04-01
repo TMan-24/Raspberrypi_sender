@@ -73,6 +73,7 @@ ECHO2 = GPIO6     #Ultrasonic sensor 2 - Echo
 # Helpful constants
 Turn = True
 Turn2 = True
+LEFT_TURN = 10
 FORWARD = 0
 BACKWARD = 1
 BRAKE = 2
@@ -133,7 +134,7 @@ def turn_90(direction):
         #while gpio.input(L_SENSOR) == gpio.HIGH:
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BACKWARD)
-            sleep(3)
+            sleep(2)
         #while gpio.input(RM_SENSOR) == gpio.HIGH:
             #set_motor(LEFT_MOTOR, BACKWARD)
             #set_motor(RIGHT_MOTOR, FORWARD)
@@ -238,6 +239,9 @@ def main():
     
     # Begin initialization of the GPIO pins on the pi
 
+    # Set warnings to false
+    gpio.setwarnings(False)
+    
     # Set pinout mode to Broadcom (board communication)
     gpio.setmode(gpio.BCM)
 
@@ -312,20 +316,17 @@ def main():
             if Turn == False:
                 dist1 = read_ultrasound()
                 dist2 = read_ultrasound2()
-                print ("Measured Distance1 = %.1f cm" % dist1)
-                print ("Measured Distance2 = %.1f cm" % dist2)
+                #print ("Measured Distance1 = %.1f cm" % dist1)
+                #print ("Measured Distance2 = %.1f cm" % dist2)
                 if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:
                     print("180 Turn Around")
                     set_motor(LEFT_MOTOR, BACKWARD)
-                    set_motor(RIGHT_MOTOR, BACKWARD)
+                    #set_motor(RIGHT_MOTOR, BACKWARD)
                     sleep(0.5)
                     turn_around()
                     print("Robot is now Driving Straight")
                 if Turn == False and Turn2 == False:
-                    if dist1 == 10 and dist2 == 10:
-                        #set_motor(LEFT_MOTOR, BACKWARD)
-                        #set_motor(RIGHT_MOTOR, BACKWARD)
-                        #sleep(0.5)
+                    if dist1 == LEFT_TURN and dist2 == LEFT_TURN:
                         set_motor(LEFT_MOTOR, BACKWARD)
                         set_motor(RIGHT_MOTOR, FORWARD)
                         sleep(2)

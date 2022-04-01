@@ -22,7 +22,6 @@
 '''
 
 #Libraries
-from dis import dis
 from pickle import FALSE, TRUE
 import Music                       # pickle library for serializing data
 import time                        # Main time library for TX/RX ultrasonic sensors
@@ -71,7 +70,6 @@ TRIGGER2 = GPIO19 #Ultrasonic sensor 2 - Trigger
 ECHO2 = GPIO6     #Ultrasonic sensor 2 - Echo
 
 # Helpful constants
-Turn = True
 FORWARD = 0
 BACKWARD = 1
 BRAKE = 2
@@ -144,8 +142,6 @@ def turn_90(direction):
         #while gpio.input(LM_SENSOR) == gpio.HIGH:
             #set_motor(LEFT_MOTOR, FORWARD)
             #set_motor(RIGHT_MOTOR, BACKWARD)
-    global Turn
-    Turn = False
 
 # read_ultrasound function - sends a sound wave to calculate distances
 def read_ultrasound():
@@ -292,10 +288,10 @@ def main():
                 print("Right 90 Turn")
                 turn_90(gpio.input(R_SENSOR))
                 print("Robot is now Driving Straight")
-            #elif gpio.input(L_SENSOR) == gpio.LOW:
-            #    print("Left 90 Turn")
-            #    turn_90(gpio.input(R_SENSOR))
-            #    print("Robot is now Driving Straight")
+            elif gpio.input(L_SENSOR) == gpio.LOW:
+                print("Left 90 Turn")
+                turn_90(gpio.input(R_SENSOR))
+                print("Robot is now Driving Straight")
             # State 3. correct back to line - use two middle sensors to determine
             elif gpio.input(RM_SENSOR) == gpio.LOW:
                 set_motor(LEFT_MOTOR, FORWARD)
@@ -305,26 +301,17 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 
             # State 4. 180deg turn (turn around)
-            if Turn == False:
-                dist1 = read_ultrasound()
-                dist2 = read_ultrasound2()
-                print ("Measured Distance1 = %.1f cm" % dist1)
-                print ("Measured Distance2 = %.1f cm" % dist2)
-                if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:
-                    print("180 Turn Around")
-                    set_motor(LEFT_MOTOR, BACKWARD)
-                    set_motor(RIGHT_MOTOR, BACKWARD)
-                    sleep(0.5)
-                    turn_around()
-                    print("Robot is now Driving Straight")
-                if dist1 == 10 and dist2 == 10:
-                    set_motor(LEFT_MOTOR, BACKWARD)
-                    set_motor(RIGHT_MOTOR, BACKWARD)
-                    sleep(0.5)
-                    set_motor(LEFT_MOTOR, BACKWARD)
-                    set_motor(RIGHT_MOTOR, FORWARD)
-                    sleep(2)
-
+            dist1 = read_ultrasound()
+            dist2 = read_ultrasound2()
+            print ("Measured Distance1 = %.1f cm" % dist1)
+            print ("Measured Distance2 = %.1f cm" % dist2)
+            if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:
+                print("180 Turn Around")
+                set_motor(LEFT_MOTOR, BACKWARD)
+                set_motor(RIGHT_MOTOR, BACKWARD)
+                sleep(0.5)
+                turn_around()
+                print("Robot is now Driving Straight")
             
 
             #5. if we get back to starting position, stop program

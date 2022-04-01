@@ -134,6 +134,8 @@ def turn_90(direction):
             set_motor(LEFT_MOTOR, FORWARD)
             set_motor(RIGHT_MOTOR, BACKWARD)
             sleep(2)
+    global Turn
+    Turn = False
         #while gpio.input(RM_SENSOR) == gpio.HIGH:
             #set_motor(LEFT_MOTOR, BACKWARD)
             #set_motor(RIGHT_MOTOR, FORWARD)
@@ -146,8 +148,8 @@ def turn_90(direction):
         #while gpio.input(LM_SENSOR) == gpio.HIGH:
             #set_motor(LEFT_MOTOR, FORWARD)
             #set_motor(RIGHT_MOTOR, BACKWARD)
-    global Turn
-    Turn = False
+    #global Turn
+    #Turn = False
 
 # read_ultrasound function - sends a sound wave to calculate distances
 def read_ultrasound():

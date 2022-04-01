@@ -320,14 +320,14 @@ def main():
                     sleep(0.5)
                     turn_around()
                     print("Robot is now Driving Straight")
-            if Turn == False and Turn2 == False:
-                if dist1 == 10 and dist2 == 10:
-                    set_motor(LEFT_MOTOR, BACKWARD)
-                    set_motor(RIGHT_MOTOR, BACKWARD)
-                    sleep(0.5)
-                    set_motor(LEFT_MOTOR, BACKWARD)
-                    set_motor(RIGHT_MOTOR, FORWARD)
-                    sleep(2)
+                if Turn == False and Turn2 == False:
+                    if dist1 == 10 and dist2 == 10:
+                        set_motor(LEFT_MOTOR, BACKWARD)
+                        set_motor(RIGHT_MOTOR, BACKWARD)
+                        sleep(0.5)
+                        set_motor(LEFT_MOTOR, BACKWARD)
+                        set_motor(RIGHT_MOTOR, FORWARD)
+                        sleep(2)
 
             
 

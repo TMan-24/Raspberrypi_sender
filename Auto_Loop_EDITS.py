@@ -329,7 +329,7 @@ def main():
                     sleep(2)
                     set_motor(LEFT_MOTOR, BACKWARD)
                     set_motor(RIGHT_MOTOR, BACKWARD)
-                    sleep(0.7)
+                    sleep(0.6)
                     turn_around()
                     print("Robot is now Driving Straight")
                 if Turn == False and Turn2 == False:

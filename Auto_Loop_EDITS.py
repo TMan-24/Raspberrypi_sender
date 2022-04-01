@@ -220,6 +220,7 @@ def turn_around():
     sleep(0.75)
     set_motor(LEFT_MOTOR, BACKWARD)
     set_motor(RIGHT_MOTOR, BACKWARD)
+    sleep(0.5)
     while gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, BACKWARD)

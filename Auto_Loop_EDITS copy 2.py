@@ -219,10 +219,10 @@ def read_ultrasound2():
 def turn_around():
     set_motor(LEFT_MOTOR, FORWARD)
     set_motor(RIGHT_MOTOR, BACKWARD)
-    sleep(2)
-    #while gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
-     #   set_motor(LEFT_MOTOR, FORWARD)
-      #  set_motor(RIGHT_MOTOR, BACKWARD)
+    sleep(6)
+    while gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
+        set_motor(LEFT_MOTOR, FORWARD)
+        set_motor(RIGHT_MOTOR, BACKWARD)
     global Turn2
     Turn2 = False
 # Main program function

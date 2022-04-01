@@ -217,10 +217,7 @@ def read_ultrasound2():
 def turn_around():
     set_motor(LEFT_MOTOR, FORWARD)
     set_motor(RIGHT_MOTOR, BACKWARD)
-    sleep(0.5)
-    set_motor(LEFT_MOTOR, BACKWARD)
-    set_motor(RIGHT_MOTOR, BACKWARD)
-    sleep(0.5)
+    sleep(6)
     while gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, BACKWARD)
@@ -298,10 +295,10 @@ def main():
                 set_motor(RIGHT_MOTOR, FORWARD)
                 set_motor(LEFT_MOTOR, FORWARD)
             # State 2. 90deg turn - either rightmost or leftmost sensor false (off) 
-            elif gpio.input(R_SENSOR) == gpio.LOW:
-                print("Right 90 Turn")
-                turn_90(gpio.input(R_SENSOR))
-                print("Robot is now Driving Straight")
+            #elif gpio.input(R_SENSOR) == gpio.LOW:
+             #   print("Right 90 Turn")
+              #  turn_90(gpio.input(R_SENSOR))
+               # print("Robot is now Driving Straight")
             #elif gpio.input(L_SENSOR) == gpio.LOW:
             #    print("Left 90 Turn")
             #    turn_90(gpio.input(R_SENSOR))

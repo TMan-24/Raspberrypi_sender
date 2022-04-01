@@ -320,8 +320,10 @@ def main():
                 if dist1 == TURN_AROUND_VALUE and dist2 == TURN_AROUND_VALUE:
                     print("180 Turn Around")
                     set_motor(LEFT_MOTOR, BACKWARD)
-                    #set_motor(RIGHT_MOTOR, BACKWARD)
+                    set_motor(RIGHT_MOTOR, BACKWARD)
                     sleep(0.5)
+                    set_motor(LEFT_MOTOR, BACKWARD)
+                    sleep(1)
                     turn_around()
                     print("Robot is now Driving Straight")
                 if Turn == False and Turn2 == False:

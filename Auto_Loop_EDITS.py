@@ -217,7 +217,7 @@ def read_ultrasound2():
 def turn_around():
     set_motor(LEFT_MOTOR, FORWARD)
     set_motor(RIGHT_MOTOR, BACKWARD)
-    sleep(0.75)
+    sleep(0.5)
     set_motor(LEFT_MOTOR, BACKWARD)
     set_motor(RIGHT_MOTOR, BACKWARD)
     sleep(0.5)

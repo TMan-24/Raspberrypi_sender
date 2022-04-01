@@ -23,8 +23,7 @@
 
 #Libraries
 from dis import dis
-from pickle import FALSE, TRUE
-import Music                       # pickle library for serializing data
+from pickle import FALSE, TRUE                      # pickle library for serializing data
 import time                        # Main time library for TX/RX ultrasonic sensors
 import math                        # Math library
 from time import sleep             # time library for stopping execution of the code for a set amount of time

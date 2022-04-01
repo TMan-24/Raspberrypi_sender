@@ -23,7 +23,7 @@
 
 #Libraries
 from dis import dis
-from pickle import FALSE, TRUE                      # pickle library for serializing data
+from pickle import FALSE, TRUE     # pickle library for serializing data
 import time                        # Main time library for TX/RX ultrasonic sensors
 import math                        # Math library
 from time import sleep             # time library for stopping execution of the code for a set amount of time
@@ -137,12 +137,12 @@ def turn_90(direction):
         #while gpio.input(RM_SENSOR) == gpio.HIGH:
             #set_motor(LEFT_MOTOR, BACKWARD)
             #set_motor(RIGHT_MOTOR, FORWARD)
-    else:
+    #else:
         # IF: leftmost sensor is OFF (LOW), then zero-degree turn left, until Rightmost sensor goes OFF (LOW) from being HIGH
         # turn until the right sensor is active (vehicle has turned far enough to cross the line)
-        while gpio.input(R_SENSOR) == gpio.HIGH:
-            set_motor(LEFT_MOTOR, BACKWARD)
-            set_motor(RIGHT_MOTOR, FORWARD)
+        #while gpio.input(R_SENSOR) == gpio.HIGH:
+        #    set_motor(LEFT_MOTOR, BACKWARD)
+            #set_motor(RIGHT_MOTOR, FORWARD)
         #while gpio.input(LM_SENSOR) == gpio.HIGH:
             #set_motor(LEFT_MOTOR, FORWARD)
             #set_motor(RIGHT_MOTOR, BACKWARD)

@@ -72,6 +72,7 @@ ECHO2 = GPIO6     #Ultrasonic sensor 2 - Echo
 
 # Helpful constants
 Turn = True
+Turn2 = True
 FORWARD = 0
 BACKWARD = 1
 BRAKE = 2
@@ -219,6 +220,8 @@ def turn_around():
     while gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, BACKWARD)
+    global Turn2
+    Turn2 = False
 # Main program function
 def main():
     
@@ -317,6 +320,7 @@ def main():
                     sleep(0.5)
                     turn_around()
                     print("Robot is now Driving Straight")
+            if Turn == False and Turn2 == False:
                 if dist1 == 10 and dist2 == 10:
                     set_motor(LEFT_MOTOR, BACKWARD)
                     set_motor(RIGHT_MOTOR, BACKWARD)

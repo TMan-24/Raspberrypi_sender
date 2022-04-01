@@ -217,7 +217,7 @@ def read_ultrasound2():
 def turn_around():
     set_motor(LEFT_MOTOR, FORWARD)
     set_motor(RIGHT_MOTOR, BACKWARD)
-    sleep(6)
+    sleep(3)
     while gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
         set_motor(LEFT_MOTOR, FORWARD)
         set_motor(RIGHT_MOTOR, BACKWARD)
@@ -327,7 +327,7 @@ def main():
                     sleep(2)
                     set_motor(LEFT_MOTOR, BACKWARD)
                     set_motor(RIGHT_MOTOR, BACKWARD)
-                    sleep(0.8)
+                    sleep(0.75)
 
                     turn_around()
                     print("Robot is now Driving Straight")

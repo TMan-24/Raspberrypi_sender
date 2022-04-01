@@ -331,42 +331,42 @@ def main():
 
             
 
-            #5. if we get back to starting position, stop program
-            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
-                # Stop motors and turn off all gpio settings
-                print("Going Home")
-                sleep(1.6)
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, BRAKE)
-                gpio.cleanup()
-                exit()
+                #5. if we get back to starting position, stop program
+                if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
+                    # Stop motors and turn off all gpio settings
+                    print("Going Home")
+                    sleep(1.6)
+                    set_motor(LEFT_MOTOR, BRAKE)
+                    set_motor(RIGHT_MOTOR, BRAKE)
+                    gpio.cleanup()
+                    exit()
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
-                # Stop motors and turn off all gpio settings
-                print("Going Home")
-                sleep(1.6)
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, BRAKE)
-                gpio.cleanup()
-                exit()
+                elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
+                    # Stop motors and turn off all gpio settings
+                    print("Going Home")
+                    sleep(1.6)
+                    set_motor(LEFT_MOTOR, BRAKE)
+                    set_motor(RIGHT_MOTOR, BRAKE)
+                    gpio.cleanup()
+                    exit()
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
-                # Stop motors and turn off all gpio settings
-                print("Going Home")
-                sleep(1.6)
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, BRAKE)
-                gpio.cleanup()
-                exit()
+                elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.HIGH and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
+                    # Stop motors and turn off all gpio settings
+                    print("Going Home")
+                    sleep(1.6)
+                    set_motor(LEFT_MOTOR, BRAKE)
+                    set_motor(RIGHT_MOTOR, BRAKE)
+                    gpio.cleanup()
+                    exit()
             
-            elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
-                # Stop motors and turn off all gpio settings
-                print("Going Home")
-                sleep(1.6)
-                set_motor(LEFT_MOTOR, BRAKE)
-                set_motor(RIGHT_MOTOR, BRAKE)
-                gpio.cleanup()
-                exit()
+                elif gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW and ((dist1 and dist2) == END_PROGRAM_VALUE1 or (dist1 and dist2) == END_PROGRAM_VALUE2 or (dist1 and dist2) == END_PROGRAM_VALUE3):
+                    # Stop motors and turn off all gpio settings
+                    print("Going Home")
+                    sleep(1.6)
+                    set_motor(LEFT_MOTOR, BRAKE)
+                    set_motor(RIGHT_MOTOR, BRAKE)
+                    gpio.cleanup()
+                    exit()
             
 # program starts here. Boilerplate (reusable) python code for having a main function.
 if __name__ == "__main__":

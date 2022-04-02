@@ -84,6 +84,42 @@ END_PROGRAM_VALUE1 = 19 # Distance in cm for ending wall
 END_PROGRAM_VALUE2 = 20 # Distance in cm for ending wall (correcting for hardware error)
 END_PROGRAM_VALUE3 = 21 # Error variable
 
+# Set warnings to false
+    gpio.setwarnings(False)
+    
+    # Set pinout mode to Broadcom (board communication)
+    gpio.setmode(gpio.BCM)
+
+    # Line sensor setup as input digital pins
+    gpio.setup(RM_SENSOR, gpio.IN)
+    gpio.setup(LM_SENSOR, gpio.IN)
+    gpio.setup(R_SENSOR, gpio.IN)
+    gpio.setup(L_SENSOR, gpio.IN)
+
+    # Setup H-bridge inputs as output pins
+    gpio.setup(RM_FORWARD, gpio.OUT)
+    gpio.setup(RM_BACKWARD, gpio.OUT)
+    gpio.setup(LM_FORWARD, gpio.OUT)
+    gpio.setup(LM_BACKWARD, gpio.OUT)
+
+    # Set H-bridge Enable motor signals as output pins 
+    gpio.setup(EN_LM, gpio.OUT)
+    gpio.setup(EN_RM, gpio.OUT)
+
+    # Set a PWM signal of 1000 for both motors
+    p1=gpio.PWM(EN_LM, 1000)
+    p2=gpio.PWM(EN_RM, 1000)
+
+    # Start motors
+    p1.start(30) #motor speeds
+    p2.start(30)
+
+    # Set up GPIO for ultrasonic sensor
+    gpio.setup(TRIGGER1, gpio.OUT)
+    gpio.setup(TRIGGER2, gpio.OUT)
+    gpio.setup(ECHO1, gpio.IN)
+    gpio.setup(ECHO2, gpio.IN)
+
 # Set_motor function - sets motor to forward/backward/brake
 def set_motor(motor_num, state):
     # determine which motor to set
@@ -239,42 +275,6 @@ def main():
     print("\n")
     
     # Begin initialization of the GPIO pins on the pi
-
-    # Set warnings to false
-    gpio.setwarnings(False)
-    
-    # Set pinout mode to Broadcom (board communication)
-    gpio.setmode(gpio.BCM)
-
-    # Line sensor setup as input digital pins
-    gpio.setup(RM_SENSOR, gpio.IN)
-    gpio.setup(LM_SENSOR, gpio.IN)
-    gpio.setup(R_SENSOR, gpio.IN)
-    gpio.setup(L_SENSOR, gpio.IN)
-
-    # Setup H-bridge inputs as output pins
-    gpio.setup(RM_FORWARD, gpio.OUT)
-    gpio.setup(RM_BACKWARD, gpio.OUT)
-    gpio.setup(LM_FORWARD, gpio.OUT)
-    gpio.setup(LM_BACKWARD, gpio.OUT)
-
-    # Set H-bridge Enable motor signals as output pins 
-    gpio.setup(EN_LM, gpio.OUT)
-    gpio.setup(EN_RM, gpio.OUT)
-
-    # Set a PWM signal of 1000 for both motors
-    p1=gpio.PWM(EN_LM, 1000)
-    p2=gpio.PWM(EN_RM, 1000)
-
-    # Start motors
-    p1.start(30) #motor speeds
-    p2.start(30)
-
-    # Set up GPIO for ultrasonic sensor
-    gpio.setup(TRIGGER1, gpio.OUT)
-    gpio.setup(TRIGGER2, gpio.OUT)
-    gpio.setup(ECHO1, gpio.IN)
-    gpio.setup(ECHO2, gpio.IN)
 
     # Starting condition will be all four sensors are off (0), since starting square is all white
     # Check to see if the robot has come off the starting square

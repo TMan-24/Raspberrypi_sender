@@ -263,7 +263,10 @@ def turn_around():
     Turn2 = False
 # Main program function
 def main():
-    
+    global Turn
+    global Turn2
+    Turn = True
+    Turn2 = True
     print(" ############################################# ")
     print(" #                                           # ")
     print(" #                                           # ")

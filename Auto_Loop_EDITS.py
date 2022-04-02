@@ -291,6 +291,8 @@ def main():
      # main logic of program
         print("Robot is now Driving Straight")
         while TRUE:
+            if gpio.input(RM_SENSOR) == gpio.LOW and gpio.input(LM_SENSOR) == gpio.LOW and gpio.input(R_SENSOR) == gpio.LOW and gpio.input(L_SENSOR) == gpio.LOW:
+                break
             # State 1. continue straight - innermost sensors are on and outer sensors are on
             if gpio.input(R_SENSOR) == gpio.HIGH and gpio.input(L_SENSOR) == gpio.HIGH and gpio.input(RM_SENSOR) == gpio.HIGH and gpio.input(LM_SENSOR) == gpio.HIGH:
                 # Set H-Bridge to go straight
